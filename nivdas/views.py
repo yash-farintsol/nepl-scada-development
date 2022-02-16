@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from .models import user_member, db_setting, admin_group, supervise_group, operator_group
 from .forms import MemberForm, SMSForm, MailForm
 from django.contrib.auth import authenticate, login, logout
@@ -8,6 +9,7 @@ import json
 from datetime import datetime, timedelta
 import paho.mqtt.client as mqtt
 import ast
+from django.http import JsonResponse
 
 
 def home(request):
@@ -132,34 +134,6 @@ def register(request):
         return render(request, 'register.html', {'all': all_members})
     else:
         return render(request, 'login.html')
-
-
-def smsset(request):
-    # all_members = user_member.objects.values()
-    if request.user.is_authenticated:
-        form = SMSForm(request.POST or None)
-        if form.is_valid():
-            f = form.save(commit=False)
-            f.sms_status = True
-            f.save()
-
-        return render(request, 'sms.html')  # , {'all': all_members})
-    else:
-        return render(request, 'login.html')
-
-
-def mailset(request):
-    # all_members = user_member.objects.values()
-    if request.user.is_authenticated:
-        form = MailForm(request.POST or None)
-        if form.is_valid():
-            f = form.save(commit=False)
-            f.mail_status = True
-            f.save()
-        return render(request, 'mail.html')  # , {'all': all_members})
-    else:
-        return render(request, 'login.html')
-
 
 def user_secur(request):
     all_members = user_member.objects.values()
@@ -592,30 +566,50 @@ def group_secur(request):
     else:
         return render(request, 'login.html')
 
+def Samp(request):
+    return render(request, "sample.html")
 
-def master_set(request):
+def AuditUser(request):
+    return render(request, "audit-user.html")
+
+def AuditAlarm(request):
+    return render(request, "audit-alarm.html")
+
+def AuditSMS(request):
+    return render(request, "audit-sms.html")
+
+def AuditEquip(request):
+    return render(request, "audit-equip.html")
+
+def AuditEmail(request):
+    return render(request, "audit-email.html")
+
+def SMSSetting(request):
     # all_members = user_member.objects.values()
-    um_admin = user_member.objects.get(sadmin=True)
-    print('um_adminnnnnn', um_admin.u_name)
-    u_admin = User.objects.get(username=um_admin.u_name)
     if request.user.is_authenticated:
-        if request.method == "POST":
-            olspswd = request.POST['oldpaswd']
-            if olspswd == um_admin.pswd:
-                newpaswd = request.POST['newpaswd']
-                cnewpaswd = request.POST['cnewpaswd']
-                if newpaswd == cnewpaswd:
-                    um_admin.pswd = newpaswd
-                    um_admin.save()
-                    u_admin.set_password(newpaswd)
-                    u_admin.save()
-                    print("password changed successfully")
-        return render(request, 'master_settings.html', {'suser': um_admin})
+        form = SMSForm(request.POST or None)
+        if form.is_valid():
+            f = form.save(commit=False)
+            f.sms_status = True
+            f.save()
+
+        return render(request, 'sms-setting.html')  # , {'all': all_members})
     else:
         return render(request, 'login.html')
 
+def EmailSetting(request):
+    # all_members = user_member.objects.values()
+    if request.user.is_authenticated:
+        form = MailForm(request.POST or None)
+        if form.is_valid():
+            f = form.save(commit=False)
+            f.mail_status = True
+            f.save()
+        return render(request, 'email-setting.html')  # , {'all': all_members})
+    else:
+        return render(request, 'login.html')
 
-def database_set(request):
+def DBSetting(request):
     # all_members = user_member.objects.values()
     if request.user.is_authenticated:
         if request.method == "POST" or None:
@@ -636,6 +630,77 @@ def database_set(request):
                 lastdatabckup=datetime.now(),
             )
             print(request.POST)
-        return render(request, 'database_settings.html')  # , {'all': all_members})
+        return render(request, 'db-setting.html')  # , {'all': all_members})
     else:
         return render(request, 'login.html')
+
+def MPSetting(request):
+    # all_members = user_member.objects.values()
+    um_admin = user_member.objects.get(sadmin=True)
+    print('um_adminnnnnn', um_admin.u_name)
+    u_admin = User.objects.get(username=um_admin.u_name)
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            olspswd = request.POST['oldpaswd']
+            if olspswd == um_admin.pswd:
+                newpaswd = request.POST['newpaswd']
+                cnewpaswd = request.POST['cnewpaswd']
+                if newpaswd == cnewpaswd:
+                    um_admin.pswd = newpaswd
+                    um_admin.save()
+                    u_admin.set_password(newpaswd)
+                    u_admin.save()
+                    print("password changed successfully")
+        return render(request, 'master-password-setting.html', {'suser': um_admin})
+    else:
+        return render(request, 'login.html')
+
+def GeneralSetting(request):
+    return render(request, "general-setting.html")
+
+def MSTemplate(request):
+    return render(request, "ms-template.html")
+
+def MasterTemplate(request):
+    return render(request, "master-template.html")
+
+def SyncDateTime(request):
+    return render(request, "sync-datetime.html")
+
+def ResetLuxUV(request):
+    return render(request, "reset-luxuv.html")
+
+def IOStatus(request):
+    return render(request, "io-status.html")
+
+def GraphSetting(request):
+    return render(request, "graph-settings.html")
+
+
+def equip_create(request):
+    all_members = user_member.objects.values()
+    return render(request, 'equip_creation.html', {'all': all_members})
+
+def eqp_param(request):
+    all_members = user_member.objects.values()
+    return render(request, 'eqp_param.html', {'all': all_members})
+
+def eqp_activ(request):
+    return render(request, 'eqp_activ.html') #, {'all': all_members, 'alle': all_equip})
+
+def UserUpdateData(request, pk):
+    print(pk)
+    getann = user_member.objects.get(u_name=pk)
+    print(getann)
+    data = []
+    item = {
+        'name': getann.u_name,
+        'password': getann.pswd,
+        'grp_name': getann.group_name,
+        'dep_name': getann.dept_name,
+        'status': getann.status,
+        'cpassword': getann.pswchdu
+    }
+    data.append(item)
+    return JsonResponse({'data': data})
+
