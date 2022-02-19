@@ -138,10 +138,10 @@ def Login(request):
 
                 return redirect("indexpage")
             else:
-                print("Password is incorrect")
+                messages.success(request, "Password is Incorrect")
                 return redirect("loginpage")
         else:
-            print("User Doesn't Exist")
+            messages.success(request, "User Doesn't Exist")
             return redirect("loginpage")
 
 
@@ -638,99 +638,192 @@ def AssignUserSecurity(request):
 
 
 def SMSsettings(request):
-    return render(request, "nivdas/sms.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/sms.html")
+    else:
+        return redirect("loginpage")
 
 def EmailSettings(request):
-    return render(request, "nivdas/mail.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/mail.html")
+    else:
+        return redirect("loginpage")
 
 def MPSetting(request):
-    return render(request, "nivdas/master_settings.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/master_settings.html")
+    else:
+        return redirect("loginpage")
 
 def GeneralSetting(request):
-    return render(request, "nivdas/general-setting.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/general-setting.html")
+    else:
+        return redirect("loginpage")
 
 
 def EquipmentCreation(request):
-    return render(request, "nivdas/equip_creation.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/equip_creation.html")
+    else:
+        return redirect("loginpage")
 
 def EquipmentParameter(request):
-    return render(request, "nivdas/eqp_param.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/eqp_param.html")
+    else:
+        return redirect("loginpage")
 
 def EquipmentActivation(request):
-    return render(request, "nivdas/eqp_activ.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/eqp_activ.html")
+    else:
+        return redirect("loginpage")
 
 def MSTemplate(request):
-    return render(request, "nivdas/ms-template.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/ms-template.html")
+    else:
+        return redirect("loginpage")
 
 def MobileNo(request):
-    return render(request, "nivdas/ms-mobile-number.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/ms-mobile-number.html")
+    else:
+        return redirect("loginpage")
 
 def MasterTemplate(request):
-    return render(request, "nivdas/ms-master-template.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/ms-master-template.html")
+    else:
+        return redirect("loginpage")
 
 def SyncDateTime(request):
-    return render(request, "nivdas/ms-sync-datetime.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/ms-sync-datetime.html")
+    else:
+        return redirect("loginpage")
 
 def ResetLuxUV(request):
-    return render(request, "nivdas/ms-reset-luxuv.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/ms-reset-luxuv.html")
+    else:
+        return redirect("loginpage")
 
 def IOStatus(request):
-    return render(request, "nivdas/io-status.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/io-status.html")
+    else:
+        return redirect("loginpage")
 
 
 def DataView(request):
-    return render(request, "nivdas/supervise-data-view.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/supervise-data-view.html")
+    else:
+        return redirect("loginpage")
 
 def LuxUVDataView(request):
-    return render(request, "nivdas/supervise-luxuv-data-view.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/supervise-luxuv-data-view.html")
+    else:
+        return redirect("loginpage")
 
 
 def AuditUser(request):
-    return render(request, "nivdas/audit-user.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/audit-user.html")
+    else:
+        return redirect("loginpage")
 
 def AuditAlarm(request):
-    return render(request, "nivdas/audit-alarm.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/audit-alarm.html")
+    else:
+        return redirect("loginpage")
 
 def AuditSMS(request):
-    return render(request, "nivdas/audit-sms.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/audit-sms.html")
+    else:
+        return redirect("loginpage")
 
 def AuditEquip(request):
-    return render(request, "nivdas/audit-equip.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/audit-equip.html")
+    else:
+        return redirect("loginpage")
 
 def AuditEmail(request):
-    return render(request, "nivdas/audit-email.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/audit-email.html")
+    else:
+        return redirect("loginpage")
 
 
 def HistoryAuditUser(request):
-    return render(request, "nivdas/history-user-audit.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/history-user-audit.html")
+    else:
+        return redirect("loginpage")
 
 def HistoryAuditAlarm(request):
-    return render(request, "nivdas/history-alarm-audit.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/history-alarm-audit.html")
+    else:
+        return redirect("loginpage")
 
 def HistoryAuditSMS(request):
-    return render(request, "nivdas/history-sms-audit.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/history-sms-audit.html")
+    else:
+        return redirect("loginpage")
 
 def HistoryAuditEquip(request):
-    return render(request, "nivdas/history-equip-audit.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/history-equip-audit.html")
+    else:
+        return redirect("loginpage")
 
 def HistoryAuditEmail(request):
-    return render(request, "nivdas/history-email-audit.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/history-email-audit.html")
+    else:
+        return redirect("loginpage")
 
 def HistoryDataView(request):
-    return render(request, "nivdas/history-data-view.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/history-data-view.html")
+    else:
+        return redirect("loginpage")
 
 def HistoryLuxUVDataView(request):
-    return render(request, "nivdas/history-luxuv-data-view.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/history-luxuv-data-view.html")
+    else:
+        return redirect("loginpage")
 
 
 def GraphSetting(request):
-    return render(request, "nivdas/tu-graph-settings.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/tu-graph-settings.html")
+    else:
+        return redirect("loginpage")
 
 def PasswordSetting(request):
-    return render(request, "nivdas/tu-password-setting.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/tu-password-setting.html")
+    else:
+        return redirect("loginpage")
 
 def PrintMultipleReports(request):
-    return render(request, "nivdas/tu-print-multiple-report.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/tu-print-multiple-report.html")
+    else:
+        return redirect("loginpage")
 
 def AboutUs(request):
-    return render(request, "nivdas/aboutus.html")
+    if 'username' in request.session:
+        return render(request, "nivdas/aboutus.html")
+    else:
+        return redirect("loginpage")
