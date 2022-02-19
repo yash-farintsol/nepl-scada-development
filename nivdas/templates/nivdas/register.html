@@ -42,9 +42,9 @@
         <!-- Begin page -->
         <div id="layout-wrapper">
 
-            {% include 'sidebar-base.html' %}
+            {% include 'nivdas/sidebar-base.html' %}
 
-            {% include 'navbar-base.html' %}
+            {% include 'nivdas/navbar-base.html' %}
 
 
 
@@ -100,10 +100,10 @@
                                                             <div class="form-group row mb-4">
                                                                 <label class="col-form-label col-lg-4">Username<span style="color:red"> *</span></label>
                                                                 <div class="col-lg-8">
-                                                                    <select class="form-control" name = "u_name" id="inputGroupSelect02" required>
+                                                                    <select class="form-control" name = "u_name" id="username" required>
                                                                     <option selected disabled>Select User</option>
-                                                                        {% for item in all %}
-                                                                        <option>{{item.u_name}}</option>
+                                                                        {% for i in alluser %}
+                                                                        <option>{{i.Username}}</option>
                                                                         {% endfor %}
                                                                     </select>
                                                                     <div class="valid-feedback">
@@ -113,16 +113,16 @@
                                                                         Looks bad!
                                                                     </div>
                                                                 </div>
-                                                                <p> {{item}} </p>
+                                                                <!-- <p> {{item}} </p> -->
                                                             </div>
                                                             <div class="form-group row mb-4">
                                                                 <label class="col-form-label col-lg-4">Group Name<span style="color:red"> *</span></label>
                                                                 <div class="col-lg-8">
-                                                                    <select class="form-control" name="group_name" required>
+                                                                    <select class="form-control" id="group-name" name="group_name" required>
                                                                         <option value="" selected disabled>Select</option>
-                                                                        <option>Admin</option>
-                                                                        <option>Supervisor</option>
-                                                                        <option>Operator</option>
+                                                                        {% for i in groups %}
+                                                                        <option>{{i.GroupName}}</option>
+                                                                        {% endfor %}
                                                                     </select>
                                                                     <div class="valid-feedback">
                                                                         Looks good!
@@ -135,11 +135,10 @@
                                                             <div class="form-group row mb-4">
                                                                 <label class="col-form-label col-lg-4">Department Name<span style="color:red"> *</span></label>
                                                                 <div class="col-lg-8">
-                                                                    <select class="form-control" name="dept_name" required>
+                                                                    <select class="form-control" id="department-name" name="dept_name" required>
                                                                         <option value="" selected disabled>Select</option>
-                                                                        <option>Admin</option>
-                                                                        <option>Supervisor</option>
-                                                                        <option>Operator</option>
+                                                                        <option>IT</option>
+                                                                        <option>QC</option>
                                                                     </select>
                                                                     <div class="valid-feedback">
                                                                         Looks good!
@@ -152,7 +151,7 @@
                                                             <div class="form-group row mb-4">
                                                                 <label class="col-form-label col-lg-4">Status<span style="color:red"> *</span></label>
                                                                 <div class="col-lg-8">
-                                                                    <select class="form-control" name="status" required>
+                                                                    <select class="form-control" id="status" name="status" required>
                                                                         <option value="" selected disabled>Select</option>
                                                                         <option>Active</option>
                                                                         <option>Inactive</option>
@@ -168,7 +167,7 @@
                                                             <div class="form-group row mb-4">
                                                                 <label class="col-form-label col-lg-4">Password<span style="color:red"> *</span></label>
                                                                 <div class="col-lg-8">
-                                                                    <input class="form-control" type="Password" name = "pswd" placeholder="Enter Password" required>
+                                                                    <input class="form-control" type="Password" id="password" name = "pswd" placeholder="Enter Password" required>
                                                                     <div class="valid-feedback">
                                                                         Looks good!
                                                                     </div>
@@ -180,7 +179,7 @@
                                                             <div class="form-group row mb-4">
                                                                 <label class="col-form-label col-lg-4">Password Change Duration(In days)<span style="color:red"> *</span></label>
                                                                 <div class="col-lg-8">
-                                                                    <input class="form-control" type="text" name="pswchdu" placeholder="Enter Password Change Duration(In days)" required>
+                                                                    <input class="form-control" type="text" id="password-change" name="pswchdu" placeholder="Enter Password Change Duration(In days)" required>
                                                                     <div class="valid-feedback">
                                                                         Looks good!
                                                                     </div>
@@ -219,7 +218,7 @@
                                     </div>
 
                                     <div class="modal-body">
-                                        <form method="POST" action="register" id="add-form" class="needs-validation" novalidate>
+                                        <form method="POST" action="{% url 'AddUser' %}" id="add-form" class="needs-validation" novalidate>
                                             {% csrf_token %}
                                             <div data-repeater-list="outer-group" class="outer">
                                                 <div data-repeater-item class="outer">
@@ -227,7 +226,7 @@
                                                     <div class="form-group row mb-4">
                                                         <label class="col-form-label col-lg-4">Username<span style="color:red"> *</span></label>
                                                         <div class="col-lg-8">
-                                                            <input class="form-control" type="text" name="u_name" placeholder="Enter Username" required>
+                                                            <input class="form-control" type="text" name="username" placeholder="Enter Username" required>
                                                             <div class="valid-feedback">
                                                                 Looks good!
                                                             </div>
@@ -239,11 +238,11 @@
                                                     <div class="form-group row mb-4">
                                                         <label class="col-form-label col-lg-4">Group Name<span style="color:red"> *</span></label>
                                                         <div class="col-lg-8">
-                                                            <select class="form-control" name="group_name" required>
+                                                            <select class="form-control" name="group" required>
                                                                 <option value="" selected disabled>Select</option>
-                                                                <option>Admin</option>
-                                                                <option>Supervisor</option>
-                                                                <option>Operator</option>
+                                                                {% for i in groups  %}
+                                                                <option>{{i.GroupName}}</option>
+                                                                {% endfor %}
                                                             </select>
                                                             <div class="valid-feedback">
                                                                 Looks good!
@@ -256,11 +255,10 @@
                                                     <div class="form-group row mb-4">
                                                         <label class="col-form-label col-lg-4">Department Name<span style="color:red"> *</span></label>
                                                         <div class="col-lg-8">
-                                                            <select class="form-control" name="dept_name" required>
+                                                            <select class="form-control" name="department" required>
                                                                 <option value="" selected disabled>Select</option>
-                                                                <option>Admin</option>
-                                                                <option>Supervisor</option>
-                                                                <option>Operator</option>
+                                                                <option>IT</option>
+                                                                <option>QC</option>
                                                             </select>
                                                             <div class="valid-feedback">
                                                                 Looks good!
@@ -289,7 +287,7 @@
                                                     <div class="form-group row mb-4">
                                                         <label class="col-form-label col-lg-4">Password<span style="color:red"> *</span></label>
                                                         <div class="col-lg-8">
-                                                            <input class="form-control" type="Password" name = "pswd" placeholder="Enter Password" required>
+                                                            <input class="form-control" type="Password" name = "password" placeholder="Enter Password" required>
                                                             <div class="valid-feedback">
                                                                 Looks good!
                                                             </div>
@@ -301,7 +299,7 @@
                                                     <div class="form-group row mb-4">
                                                         <label class="col-form-label col-lg-4">Password Change Duration(In days)<span style="color:red"> *</span></label>
                                                         <div class="col-lg-8">
-                                                            <input class="form-control" type="text" name="pswchdu" placeholder="Enter Password Change Duration(In days)" required>
+                                                            <input class="form-control" type="text" name="PasswdChangeDuration" placeholder="Enter Password Change Duration(In days)" required>
                                                             <div class="valid-feedback">
                                                                 Looks good!
                                                             </div>
@@ -347,12 +345,12 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        {% for item in all %}
+                                                        {% for i in alluser %}
                                                             <tr>
-                                                                <td>{{item.u_name}}</td>
-                                                                <td>{{item.status}}</td>
-                                                                <td>{{item.group_name}}</td>
-                                                                <td>{{item.pswchdu}}</td>
+                                                                <td>{{i.Username}}</td>
+                                                                <td>{{i.status}}</td>
+                                                                <td>{{i.Group.GroupName}}</td>
+                                                                <td>{{i.PasswdChangeDuration}}</td>
                                                             </tr>
                                                         {% endfor %}
                                                     </tbody>
@@ -418,25 +416,25 @@
                     buttons: ["copy", "excel", "pdf", "colvis"],
                     initComplete: function () {
 
-                        this.api().columns(0).every(function () {
-                            var column = this;
-                            var select = $(' <select class="form-select"><option value=""></option></select>')
-                                // .appendTo(myTable.header())
-                                .appendTo('#datatable-buttons thead tr #sort0')
-                                .on('change', function () {
-                                    var val = $.fn.dataTable.util.escapeRegex(
-                                        $(this).val()
-                                    );
+                        // this.api().columns(0).every(function () {
+                        //     var column = this;
+                        //     var select = $(' <select class="form-select"><option value=""></option></select>')
+                        //         // .appendTo(myTable.header())
+                        //         .appendTo('#datatable-buttons thead tr #sort0')
+                        //         .on('change', function () {
+                        //             var val = $.fn.dataTable.util.escapeRegex(
+                        //                 $(this).val()
+                        //             );
 
-                                    column
-                                        .search(val ? '^' + val + '$' : '', true, false)
-                                        .draw();
-                                });
+                        //             column
+                        //                 .search(val ? '^' + val + '$' : '', true, false)
+                        //                 .draw();
+                        //         });
 
-                            column.data().unique().sort().each(function (d, j) {
-                                select.append('<option value="' + d + '">' + d + '</option>')
-                            });
-                        })
+                        //     column.data().unique().sort().each(function (d, j) {
+                        //         select.append('<option value="' + d + '">' + d + '</option>')
+                        //     });
+                        // })
 
                         this.api().columns(1).every(function () {
                             var column = this;
@@ -478,25 +476,25 @@
                             });
                         })
 
-                        this.api().columns(3).every(function () {
-                            var column = this;
-                            var select = $(' <select class="form-select"><option value=""></option></select>')
-                                // .appendTo(myTable.header())
-                                .appendTo('#datatable-buttons thead tr #sort3')
-                                .on('change', function () {
-                                    var val = $.fn.dataTable.util.escapeRegex(
-                                        $(this).val()
-                                    );
+                        // this.api().columns(3).every(function () {
+                        //     var column = this;
+                        //     var select = $(' <select class="form-select"><option value=""></option></select>')
+                        //         // .appendTo(myTable.header())
+                        //         .appendTo('#datatable-buttons thead tr #sort3')
+                        //         .on('change', function () {
+                        //             var val = $.fn.dataTable.util.escapeRegex(
+                        //                 $(this).val()
+                        //             );
 
-                                    column
-                                        .search(val ? '^' + val + '$' : '', true, false)
-                                        .draw();
-                                });
+                        //             column
+                        //                 .search(val ? '^' + val + '$' : '', true, false)
+                        //                 .draw();
+                        //         });
 
-                            column.data().unique().sort().each(function (d, j) {
-                                select.append('<option value="' + d + '">' + d + '</option>')
-                            });
-                        })
+                        //     column.data().unique().sort().each(function (d, j) {
+                        //         select.append('<option value="' + d + '">' + d + '</option>')
+                        //     });
+                        // })
 
                     },
                 }).buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)");
@@ -518,6 +516,33 @@
             }
         </script>
 
+         <script>
+            // ,'#U_name'
+            $("#username").on("change",function(){
+                console.log("change")
+                var aid = this.value
+                // $(this).attr("data-uid");
+                console.log("UPdatebtn pREsseS",aid)
+
+                $.ajax
+                ({
+                    method : "GET",
+                    url : `/user-update-data/${aid}/`,
+
+                    success: function(response)
+                    {
+                        r = response.data;
+                        console.log(r);
+                        document.getElementById("username").value = r[0].name;
+                        document.getElementById("password").value = r[0].password;
+                        document.getElementById("group-name").value = r[0].grp_name;
+                        document.getElementById("department-name").value = r[0].dep_name;
+                        document.getElementById("status").value = r[0].status;
+                        document.getElementById("password-change").value = r[0].cpassword;
+                    }
+                });
+            });
+        </script>
 
     </body>
 </html>
