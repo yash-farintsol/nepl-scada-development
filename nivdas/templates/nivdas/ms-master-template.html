@@ -6,7 +6,7 @@
     <head>
         
         <meta charset="utf-8" />
-        <title>General Settings | NIV-DAS</title>
+        <title>Master Template | NIV-DAS</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
@@ -50,13 +50,13 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">General Setting</h4>
+                                    <h4 class="mb-sm-0 font-size-18">Master Template</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="home">Dashboard</a></li>
-                                            <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                                            <li class="breadcrumb-item active">General Settings</li>
+                                            <li class="breadcrumb-item"><a href="#">Master Settings</a></li>
+                                            <li class="breadcrumb-item active">Master Template</li>
                                         </ol>
                                     </div>
 
@@ -68,16 +68,13 @@
                                 <form id="new-form" class="needs-validation" novalidate>
 
                                     <div class="row">
-                                        <div class="col-xl-4 col-md-4">
+                                        <div class="col-xl-6 col-md-4">
                                             <div class="form-group mb-3">
                                                 <label for="validationCustom11" class="form-label">
-                                                    Send SMS Status<span style="color:red"> *</span>
+                                                    Header<span style="color:red"> *</span>
                                                 </label>
-                                                <select class="form-control" name="Sms-status" id="sms-status" required>
-                                                    <!-- <option selected disabled value="">-- Select Option --</option> -->
-                                                    <option>Active</option>
-                                                    <option>Deactive</option>
-                                                </select>
+                                                <input type="text" class="form-control" id="header" name="Header" required
+                                                    placeholder="Enter Header" value="Nihaar Equipment Private Limited">
                                                 <div class="valid-feedback">
                                                     Looks Good!
                                                 </div>
@@ -86,16 +83,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xl-4 col-md-4">
+                                        <div class="col-xl-6 col-md-4">
                                             <div class="form-group mb-3">
                                                 <label for="validationCustom11" class="form-label">
-                                                    Send Email Status<span style="color:red"> *</span>
+                                                    Footer<span style="color:red"> *</span>
                                                 </label>
-                                                <select class="form-control" name="Email-status" id="email-status" required>
-                                                    <!-- <option selected disabled value="">-- Select Option --</option> -->
-                                                    <option>Active</option>
-                                                    <option>Deactive</option>
-                                                </select>
+                                                <input type="text" class="form-control" id="footer" name="Footer" placeholder="Enter Footer" 
+                                                    value="Rejected By Reviewer#Review By:               Rejected By Approver#Review Approved By:" required>
                                                 <div class="valid-feedback">
                                                     Looks Good!
                                                 </div>
@@ -104,71 +98,51 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xl-4 col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom11" class="form-label">E-Signature 
-                                                    Date Time Stamping<span style="color:red"> *</span>
-                                                </label>
-                                                <select class="form-control" name="Sms-status" id="sms-status" required>
-                                                    <!-- <option selected disabled value="">-- Select Option --</option> -->
-                                                    <option>Yes</option>
-                                                    <option>No</option>
-                                                </select>
-                                                <div class="valid-feedback">
-                                                    Looks Good!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Looks Bad!
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xl-4 col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom11" class="form-label">E-Signature 
-                                                    in Audit Trails<span style="color:red"> *</span>
-                                                </label>
-                                                <select class="form-control" name="Sms-status" id="sms-status" required>
-                                                    <option selected disabled value="">-- Select Option --</option>
-                                                    <option>Yes</option>
-                                                    <option>No</option>
-                                                </select>
-                                                <div class="valid-feedback">
-                                                    Looks Good!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Looks Bad!
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom11" class="form-label">
-                                                    Approval<span style="color:red"> *</span>
-                                                </label>
-                                                <select class="form-control" name="Sms-status" id="sms-status" required>
-                                                    <option selected disabled value="">-- Select Option --</option>
-                                                    <option>Single</option>
-                                                    <option>Double</option>
-                                                </select>
-                                                <div class="valid-feedback">
-                                                    Looks Good!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Looks Bad!
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div style="float: right;">
-                                        <button class="btn btn-primary waves-effect waves-light"
-                                            type="submit" id="save" name="Save">Save
-                                        </button>
                                     </div>
 
-                                </form>    
+                                    <div class="row">
+                                        <div class="col-xl-6 col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="validationCustom02" class="form-label">
+                                                    Address<span style="color:red"> *</span>
+                                                </label>
+                                                <textarea type="text" class="form-control" id="address" name="Address" placeholder="Enter Address" style="height: 100px;" 
+                                                    required>117/CD, Kandivli Co-Op Indl.Est.Ltd, Near Hindustan Naka, Charkop, Kandivli (W), Mumbai - 400 067, India
+                                                </textarea>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Looks bad!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="validationCustom02" class="form-label">
+                                                    Logo Upload<span style="color:red"> *</span>
+                                                </label>
+                                                <input type="file" class="form-control" id="logo" name="Logo" 
+                                                    placeholder="Enter Address" required>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Looks bad!
+                                                </div><br>
+                                                <img id="blah" src="{% static 'images/nepl-logo.png' %}" width="35%" alt="{% static 'images/nepl-logo.png' %}" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-end">
+                                        <div class="col-lg-12">
+                                            <div style="float: right;">
+                                                <button class="btn btn-primary waves-effect waves-light" type="submit">Save</button> &nbsp;&nbsp;
+                                                <button class="btn btn-primary waves-effect waves-light" onclick="clearAdd()">Clear</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -210,6 +184,33 @@
     
         <!-- form validation -->
         <script src="{% static 'js/pages/form-validation.init.js' %}"></script>
+
+        <!-- clear form -->
+        <script>
+            function clearAdd() {
+                document.getElementById("new-form").reset();
+                // document.getElementById("logo").value=""
+                // $("#blah").hide();
+            }
+        </script>
+
+        <script>
+            $(document).on("load", function(){
+                const [file] = logo.files
+                if (file) {
+                    blah.src = URL.createObjectURL(file)
+                }
+            });
+        </script>
+
+        <script>
+            logo.onchange = evt => {
+                const [file] = logo.files
+                if (file) {
+                    blah.src = URL.createObjectURL(file)
+                }
+            }
+        </script>
 
 
     </body>

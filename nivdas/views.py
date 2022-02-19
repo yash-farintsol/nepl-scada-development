@@ -635,3 +635,102 @@ def AssignUserSecurity(request):
         
         getSecurity.save()
         return redirect("usersec")
+
+
+def SMSsettings(request):
+    return render(request, "nivdas/sms.html")
+
+def EmailSettings(request):
+    return render(request, "nivdas/mail.html")
+
+def MPSetting(request):
+    return render(request, "nivdas/master_settings.html")
+
+def GeneralSetting(request):
+    return render(request, "nivdas/general-setting.html")
+
+
+def EquipmentCreation(request):
+    return render(request, "nivdas/equip_creation.html")
+
+def EquipmentParameter(request):
+    return render(request, "nivdas/eqp_param.html")
+
+def EquipmentActivation(request):
+    return render(request, "nivdas/eqp_activ.html")
+
+def MSTemplate(request):
+    return render(request, "nivdas/ms-template.html")
+
+def MobileNo(request):
+    return render(request, "nivdas/ms-mobile-number.html")
+
+def MasterTemplate(request):
+    return render(request, "nivdas/ms-master-template.html")
+
+def SyncDateTime(request):
+    return render(request, "nivdas/ms-sync-datetime.html")
+
+def ResetLuxUV(request):
+    return render(request, "nivdas/ms-reset-luxuv.html")
+
+def IOStatus(request):
+    return render(request, "nivdas/io-status.html")
+
+
+def DataView(request):
+    return render(request, "nivdas/supervise-data-view.html")
+
+def LuxUVDataView(request):
+    return render(request, "nivdas/supervise-luxuv-data-view.html")
+
+
+def AuditUser(request):
+    return render(request, "nivdas/audit-user.html")
+
+def AuditAlarm(request):
+    return render(request, "nivdas/audit-alarm.html")
+
+def AuditSMS(request):
+    return render(request, "nivdas/audit-sms.html")
+
+def AuditEquip(request):
+    return render(request, "nivdas/audit-equip.html")
+
+def AuditEmail(request):
+    return render(request, "nivdas/audit-email.html")
+
+
+def HistoryAuditUser(request):
+    return render(request, "nivdas/history-user-audit.html")
+
+def HistoryAuditAlarm(request):
+    return render(request, "nivdas/history-alarm-audit.html")
+
+def HistoryAuditSMS(request):
+    return render(request, "nivdas/history-sms-audit.html")
+
+def HistoryAuditEquip(request):
+    return render(request, "nivdas/history-equip-audit.html")
+
+def HistoryAuditEmail(request):
+    return render(request, "nivdas/history-email-audit.html")
+
+def HistoryDataView(request):
+    return render(request, "nivdas/history-data-view.html")
+
+def HistoryLuxUVDataView(request):
+    return render(request, "nivdas/history-luxuv-data-view.html")
+
+
+def GraphSetting(request):
+    return render(request, "nivdas/tu-graph-settings.html")
+
+def PasswordSetting(request):
+    return render(request, "nivdas/tu-password-setting.html")
+
+def PrintMultipleReports(request):
+    return render(request, "nivdas/tu-print-multiple-report.html")
+
+def AboutUs(request):
+    return render(request, "nivdas/aboutus.html")

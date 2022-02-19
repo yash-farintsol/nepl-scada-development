@@ -43,16 +43,16 @@
                             <li><a href="{% url 'DatabaseSettingPage' %}" data-key="t-customers">Database Settings</a></li>
                         {% endif %}
                         {% if request.session.SMSsetting == True %}
-                            <li><a href="sms-setting" data-key="t-cart">SMS Settings</a></li>
+                            <li><a href="{% url 'sms-setting' %}" data-key="t-cart">SMS Settings</a></li>
                         {% endif %}
                         {% if request.session.EmailSetting == True %}
-                            <li><a href="email-setting" data-key="t-cart">Email Settings</a></li>
+                            <li><a href="{% url 'email-setting' %}" data-key="t-cart">Email Settings</a></li>
                         {% endif %}
                         {% if request.session.MasterPasswdSetting == True %}
-                            <li><a href="master-password-setting" data-key="t-checkout">Master Password Settings</a></li>
+                            <li><a href="{% url 'master-password-setting' %}" data-key="t-checkout">Master Password Settings</a></li>
                         {% endif %}
                         {% if request.session.GeneralSetting == True %}
-                            <li><a href="general-setting" data-key="t-cart">General Setting</a></li>
+                            <li><a href="{% url 'general-setting' %}" data-key="t-cart">General Setting</a></li>
                         {% endif %}
                         </ul>
                 </li>
@@ -64,31 +64,31 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         {% if request.session.EquipmentCreation == True %}
-                            <li><a href="create_equipment" data-key="t-products">Equipment Creation</a></li>
+                            <li><a href="{% url 'equipment-creation' %}" data-key="t-products">Equipment Creation</a></li>
                         {% endif %}
                         {% if request.session.EquipmentParameter == True %}
-                            <li><a href="eqp_parameter" data-key="t-product-detail">Equipment Parameter</a></li>
+                            <li><a href="{% url 'equipment-parameter' %}" data-key="t-product-detail">Equipment Parameter</a></li>
                         {% endif %}
                         {% if request.session.EquipmentActivation == True %}
-                            <li><a href="eqp_activation" data-key="t-orders">Equipment Activation</a></li>
+                            <li><a href="{% url 'equipment-activation' %}" data-key="t-orders">Equipment Activation</a></li>
                         {% endif %}
                         {% if request.session.Template == True %}
-                            <li><a href="template" data-key="t-customers">Template</a></li>
+                            <li><a href="{% url 'template' %}" data-key="t-customers">Template</a></li>
                         {% endif %}
                         {% if request.session.MobileNumber == True %}
-                            <li><a href="#" data-key="t-cart">Mobile Number</a></li>
+                            <li><a href="{% url 'mobile-number' %}" data-key="t-cart">Mobile Number</a></li>
                         {% endif %}
                         {% if request.session.MasterTemplate == True %}
-                            <li><a href="master-template" data-key="t-checkout">Master Template</a></li>
+                            <li><a href="{% url 'master-template' %}" data-key="t-checkout">Master Template</a></li>
                         {% endif %}
                         {% if request.session.SyncDataTime == True %}
-                            <li><a href="synchronize-date-time" data-key="t-shops">Synchronize Date Time</a></li>
+                            <li><a href="{% url 'synchronize-date-time' %}" data-key="t-shops">Synchronize Date Time</a></li>
                         {% endif %}
                         {% if request.session.ResetLuxUV == True %}
-                            <li><a href="reset-lux-uv" data-key="t-add-product">Reset Lux UV</a></li>
+                            <li><a href="{% url 'reset-lux-uv' %}" data-key="t-add-product">Reset Lux UV</a></li>
                         {% endif %}
                         {% if request.session.InputOutputStatus == True %}
-                            <li><a href="io-status" data-key="t-add-product">Input Output Status</a></li>
+                            <li><a href="{% url 'io-status' %}" data-key="t-add-product">Input Output Status</a></li>
                         {% endif %}
                     </ul>
                 </li>
@@ -103,10 +103,10 @@
                             <li><a href="#" data-key="t-products">Equipment List</a></li>
                         {% endif %}
                         {% if request.session.DataView == True %}
-                            <li><a href="#" data-key="t-product-detail">Data View</a></li>
+                            <li><a href="{% url 'data-view' %}" data-key="t-product-detail">Data View</a></li>
                         {% endif %}
                         {% if request.session.LuxUVDataView == True %}
-                            <li><a href="#" data-key="t-orders">Lux UV Data View</a></li>
+                            <li><a href="{% url 'luxuv-data-view' %}" data-key="t-orders">Lux UV Data View</a></li>
                         {% endif %}
                         {% if request.session.ReportApproval == True %}
                             <li><a href="#" data-key="t-products">Report Approval</a></li>
@@ -124,19 +124,19 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         {% if request.session.UserAudit == True %}
-                            <li><a href="user-audit" data-key="t-products">User Audit</a></li>
+                            <li><a href="{% url 'user-audit' %}" data-key="t-products">User Audit</a></li>
                         {% endif %}
                         {% if request.session.AlarmAudit == True %}
-                            <li><a href="alarm-audit" data-key="t-products">Alarm Audit</a></li>
+                            <li><a href="{% url 'alarm-audit' %}" data-key="t-products">Alarm Audit</a></li>
                         {% endif %}
                         {% if request.session.SMSAudit == True %}
-                            <li><a href="sms-audit" data-key="t-products">SMS Audit</a></li>
+                            <li><a href="{% url 'sms-audit' %}" data-key="t-products">SMS Audit</a></li>
                         {% endif %}
                         {% if request.session.EquipmentAudit == True %}
-                            <li><a href="equip-audit" data-key="t-products">Equipment Audit</a></li>
+                            <li><a href="{% url 'equipment-audit' %}" data-key="t-products">Equipment Audit</a></li>
                         {% endif %}
                         {% if request.session.EmailAudit == True %}
-                            <li><a href="email-audit" data-key="t-products">Email Audit</a></li>
+                            <li><a href="{% url 'email-audit' %}" data-key="t-products">Email Audit</a></li>
                         {% endif %}
                     </ul>
                 </li>
@@ -148,25 +148,25 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         {% if request.session.DataReportGraph == True %}
-                            <li><a href="#" data-key="t-products">Data Report/Graph</a></li>
+                            <li><a href="{% url 'data-view-history' %}" data-key="t-products">Data Report/Graph</a></li>
                         {% endif %}
                         {% if request.session.LuxUVDataView == True %}
-                            <li><a href="#" data-key="t-product-detail">Lux UV Data View</a></li>
+                            <li><a href="{% url 'luxuv-data-view-history' %}" data-key="t-product-detail">Lux UV Data View</a></li>
                         {% endif %}
                         {% if request.session.HUserAudit == True %}
-                            <li><a href="user-audit" data-key="t-products">User Audit</a></li>
+                            <li><a href="{% url 'user-audit-history' %}" data-key="t-products">User Audit</a></li>
                         {% endif %}
                         {% if request.session.HAlarmAudit == True %}
-                            <li><a href="alarm-audit" data-key="t-products">Alarm Audit</a></li>
+                            <li><a href="{% url 'alarm-audit-history' %}" data-key="t-products">Alarm Audit</a></li>
                         {% endif %}
                         {% if request.session.HSMSAudit == True %}
-                            <li><a href="sms-audit" data-key="t-products">SMS Audit</a></li>
+                            <li><a href="{% url 'sms-audit-history' %}" data-key="t-products">SMS Audit</a></li>
                         {% endif %}
                         {% if request.session.HEquipmentAudit == True %}
-                            <li><a href="equip-audit" data-key="t-products">Equipment Audit</a></li>
+                            <li><a href="{% url 'equipment-audit-history' %}" data-key="t-products">Equipment Audit</a></li>
                         {% endif %}
                         {% if request.session.HEmailAudit == True %}
-                            <li><a href="email-audit" data-key="t-products">Email Audit</a></li>
+                            <li><a href="{% url 'email-audit-history' %}" data-key="t-products">Email Audit</a></li>
                         {% endif %}
                     </ul>
                 </li>
@@ -178,13 +178,13 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         {% if request.session.GraphSettings == True %}
-                            <li><a href="#" data-key="t-products">Graph Settings</a></li>
+                            <li><a href="{% url 'graph-setting' %}" data-key="t-products">Graph Settings</a></li>
                         {% endif %}
                         {% if request.session.PasswordSettings == True %}
-                            <li><a href="#" data-key="t-product-detail">Password Settings</a></li>
+                            <li><a href="{% url 'password-setting' %}" data-key="t-product-detail">Password Settings</a></li>
                         {% endif %}
                         {% if request.session.PrintMultipleReports == True %}
-                            <li><a href="#" data-key="t-orders">Print Multiple Reports</a></li>
+                            <li><a href="{% url 'print-multiple-reports' %}" data-key="t-orders">Print Multiple Reports</a></li>
                         {% endif %}
                     </ul>
                 </li>
@@ -196,7 +196,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         {% if request.session.AboutUs == True %}
-                            <li><a href="#" data-key="t-product-detail">About Us</a></li>
+                            <li><a href="{% url 'about-us' %}" data-key="t-product-detail">About Us</a></li>
                         {% endif %}
                         {% if request.session.Help == True %}
                             <li><a href="#" data-key="t-orders">Help</a></li>

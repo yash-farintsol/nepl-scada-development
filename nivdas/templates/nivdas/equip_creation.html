@@ -43,9 +43,9 @@
         <!-- Begin page -->
         <div id="layout-wrapper">
 
-            {% include 'sidebar-base.html' %}
+            {% include 'nivdas/sidebar-base.html' %}
 
-            {% include 'navbar-base.html' %}
+            {% include 'nivdas/navbar-base.html' %}
             
 
             <!-- ============================================================== -->
@@ -76,7 +76,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <form class="needs-validation" novalidate method="post" action="create_equipment">
+                                        <form class="needs-validation" novalidate method="post" id="new-form">
                                             {% csrf_token %}
                                             <div class="row">
                                                 <div class="col-xl-4 col-md-6">
@@ -149,7 +149,8 @@
                                                 <div class="col-xl-4 col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label>Data Log Intervals</label>
-                                                        <input class="form-control" type="text" name = "log_inv" placeholder="Enter Data Log Intervals">
+                                                        <input class="form-control" type="text" name="log_inv" pattern="[6-9]|\d{2,}|\d{3,}" 
+                                                            placeholder="Enter Data Log Intervals" required>
                                                         <div class="valid-feedback">
                                                             Looks good!
                                                         </div>
@@ -158,6 +159,92 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="col-xl-4 col-md-6">
+                                                    <div class="form-group mb-3"> <br>
+                                                        <label>(Minimum 5 minutes)</label> &emsp;&emsp;
+                                                        <!-- <div style="float: right;"> -->
+                                                            <button class="btn btn-primary waves-effect waves-light" type="submit">Sync</button>
+                                                        <!-- </div> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row">
+                                                <div class="col-xl-2 col-md-3 col-sm-3">
+                                                    <div class="form-group mb-3">
+                                                        <label>IP Address</label>
+                                                        <input type="text" class="form-control form-control-lg text-center" 
+                                                            name="t1" id="digit1-input" pattern="[0-9]{1,4}" required>
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                        <div class="invalid-feedback">
+                                                            Looks bad!
+                                                        </div>
+                                                    </div>
+                                                </div>
+            
+                                                <div class="col-xl-2 col-md-3 col-sm-3">
+                                                    <div class="form-group mb-3">
+                                                        <input type="text" class="form-control form-control-lg text-center" 
+                                                        name="t2" id="digit2-input" pattern="[0-9]{1,4}" required style="margin-top: 27px;">
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                        <div class="invalid-feedback">
+                                                            Looks bad!
+                                                        </div>
+                                                    </div>
+                                                </div>
+            
+                                                <div class="col-xl-2 col-md-3 col-sm-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="digit3-input" class="visually-hidden"></label>
+                                                        <input type="text" class="form-control form-control-lg text-center" 
+                                                        name="t3" id="digit3-input" pattern="[0-9]{1,4}" required style="margin-top: 27px;">
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                        <div class="invalid-feedback">
+                                                            Looks bad!
+                                                        </div>
+                                                    </div>
+                                                </div>
+            
+                                                <div class="col-xl-2 col-md-3 col-sm-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="digit4-input" class="visually-hidden"></label>
+                                                        <input type="text" class="form-control form-control-lg text-center" 
+                                                        name="t4" id="digit4-input" pattern="[0-9]{1,4}" required style="margin-top: 27px;">
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                        <div class="invalid-feedback">
+                                                            Looks bad!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-2 col-md-6"><br><br>
+                                                    <div class="form-check font-size-16">
+                                                        <input class="form-check-input" type="checkbox" name="PhotoStability"
+                                                            value="Photo-stability" id="photoStability">
+                                                        <label class="form-check-label" for="admincheck03">
+                                                            Is Photo Stability
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-2 col-md-6"><br><br>
+                                                    <div class="form-check font-size-16">
+                                                        <input class="form-check-input" type="checkbox" name="Dual"
+                                                            value="Dual" id="dual">
+                                                        <label class="form-check-label" for="admincheck03">
+                                                            Is Dual
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
                                                 <div class="col-xl-4 col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label>Machine Code</label>
@@ -170,45 +257,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            
-                                            <div class="row">
-                                                <div class="col-xl-6 col-md-6">
-                                                    <div class="form-group mb-3">
-                                                        <label>IP Address</label>
-                                                        <div class="input-group">
-                                                            <input name = "ip_addr1" type="text" class="form-control">
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                </div>
-                                                                <div class="invalid-feedback">
-                                                                    Looks bad!
-                                                                </div>
-                                                            <input name = "ip_addr2" type="text" class="form-control">
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                </div>
-                                                                <div class="invalid-feedback">
-                                                                    Looks bad!
-                                                                </div>
-                                                            <input name = "ip_addr3" type="text" class="form-control">
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                </div>
-                                                                <div class="invalid-feedback">
-                                                                    Looks bad!
-                                                                </div>
-                                                            <input name = "ip_addr4" type="text" class="form-control">
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                </div>
-                                                                <div class="invalid-feedback">
-                                                                    Looks bad!
-                                                                </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6 col-md-6">
+                                                <div class="col-xl-4 col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label>Comments</label>
                                                         <textarea class="form-control" name="comment" rows="3" placeholder="Enter Comments"></textarea>
@@ -221,19 +270,12 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
-                                            <div class="row">
-                                                <div class="mb-3">
-                                                    <button class="btn btn-primary waves-effect waves-light" type="submit">Save</button>
-                                                    <button class="btn btn-primary waves-effect waves-light" type="submit">Clear</button>
-                                                </div>
-                                            </div>
-
                                             <div class="row justify-content-end">
-                                                <div class="col-lg-10">
-                                                    <button type="submit" style="float: right;"
-                                                        class="btn btn-primary" id="submit-btn">Submit
-                                                    </button>
+                                                <div class="col-xl-12">
+                                                    <div style="float: right;">
+                                                        <button class="btn btn-primary waves-effect waves-light" type="submit">Save</button> &nbsp;&nbsp;
+                                                        <button class="btn btn-primary waves-effect waves-light" type="submit" onclick="clearForm()">Clear</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </form>
@@ -281,31 +323,13 @@
         <!-- form validation -->
         <script src="{% static 'js/pages/form-validation.init.js' %}"></script>
 
-        <!-- Required datatable js -->
-        <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
-        <script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
-
-        <!-- Buttons examples -->
-        <script src="{% static 'libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
-        <script src="{% static 'libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
-        <script src="{% static 'libs/jszip/jszip.min.js' %}"></script>
-        <script src="{% static 'libs/pdfmake/build/pdfmake.min.js' %}"></script>
-        <script src="{% static 'libs/pdfmake/build/vfs_fonts.js' %}"></script>
-        <script src="{% static 'libs/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
-        <script src="{% static 'libs/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
-        <script src="{% static 'libs/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
-
-        <!-- Responsive examples -->
-        <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
-        <script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
-
-        <!-- Datatable init js -->
-        <!-- <script src="{% static 'js/pages/datatables.init.js' %}"></script> -->
-        <script src="{% static 'js/pages/custom-dt.init.js' %}"></script>
-
-        <!-- Table Editable plugin -->
-        <script src="{%static 'libs/table-edits/build/table-edits.min.js' %}"></script>
-        <script src="{%static 'js/pages/table-editable.int.js' %}"></script>
+        <!-- clear form -->
+        <script>
+            function clearForm() {
+                document.getElementById("new-form").reset();
+            }
+        </script>
+        
 
     </body>
 </html>
