@@ -37,7 +37,7 @@
                             <li><a href="{% url 'groupsec' %}" data-key="t-product-detail">Group Security</a></li>
                         {% endif %}
                         {% if request.session.UserSec == True %}
-                            <li><a href="user_security" data-key="t-orders">User Security</a></li>
+                            <li><a href="{% url 'usersec' %}" data-key="t-orders">User Security</a></li>
                         {% endif %}
                         {% if request.session.DatabaseSetting == True %}
                             <li><a href="{% url 'DatabaseSettingPage' %}" data-key="t-customers">Database Settings</a></li>

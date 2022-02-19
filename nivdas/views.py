@@ -30,7 +30,8 @@ def RegisterPage(request):
 
 def GroupSec(request):
     if 'username' in request.session:
-        return render(request, "nivdas/group_sec.html")
+        groups = Group.objects.all()
+        return render(request, "nivdas/group_sec.html", {'group': groups})
     else:
         return redirect("loginpage")
 
@@ -177,3 +178,460 @@ def UserUpdateData(request, pk):
     }
     data.append(item)
     return JsonResponse({'data': data})
+
+def GroupSecurityData(request, pk):
+    print(pk)
+    GetGroup = Group.objects.get(GroupName=pk)
+    get_security = GroupSecurity.objects.get(Group=GetGroup)
+    print(get_security)
+    item = {
+        'userCreation': get_security.UserCreation,
+        'groupSec': get_security.GroupSec,
+        'userSec': get_security.UserSec,
+        'databaseSetting': get_security.DatabaseSetting,
+        'SMSSetting': get_security.SMSsetting,
+        'emailSetting': get_security.EmailSetting,
+        'MasterPasswdSetting': get_security.MasterPasswdSetting,
+        'GeneralSetting': get_security.GeneralSetting,
+        'EquipmentCreation': get_security.EquipmentCreation,
+        'EquipmentParameter': get_security.EquipmentParameter,
+        'EquipmentActivation': get_security.EquipmentActivation,
+        'Template': get_security.Template,
+        'MobileNumber': get_security.MobileNumber,
+        'MasterTemplate': get_security.MasterTemplate,
+        'SyncDataTime': get_security.SyncDataTime,
+        'ResetLuxUV': get_security.ResetLuxUV,
+        'InputOutputStatus': get_security.InputOutputStatus,
+        'EquipmentList': get_security.EquipmentList,
+        'DataView': get_security.DataView,
+        'LuxUVDataView': get_security.LuxUVDataView,
+        'ReportApproval': get_security.ReportApproval,
+        'StatusReports': get_security.StatusReports,
+        'UserAudit': get_security.UserAudit,
+        'AlarmAudit': get_security.AlarmAudit,
+        'SMSAudit': get_security.SMSAudit,
+        'EquipmentAudit': get_security.EquipmentAudit,
+        'EmailAudit': get_security.EmailAudit,
+        'DataReportGraph': get_security.DataReportGraph,
+        'LuxUVDataView': get_security.LuxUVDataView,
+        'HUserAudit': get_security.HUserAudit,
+        'HAlarmAudit': get_security.HAlarmAudit,
+        'HSMSAudit': get_security.HSMSAudit,
+        'HEquipmentAudit': get_security.HEquipmentAudit,
+        'HEmailAudit': get_security.HEmailAudit,
+        'GraphSettings': get_security.GraphSettings,
+        'PasswordSettings': get_security.PasswordSettings,
+        'PrintMultipleReports': get_security.PrintMultipleReports,
+        'AboutUs': get_security.AboutUs,
+        'Help': get_security.Help
+    }
+    return JsonResponse({'data': item})
+
+def UserSecurityData(request, pk):
+    GetUser = User.objects.get(Username=pk)
+    get_security = GroupSecurity.objects.get(Group=GetUser.Group)
+    item = {
+        'userCreation': get_security.UserCreation,
+        'groupSec': get_security.GroupSec,
+        'userSec': get_security.UserSec,
+        'databaseSetting': get_security.DatabaseSetting,
+        'SMSSetting': get_security.SMSsetting,
+        'emailSetting': get_security.EmailSetting,
+        'MasterPasswdSetting': get_security.MasterPasswdSetting,
+        'GeneralSetting': get_security.GeneralSetting,
+        'EquipmentCreation': get_security.EquipmentCreation,
+        'EquipmentParameter': get_security.EquipmentParameter,
+        'EquipmentActivation': get_security.EquipmentActivation,
+        'Template': get_security.Template,
+        'MobileNumber': get_security.MobileNumber,
+        'MasterTemplate': get_security.MasterTemplate,
+        'SyncDataTime': get_security.SyncDataTime,
+        'ResetLuxUV': get_security.ResetLuxUV,
+        'InputOutputStatus': get_security.InputOutputStatus,
+        'EquipmentList': get_security.EquipmentList,
+        'DataView': get_security.DataView,
+        'LuxUVDataView': get_security.LuxUVDataView,
+        'ReportApproval': get_security.ReportApproval,
+        'StatusReports': get_security.StatusReports,
+        'UserAudit': get_security.UserAudit,
+        'AlarmAudit': get_security.AlarmAudit,
+        'SMSAudit': get_security.SMSAudit,
+        'EquipmentAudit': get_security.EquipmentAudit,
+        'EmailAudit': get_security.EmailAudit,
+        'DataReportGraph': get_security.DataReportGraph,
+        'LuxUVDataView': get_security.LuxUVDataView,
+        'HUserAudit': get_security.HUserAudit,
+        'HAlarmAudit': get_security.HAlarmAudit,
+        'HSMSAudit': get_security.HSMSAudit,
+        'HEquipmentAudit': get_security.HEquipmentAudit,
+        'HEmailAudit': get_security.HEmailAudit,
+        'GraphSettings': get_security.GraphSettings,
+        'PasswordSettings': get_security.PasswordSettings,
+        'PrintMultipleReports': get_security.PrintMultipleReports,
+        'AboutUs': get_security.AboutUs,
+        'Help': get_security.Help
+    }
+    return JsonResponse({'data': item})
+
+def UserSec(request):
+    if 'username' in request.session:
+        users = User.objects.all()
+        return render(request, "nivdas/user_sec.html", {'user': users})
+    else:
+        return redirect("loginpage")
+
+def AssignGroupSecurity(request):
+    if request.method == "POST":
+        getGroup = Group.objects.get(GroupName = request.POST['Group'])
+        getSecurity = GroupSecurity.objects.get(Group=getGroup)
+        admin = request.POST.getlist('Admin1')
+        masterSetting = request.POST.getlist('Master1')
+        supervise = request.POST.getlist('Supervise1')
+        auditTrails = request.POST.getlist('Audit1')
+        history = request.POST.getlist('History1')
+        tools = request.POST.getlist('Tool1')
+        help = request.POST.getlist('Help1')
+
+        if "UserCreation" in admin:
+            getSecurity.UserCreation = True
+        else:
+            getSecurity.UserCreation = False
+        if "GroupSec" in admin:
+            getSecurity.GroupSec = True
+        else:
+            getSecurity.GroupSec = False
+        if "UserSec" in admin:
+            getSecurity.UserSec = True
+        else:
+            getSecurity.UserSec = False
+        if "DatabaseSetting" in admin:
+            getSecurity.DatabaseSetting = True
+        else:
+            getSecurity.DatabaseSetting = False
+        if "SMSsetting" in admin:
+            getSecurity.SMSsetting = True
+        else:
+            getSecurity.SMSsetting = False
+        if "EmailSetting" in admin:
+            getSecurity.EmailSetting = True
+        else:
+            getSecurity.EmailSetting = False
+        if "MasterPasswdSetting" in admin:
+            getSecurity.MasterPasswdSetting = True
+        else:
+            getSecurity.MasterPasswdSetting = False
+        if "GeneralSetting" in admin:
+            getSecurity.GeneralSetting = True
+        else:
+            getSecurity.GeneralSetting = False
+        
+        if "EquipmentCreation" in masterSetting:
+            getSecurity.EquipmentCreation = True
+        else:
+            getSecurity.EquipmentCreation = False
+        if "EquipmentParameter" in masterSetting:
+            getSecurity.EquipmentParameter = True
+        else:
+            getSecurity.EquipmentParameter = False
+        if "EquipmentActivation" in masterSetting:
+            getSecurity.EquipmentActivation = True
+        else:
+            getSecurity.EquipmentActivation = False
+        if "Template" in masterSetting:
+            getSecurity.Template = True
+        else:
+            getSecurity.Template = False
+        if "MobileNumber" in masterSetting:
+            getSecurity.MobileNumber = True
+        else:
+            getSecurity.MobileNumber = False
+        if "MasterTemplate" in masterSetting:
+            getSecurity.MasterTemplate = True
+        else:
+            getSecurity.MasterTemplate = False
+        if "SyncDataTime" in masterSetting:
+            getSecurity.SyncDataTime = True
+        else:
+            getSecurity.SyncDataTime = False
+        if "ResetLuxUV" in masterSetting:
+            getSecurity.ResetLuxUV = True
+        else:
+            getSecurity.ResetLuxUV = False
+        if "InputOutputStatus" in masterSetting:
+            getSecurity.InputOutputStatus = True
+        else:
+            getSecurity.InputOutputStatus = False
+        
+        if "EquipmentList" in supervise:
+            getSecurity.EquipmentList = True
+        else:
+            getSecurity.EquipmentList = False
+        if "DataView" in supervise:
+            getSecurity.DataView = True
+        else:
+            getSecurity.DataView = False
+        if "LuxUVDataView" in supervise:
+            getSecurity.LuxUVDataView = True
+        else:
+            getSecurity.LuxUVDataView = False
+        if "ReportApproval" in supervise:
+            getSecurity.ReportApproval = True
+        else:
+            getSecurity.ReportApproval = False
+        if "StatusReports" in supervise:
+            getSecurity.StatusReports = True
+        else:
+            getSecurity.StatusReports = False
+        
+        if "UserAudit" in auditTrails:
+            getSecurity.UserAudit = True
+        else:
+            getSecurity.UserAudit = False
+        if "AlarmAudit" in auditTrails:
+            getSecurity.AlarmAudit = True
+        else:
+            getSecurity.AlarmAudit = False
+        if "SMSAudit" in auditTrails:
+            getSecurity.SMSAudit = True
+        else:
+            getSecurity.SMSAudit = False
+        if "EquipmentAudit" in auditTrails:
+            getSecurity.EquipmentAudit = True
+        else:
+            getSecurity.EquipmentAudit = False
+        if "EmailAudit" in auditTrails:
+            getSecurity.EmailAudit = True
+        else:
+            getSecurity.EmailAudit = False
+        
+        if "DataReportGraph" in history:
+            getSecurity.DataReportGraph = True
+        else:
+            getSecurity.DataReportGraph = False
+        if "LuxUVDataView" in history:
+            getSecurity.LuxUVDataView = True
+        else:
+            getSecurity.LuxUVDataView = False
+        if "HUserAudit" in history:
+            getSecurity.HUserAudit = True
+        else:
+            getSecurity.HUserAudit = False
+        if "HAlarmAudit" in history:
+            getSecurity.HAlarmAudit = True
+        else:
+            getSecurity.HAlarmAudit = False
+        if "HSMSAudit" in history:
+            getSecurity.HSMSAudit = True
+        else:
+            getSecurity.HSMSAudit = False
+        if "HEquipmentAudit" in history:
+            getSecurity.HEquipmentAudit = True
+        else:
+            getSecurity.HEquipmentAudit = False
+        if "HEmailAudit" in history:
+            getSecurity.HEmailAudit = True
+        else:
+            getSecurity.HEmailAudit = False
+        
+        if "GraphSettings" in tools:
+            getSecurity.GraphSettings = True
+        else:
+            getSecurity.GraphSettings = False
+        if "PasswordSettings" in tools:
+            getSecurity.PasswordSettings = True
+        else:
+            getSecurity.PasswordSettings = False
+        if "PrintMultipleReports" in tools:
+            getSecurity.PrintMultipleReports = True
+        else:
+            getSecurity.PrintMultipleReports = False
+        
+        if "AboutUs" in help:
+            getSecurity.AboutUs = True
+        else:
+            getSecurity.AboutUs = False
+        if "Help" in help:
+            getSecurity.Help = True
+        else:
+            getSecurity.Help = False
+        
+        getSecurity.save()
+        return redirect("groupsec")
+
+def AssignUserSecurity(request):
+    if request.method == "POST":
+        getUser = User.objects.get(Username = request.POST['User'])
+        getSecurity = GroupSecurity.objects.get(Group=getUser.Group)
+        admin = request.POST.getlist('Admin1')
+        masterSetting = request.POST.getlist('Master1')
+        supervise = request.POST.getlist('Supervise1')
+        auditTrails = request.POST.getlist('Audit1')
+        history = request.POST.getlist('History1')
+        tools = request.POST.getlist('Tool1')
+        help = request.POST.getlist('Help1')
+
+        if "UserCreation" in admin:
+            getSecurity.UserCreation = True
+        else:
+            getSecurity.UserCreation = False
+        if "GroupSec" in admin:
+            getSecurity.GroupSec = True
+        else:
+            getSecurity.GroupSec = False
+        if "UserSec" in admin:
+            getSecurity.UserSec = True
+        else:
+            getSecurity.UserSec = False
+        if "DatabaseSetting" in admin:
+            getSecurity.DatabaseSetting = True
+        else:
+            getSecurity.DatabaseSetting = False
+        if "SMSsetting" in admin:
+            getSecurity.SMSsetting = True
+        else:
+            getSecurity.SMSsetting = False
+        if "EmailSetting" in admin:
+            getSecurity.EmailSetting = True
+        else:
+            getSecurity.EmailSetting = False
+        if "MasterPasswdSetting" in admin:
+            getSecurity.MasterPasswdSetting = True
+        else:
+            getSecurity.MasterPasswdSetting = False
+        if "GeneralSetting" in admin:
+            getSecurity.GeneralSetting = True
+        else:
+            getSecurity.GeneralSetting = False
+        
+        if "EquipmentCreation" in masterSetting:
+            getSecurity.EquipmentCreation = True
+        else:
+            getSecurity.EquipmentCreation = False
+        if "EquipmentParameter" in masterSetting:
+            getSecurity.EquipmentParameter = True
+        else:
+            getSecurity.EquipmentParameter = False
+        if "EquipmentActivation" in masterSetting:
+            getSecurity.EquipmentActivation = True
+        else:
+            getSecurity.EquipmentActivation = False
+        if "Template" in masterSetting:
+            getSecurity.Template = True
+        else:
+            getSecurity.Template = False
+        if "MobileNumber" in masterSetting:
+            getSecurity.MobileNumber = True
+        else:
+            getSecurity.MobileNumber = False
+        if "MasterTemplate" in masterSetting:
+            getSecurity.MasterTemplate = True
+        else:
+            getSecurity.MasterTemplate = False
+        if "SyncDataTime" in masterSetting:
+            getSecurity.SyncDataTime = True
+        else:
+            getSecurity.SyncDataTime = False
+        if "ResetLuxUV" in masterSetting:
+            getSecurity.ResetLuxUV = True
+        else:
+            getSecurity.ResetLuxUV = False
+        if "InputOutputStatus" in masterSetting:
+            getSecurity.InputOutputStatus = True
+        else:
+            getSecurity.InputOutputStatus = False
+        
+        if "EquipmentList" in supervise:
+            getSecurity.EquipmentList = True
+        else:
+            getSecurity.EquipmentList = False
+        if "DataView" in supervise:
+            getSecurity.DataView = True
+        else:
+            getSecurity.DataView = False
+        if "LuxUVDataView" in supervise:
+            getSecurity.LuxUVDataView = True
+        else:
+            getSecurity.LuxUVDataView = False
+        if "ReportApproval" in supervise:
+            getSecurity.ReportApproval = True
+        else:
+            getSecurity.ReportApproval = False
+        if "StatusReports" in supervise:
+            getSecurity.StatusReports = True
+        else:
+            getSecurity.StatusReports = False
+        
+        if "UserAudit" in auditTrails:
+            getSecurity.UserAudit = True
+        else:
+            getSecurity.UserAudit = False
+        if "AlarmAudit" in auditTrails:
+            getSecurity.AlarmAudit = True
+        else:
+            getSecurity.AlarmAudit = False
+        if "SMSAudit" in auditTrails:
+            getSecurity.SMSAudit = True
+        else:
+            getSecurity.SMSAudit = False
+        if "EquipmentAudit" in auditTrails:
+            getSecurity.EquipmentAudit = True
+        else:
+            getSecurity.EquipmentAudit = False
+        if "EmailAudit" in auditTrails:
+            getSecurity.EmailAudit = True
+        else:
+            getSecurity.EmailAudit = False
+        
+        if "DataReportGraph" in history:
+            getSecurity.DataReportGraph = True
+        else:
+            getSecurity.DataReportGraph = False
+        if "LuxUVDataView" in history:
+            getSecurity.LuxUVDataView = True
+        else:
+            getSecurity.LuxUVDataView = False
+        if "HUserAudit" in history:
+            getSecurity.HUserAudit = True
+        else:
+            getSecurity.HUserAudit = False
+        if "HAlarmAudit" in history:
+            getSecurity.HAlarmAudit = True
+        else:
+            getSecurity.HAlarmAudit = False
+        if "HSMSAudit" in history:
+            getSecurity.HSMSAudit = True
+        else:
+            getSecurity.HSMSAudit = False
+        if "HEquipmentAudit" in history:
+            getSecurity.HEquipmentAudit = True
+        else:
+            getSecurity.HEquipmentAudit = False
+        if "HEmailAudit" in history:
+            getSecurity.HEmailAudit = True
+        else:
+            getSecurity.HEmailAudit = False
+        
+        if "GraphSettings" in tools:
+            getSecurity.GraphSettings = True
+        else:
+            getSecurity.GraphSettings = False
+        if "PasswordSettings" in tools:
+            getSecurity.PasswordSettings = True
+        else:
+            getSecurity.PasswordSettings = False
+        if "PrintMultipleReports" in tools:
+            getSecurity.PrintMultipleReports = True
+        else:
+            getSecurity.PrintMultipleReports = False
+        
+        if "AboutUs" in help:
+            getSecurity.AboutUs = True
+        else:
+            getSecurity.AboutUs = False
+        if "Help" in help:
+            getSecurity.Help = True
+        else:
+            getSecurity.Help = False
+        
+        getSecurity.save()
+        return redirect("usersec")
