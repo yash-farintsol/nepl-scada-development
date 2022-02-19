@@ -40,7 +40,7 @@
                             <li><a href="user_security" data-key="t-orders">User Security</a></li>
                         {% endif %}
                         {% if request.session.DatabaseSetting == True %}
-                            <li><a href="database-setting" data-key="t-customers">Database Settings</a></li>
+                            <li><a href="{% url 'DatabaseSettingPage' %}" data-key="t-customers">Database Settings</a></li>
                         {% endif %}
                         {% if request.session.SMSsetting == True %}
                             <li><a href="sms-setting" data-key="t-cart">SMS Settings</a></li>

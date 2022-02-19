@@ -34,6 +34,11 @@ def GroupSec(request):
     else:
         return redirect("loginpage")
 
+def DatabaseSettingPage(request):
+    if 'username' in request.session:
+        return render(request, "nivdas/db-setting.html")
+    else:
+        return redirect("loginpage")
 
 def Login(request):
     print("HELLO")
