@@ -6,7 +6,7 @@
     <head>
         
         <meta charset="utf-8" />
-        <title>User Audit | NIV-DAS</title>
+        <title>Equipment Audit History | NIV-DAS</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
@@ -64,13 +64,13 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">User Audit</h4>
+                                    <h4 class="mb-sm-0 font-size-18">Equipment Audit History</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="home">Dashboard</a></li>
-                                            <li class="breadcrumb-item"><a href="#">Audit Trails</a></li>
-                                            <li class="breadcrumb-item active">User Audit</li>
+                                            <li class="breadcrumb-item"><a href="#">History</a></li>
+                                            <li class="breadcrumb-item active">Equipment Audit History</li>
                                         </ol>
                                     </div>
 
@@ -83,14 +83,14 @@
                                 <div class="card-header">
                                     <div class="row">
                                         <div class="col-xl-1">
-                                            <label>Username : </label>
+                                            <label>Equipment Name : <span style="color:red"> *</span></label>
                                         </div>
                                         <div class="col-xl-3">
                                             <div id="username"></div>
                                         </div>
 
                                         <div class="col-xl-1">
-                                            <label>From : </label>
+                                            <label>From : <span style="color:red"> *</span></label>
                                         </div>
                                         <div class="col-xl-3">
                                             <div class="input-daterange input-group"
@@ -100,7 +100,7 @@
                                         </div>
 
                                         <div class="col-xl-1">
-                                            <label>To : </label>
+                                            <label>To : <span style="color:red"> *</span></label>
                                         </div>
                                         <div class="col-xl-3">
                                             <div class="input-daterange input-group"
@@ -115,9 +115,6 @@
                                     <div style="float: right;">
                                         <button type="button" class="btn btn-primary waves-effect waves-light"
                                             data-bs-toggle="modal" data-bs-target="#edit">Report
-                                        </button> &nbsp;&nbsp;
-                                        <button type="button" class="btn btn-primary waves-effect waves-light"
-                                            data-bs-toggle="modal" data-bs-target="#register">Send for Approval
                                         </button>
                                     </div>
 
@@ -129,22 +126,28 @@
                                         dataTable no-footer dtr-inline" style="table-layout: auto">
                                         <thead id="header">
                                             <tr>
+                                                <th>Equipment Name</th>
                                                 <th>Username</th>
                                                 <th>Date</th> <!-- strftime('%Y-%m-%d') -->
                                                 <th>Time</th>
                                                 <th>Log Status</th>
+                                                <th>Comment</th>
                                             </tr>
                                             <tr>
                                                 <td id="0"></td>
                                                 <td id="1"></td>
                                                 <td id="2"></td>
                                                 <td id="3"></td>
+                                                <td id="4"></td>
+                                                <td id="5"></td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>Tiger Nixon</td>
+                                                <td>System Architect</td>
                                                 <td>2021-04-25</td>
+                                                <td>Edinburgh</td>
                                                 <td>System Architect</td>
                                                 <td>Edinburgh</td>
                                             </tr>
@@ -223,7 +226,7 @@
                 function( settings, data, dataIndex ) {
                     var min = minDate.val();
                     var max = maxDate.val();
-                    var date = new Date( data[1] );
+                    var date = new Date( data[2] );
             
                     if (
                         ( min === null && max === null ) ||
@@ -256,7 +259,7 @@
                             
                         this.api().columns(0).every(function () {
                             var column = this;
-                            var select = $(' <select class="form-select"><option value="">All User</option></select>')
+                            var select = $(' <select class="form-select"><option value="">All Equipment</option></select>')
                                 // .appendTo(myTable.header())
                                 .appendTo('#username')
                                 .on('change', function () {
@@ -294,31 +297,11 @@
                             });
                         })
             
-                        // this.api().columns(2).every(function () {
-                        //     var column = this;
-                        //     var select = $(' <select class="form-select"><option value=""></option></select>')
-                        //         // .appendTo(myTable.header())
-                        //         .appendTo('#datatable-buttons thead tr #2')
-                        //         .on('change', function () {
-                        //             var val = $.fn.dataTable.util.escapeRegex(
-                        //                 $(this).val()
-                        //             );
-            
-                        //             column
-                        //                 .search(val ? '^' + val + '$' : '', true, false)
-                        //                 .draw();
-                        //         });
-            
-                        //     column.data().unique().sort().each(function (d, j) {
-                        //         select.append('<option value="' + d + '">' + d + '</option>')
-                        //     });
-                        // })
-            
-                        this.api().columns(3).every(function () {
+                        this.api().columns(2).every(function () {
                             var column = this;
                             var select = $(' <select class="form-select"><option value=""></option></select>')
                                 // .appendTo(myTable.header())
-                                .appendTo('#datatable-buttons thead tr #3')
+                                .appendTo('#datatable-buttons thead tr #2')
                                 .on('change', function () {
                                     var val = $.fn.dataTable.util.escapeRegex(
                                         $(this).val()
@@ -333,6 +316,26 @@
                                 select.append('<option value="' + d + '">' + d + '</option>')
                             });
                         })
+            
+                        // this.api().columns(3).every(function () {
+                        //     var column = this;
+                        //     var select = $(' <select class="form-select"><option value=""></option></select>')
+                        //         // .appendTo(myTable.header())
+                        //         .appendTo('#datatable-buttons thead tr #3')
+                        //         .on('change', function () {
+                        //             var val = $.fn.dataTable.util.escapeRegex(
+                        //                 $(this).val()
+                        //             );
+            
+                        //             column
+                        //                 .search(val ? '^' + val + '$' : '', true, false)
+                        //                 .draw();
+                        //         });
+            
+                        //     column.data().unique().sort().each(function (d, j) {
+                        //         select.append('<option value="' + d + '">' + d + '</option>')
+                        //     });
+                        // })
                     },
                 });
             
@@ -344,8 +347,6 @@
                 table.buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)");
             });
         </script>
-
-
 
 
     </body>

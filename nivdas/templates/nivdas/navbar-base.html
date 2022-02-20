@@ -1,5 +1,14 @@
 {% load static %}
 
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Muli" />
+
+<style>
+    html *
+    {
+        font-family: Muli !important;
+    }
+</style>
+
 <header id="page-topbar">
     <div class="navbar-header">
         <div class="d-flex">
@@ -7,7 +16,7 @@
             <div class="navbar-brand-box">
                 <a href="home" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{% static 'images/nepl-logo.png' %}" alt="" height="40">
+                        <img src="{% static 'images/nepl-logo.png' %}" alt="" height="40" style="margin-left: -11px;">
                     </span>
                     <span class="logo-lg">
                         <img src="{% static 'images/nepl-logo.png' %}" alt="" height="40"> <span class="logo-txt">NIV-DAS</span>
@@ -16,7 +25,7 @@
 
                 <a href="home" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{% static 'images/nepl-logo.png' %}" alt="" height="40">
+                        <img src="{% static 'images/nepl-logo.png' %}" alt="" height="40" style="margin-left: -11px;">
                     </span>
                     <span class="logo-lg">
                         <img src="{% static 'images/nepl-logo.png' %}" alt="" height="40"> <span class="logo-txt">NIV-DAS</span>
@@ -25,7 +34,7 @@
             </div>
 
             <button type="button" class="btn btn-sm px-3 font-size-16 header-item" id="vertical-menu-btn">
-                <i class="fa fa-fw fa-bars"></i>
+                <i data-feather="align-justify"></i>
             </button>
 
         </div>
