@@ -177,3 +177,22 @@ def UserUpdateData(request, pk):
     }
     data.append(item)
     return JsonResponse({'data': data})
+
+def StoreDatabaseSetting(request):
+    if request.method == "POST":
+        days = request.POST['days']
+        time1 = datetime.strptime(request.POST['time1'], '%H:%M').time()
+        time2 = datetime.strptime(request.POST['time2'], '%H:%M').time()
+        time3 = datetime.strptime(request.POST['time3'], '%H:%M').time()
+        time4 = datetime.strptime(request.POST['time4'], '%H:%M').time()
+        time5 = datetime.strptime(request.POST['time5'], '%H:%M').time()
+        BackupFilePath = request.POST['BackupFilePath']
+        AutoBackupStatus = request.POST['AutoBackupStatus']
+        HistoryDatabase = request.POST['HistoryDatabase']  
+
+
+        StoreDBSetting = DatabaseSetting.objects.create(days=days,time1=time1,
+        time2=time2,time3=time3,time4=time4,time5=time5,DataBackupPath=BackupFilePath,
+        AutoBackupStatus=AutoBackupStatus)
+
+        return redirect("indexpage")

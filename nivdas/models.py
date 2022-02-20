@@ -129,7 +129,16 @@ class UserSecurity(models.Model):
     Help = models.BooleanField(default=False)
 
 
-
+class DatabaseSetting(models.Model):
+    days = models.IntegerField()
+    time1 = models.TimeField()
+    time2 = models.TimeField()
+    time3 = models.TimeField()
+    time4 = models.TimeField()
+    time5 = models.TimeField()
+    DataBackupPath = models.CharField(max_length=50)
+    AutoBackupStatus = models.CharField(max_length=50)
+    lastdatabckup = models.DateTimeField(auto_now_add=True)
 
 class sms_setting(models.Model):
     objects = models.Manager()

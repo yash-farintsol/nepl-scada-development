@@ -10,4 +10,5 @@ urlpatterns = [
     path("login/",views.Login,name="login"),
     path("Add-user/",views.AddUser,name="AddUser"),
     path('user-update-data/<str:pk>/', views.UserUpdateData, name="user-update-data"),
+    path("store-database-setting/",views.StoreDatabaseSetting,name="StoreDatabaseSetting"),
 ]
