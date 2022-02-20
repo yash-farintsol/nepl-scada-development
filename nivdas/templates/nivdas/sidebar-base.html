@@ -100,7 +100,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         {% if request.session.EquipmentList == True %}
-                            <li><a href="#" data-key="t-products">Equipment List</a></li>
+                            <li><a href="{% url 'equipment-list' %}" data-key="t-products">Equipment List</a></li>
                         {% endif %}
                         {% if request.session.DataView == True %}
                             <li><a href="{% url 'data-view' %}" data-key="t-product-detail">Data View</a></li>
@@ -109,10 +109,10 @@
                             <li><a href="{% url 'luxuv-data-view' %}" data-key="t-orders">Lux UV Data View</a></li>
                         {% endif %}
                         {% if request.session.ReportApproval == True %}
-                            <li><a href="#" data-key="t-products">Report Approval</a></li>
+                            <li><a href="{% url 'report-approval' %}" data-key="t-products">Report Approval</a></li>
                         {% endif %}
                         {% if request.session.StatusReports == True %}
-                            <li><a href="#" data-key="t-product-detail">Status Reports</a></li>
+                            <li><a href="{% url 'status-report' %}" data-key="t-product-detail">Status Reports</a></li>
                         {% endif %}
                     </ul>
                 </li>

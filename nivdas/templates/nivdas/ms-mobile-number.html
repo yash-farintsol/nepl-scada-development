@@ -91,8 +91,8 @@
                                             <p>1.</p>
                                         </div>
                                         <div class="col-md-3">
-                                            <input class="form-control" type="text" value="" id="name1"
-                                                name="Name1" pattern="[a-zA-Z\s]{0,}" placeholder="Enter Name">
+                                            <input class="form-control" type="text" id="name1" required onchange="func1()"
+                                                name="Name1" pattern="[a-zA-Z\s]{1,}" placeholder="Enter Name">
                                             <div class="valid-feedback">
                                                 Looks Good!
                                             </div>
@@ -101,7 +101,7 @@
                                             </div>
                                         </div>
                                         <div class=" col-md-3">
-                                            <input class="form-control" type="text" value="" id="number1"
+                                            <input class="form-control" type="text" id="number1" required onchange="func1()"
                                                 name="Number1" pattern="[0-9]{10}" placeholder="Enter Mobile Number">
                                             <div class="valid-feedback">
                                                 Looks Good!
@@ -111,8 +111,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <input class="form-control" type="email" name="Email1"
-                                                id="email1" placeholder="Enter Email"
+                                            <input class="form-control" type="email" name="Email1" required
+                                                id="email1" placeholder="Enter Email" onchange="func1()"
                                                 pattern="\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,})+">
                                             <div class="valid-feedback">
                                                 Looks Good!
@@ -122,7 +122,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-2">
-                                            <select class="form-select" name="Status1" id="status1">
+                                            <select class="form-select" name="Status1" id="status1" required onchange="func1()">
                                                 <option selected disabled value="">-- Select Option --</option>
                                                 <option>Inactive</option>
                                                 <option>Active</option>
@@ -142,8 +142,8 @@
                                             <p>2.</p>
                                         </div>
                                         <div class="col-md-3">
-                                            <input class="form-control" type="text" value="" id="name2"
-                                                name="Name2" pattern="[a-zA-Z\s]{0,}" placeholder="Enter Name">
+                                            <input class="form-control" type="text" id="name2" disabled onchange="func2()"
+                                                name="Name2" pattern="[a-zA-Z\s]{1,}" placeholder="Enter Name">
                                             <div class="valid-feedback">
                                                 Looks Good!
                                             </div>
@@ -152,7 +152,7 @@
                                             </div>
                                         </div>
                                         <div class=" col-md-3">
-                                            <input class="form-control" type="text" value="" id="number2"
+                                            <input class="form-control" type="text" id="number2" disabled onchange="func2()"
                                                 name="Number2" pattern="[0-9]{10}" placeholder="Enter Mobile Number">
                                             <div class="valid-feedback">
                                                 Looks Good!
@@ -162,8 +162,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <input class="form-control" type="email" name="Email2"
-                                                id="email2" placeholder="Enter Email"
+                                            <input class="form-control" type="email" name="Email2" disabled
+                                                id="email2" placeholder="Enter Email" onchange="func2()"
                                                 pattern="\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,})+">
                                             <div class="valid-feedback">
                                                 Looks Good!
@@ -173,7 +173,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-2">
-                                            <select class="form-select" name="Status2" id="status2">
+                                            <select class="form-select" name="Status2" id="status2" disabled onchange="func2()">
                                                 <option selected disabled value="">-- Select Option --</option>
                                                 <option>Inactive</option>
                                                 <option>Active</option>
@@ -193,8 +193,8 @@
                                             <p>3.</p>
                                         </div>
                                         <div class="col-md-3">
-                                            <input class="form-control" type="text" value="" id="name3"
-                                                name="Name3" pattern="[a-zA-Z\s]{0,}" placeholder="Enter Name">
+                                            <input class="form-control" type="text" id="name3" disabled onchange="func3()"
+                                                name="Name3" pattern="[a-zA-Z\s]{1,}" placeholder="Enter Name">
                                             <div class="valid-feedback">
                                                 Looks Good!
                                             </div>
@@ -203,7 +203,7 @@
                                             </div>
                                         </div>
                                         <div class=" col-md-3">
-                                            <input class="form-control" type="text" value="" id="number3"
+                                            <input class="form-control" type="text" id="number3" disabled onchange="func3()"
                                                 name="Number3" pattern="[0-9]{10}" placeholder="Enter Mobile Number">
                                             <div class="valid-feedback">
                                                 Looks Good!
@@ -213,8 +213,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <input class="form-control" type="email" name="Email3"
-                                                id="email3" placeholder="Enter Email"
+                                            <input class="form-control" type="email" name="Email3" disabled
+                                                id="email3" placeholder="Enter Email" onchange="func3()"
                                                 pattern="\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,})+">
                                             <div class="valid-feedback">
                                                 Looks Good!
@@ -224,7 +224,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-2">
-                                            <select class="form-select" name="Status3" id="status3">
+                                            <select class="form-select" name="Status3" id="status3" disabled onchange="func3()">
                                                 <option selected disabled value="">-- Select Option --</option>
                                                 <option>Inactive</option>
                                                 <option>Active</option>
@@ -244,8 +244,8 @@
                                             <p>4.</p>
                                         </div>
                                         <div class="col-md-3">
-                                            <input class="form-control" type="text" value="" id="name4"
-                                                name="Name4" pattern="[a-zA-Z\s]{0,}" placeholder="Enter Name">
+                                            <input class="form-control" type="text" id="name4" disabled onchange="func4()"
+                                                name="Name4" pattern="[a-zA-Z\s]{1,}" placeholder="Enter Name">
                                             <div class="valid-feedback">
                                                 Looks Good!
                                             </div>
@@ -254,7 +254,7 @@
                                             </div>
                                         </div>
                                         <div class=" col-md-3">
-                                            <input class="form-control" type="text" value="" id="number4"
+                                            <input class="form-control" type="text" id="number4" disabled onchange="func4()"
                                                 name="Number4" pattern="[0-9]{10}" placeholder="Enter Mobile Number">
                                             <div class="valid-feedback">
                                                 Looks Good!
@@ -264,8 +264,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <input class="form-control" type="email" name="Email4"
-                                                id="email4" placeholder="Enter Email"
+                                            <input class="form-control" type="email" name="Email4" disabled
+                                                id="email4" placeholder="Enter Email" onchange="func4()"
                                                 pattern="\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,})+">
                                             <div class="valid-feedback">
                                                 Looks Good!
@@ -275,7 +275,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-2">
-                                            <select class="form-select" name="Status4" id="status4">
+                                            <select class="form-select" name="Status4" id="status4" disabled onchange="func4()">
                                                 <option selected disabled value="">-- Select Option --</option>
                                                 <option>Inactive</option>
                                                 <option>Active</option>
@@ -295,8 +295,8 @@
                                             <p>5.</p>
                                         </div>
                                         <div class="col-md-3">
-                                            <input class="form-control" type="text" value="" id="name5"
-                                                name="Name5" pattern="[a-zA-Z\s]{0,}" placeholder="Enter Name">
+                                            <input class="form-control" type="text" id="name5" disabled onchange="func5()"
+                                                name="Name5" pattern="[a-zA-Z\s]{1,}" placeholder="Enter Name">
                                             <div class="valid-feedback">
                                                 Looks Good!
                                             </div>
@@ -305,7 +305,7 @@
                                             </div>
                                         </div>
                                         <div class=" col-md-3">
-                                            <input class="form-control" type="text" value="" id="number5"
+                                            <input class="form-control" type="text" id="number5" disabled onchange="func5()"
                                                 name="Number5" pattern="[0-9]{10}" placeholder="Enter Mobile Number">
                                             <div class="valid-feedback">
                                                 Looks Good!
@@ -315,8 +315,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <input class="form-control" type="email" name="Email5"
-                                                id="email5" placeholder="Enter Email"
+                                            <input class="form-control" type="email" name="Email5" disabled
+                                                id="email5" placeholder="Enter Email" onchange="func5()"
                                                 pattern="\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,})+">
                                             <div class="valid-feedback">
                                                 Looks Good!
@@ -326,7 +326,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-2">
-                                            <select class="form-select" name="Status5" id="status5">
+                                            <select class="form-select" name="Status5" id="status5" disabled onchange="func5()">
                                                 <option selected disabled value="">-- Select Option --</option>
                                                 <option>Inactive</option>
                                                 <option>Active</option>
@@ -346,8 +346,8 @@
                                             <p>6.</p>
                                         </div>
                                         <div class="col-md-3">
-                                            <input class="form-control" type="text" value="" id="name6"
-                                                name="Name6" pattern="[a-zA-Z\s]{0,}" placeholder="Enter Name">
+                                            <input class="form-control" type="text" id="name6" disabled
+                                                name="Name6" pattern="[a-zA-Z\s]{1,}" placeholder="Enter Name">
                                             <div class="valid-feedback">
                                                 Looks Good!
                                             </div>
@@ -356,7 +356,7 @@
                                             </div>
                                         </div>
                                         <div class=" col-md-3">
-                                            <input class="form-control" type="text" value="" id="number6"
+                                            <input class="form-control" type="text" id="number6" disabled
                                                 name="Number6" pattern="[0-9]{10}" placeholder="Enter Mobile Number">
                                             <div class="valid-feedback">
                                                 Looks Good!
@@ -367,7 +367,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <input class="form-control" type="email" name="Email6"
-                                                id="email6" placeholder="Enter Email"
+                                                id="email6" placeholder="Enter Email" disabled
                                                 pattern="\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,})+">
                                             <div class="valid-feedback">
                                                 Looks Good!
@@ -377,7 +377,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-2">
-                                            <select class="form-select" name="Status6" id="status6">
+                                            <select class="form-select" name="Status6" id="status6" disabled>
                                                 <option selected disabled value="">-- Select Option --</option>
                                                 <option>Inactive</option>
                                                 <option>Active</option>
@@ -441,6 +441,71 @@
     
         <!-- form validation -->
         <script src="{% static 'js/pages/form-validation.init.js' %}"></script>
+
+        <script>
+            function func1() {
+                a = /^([a-zA-Z\s]{1,})$/.test(document.getElementById('name1').value)
+                b = /^(\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,})+)$/.test(document.getElementById('email1').value)
+                c = /^([0-9]{10})$/.test(document.getElementById('number1').value)
+                d = /^()$/.test(document.getElementById('status1').value)
+                console.log("func1 called", a, b, c, d)
+                if ( a==true && b==true && c==true && d==false ) {
+                    console.log("func1 true")
+                    document.getElementById('name2').disabled = false
+                    document.getElementById('email2').disabled = false
+                    document.getElementById('number2').disabled = false
+                    document.getElementById('status2').disabled = false
+                }
+            }
+            function func2() {
+                a = /^([a-zA-Z\s]{1,})$/.test(document.getElementById('name2').value)
+                b = /^(\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,})+)$/.test(document.getElementById('email2').value)
+                c = /^([0-9]{10})$/.test(document.getElementById('number2').value)
+                d = /^()$/.test(document.getElementById('status2').value)
+                if ( a==true && b==true && c==true && d==false ) {
+                    document.getElementById('name3').disabled = false
+                    document.getElementById('email3').disabled = false
+                    document.getElementById('number3').disabled = false
+                    document.getElementById('status3').disabled = false
+                }
+            }
+            function func3() {
+                a = /^([a-zA-Z\s]{1,})$/.test(document.getElementById('name3').value)
+                b = /^(\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,})+)$/.test(document.getElementById('email3').value)
+                c = /^([0-9]{10})$/.test(document.getElementById('number3').value)
+                d = /^()$/.test(document.getElementById('status3').value)
+                if ( a==true && b==true && c==true && d==false ) {
+                    document.getElementById('name4').disabled = false
+                    document.getElementById('email4').disabled = false
+                    document.getElementById('number4').disabled = false
+                    document.getElementById('status4').disabled = false
+                }
+            }
+            function func4() {
+                a = /^([a-zA-Z\s]{1,})$/.test(document.getElementById('name4').value)
+                b = /^(\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,})+)$/.test(document.getElementById('email4').value)
+                c = /^([0-9]{10})$/.test(document.getElementById('number4').value)
+                d = /^()$/.test(document.getElementById('status4').value)
+                if ( a==true && b==true && c==true && d==false ) {
+                    document.getElementById('name5').disabled = false
+                    document.getElementById('email5').disabled = false
+                    document.getElementById('number5').disabled = false
+                    document.getElementById('status5').disabled = false
+                }
+            }
+            function func5() {
+                a = /^([a-zA-Z\s]{1,})$/.test(document.getElementById('name5').value)
+                b = /^(\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,})+)$/.test(document.getElementById('email5').value)
+                c = /^([0-9]{10})$/.test(document.getElementById('number5').value)
+                d = /^()$/.test(document.getElementById('status5').value)
+                if ( a==true && b==true && c==true && d==false ) {
+                    document.getElementById('name6').disabled = false
+                    document.getElementById('email6').disabled = false
+                    document.getElementById('number6').disabled = false
+                    document.getElementById('status6').disabled = false
+                }
+            }
+        </script>
 
 
     </body>

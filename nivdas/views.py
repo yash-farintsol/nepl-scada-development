@@ -827,3 +827,22 @@ def AboutUs(request):
         return render(request, "nivdas/aboutus.html")
     else:
         return redirect("loginpage")
+
+def EquipmentList(request):
+    if 'username' in request.session:
+        return render(request, "nivdas/supervise-equip-list.html")
+    else:
+        return redirect("loginpage")
+
+def ReportApproval(request):
+    if 'username' in request.session:
+        return render(request, "nivdas/supervise-report-approval.html")
+    else:
+        return redirect("loginpage")
+
+def StatusReport(request):
+    if 'username' in request.session:
+        return render(request, "nivdas/supervise-status-reports.html")
+    else:
+        return redirect("loginpage")
+        # supervise-status-reports
