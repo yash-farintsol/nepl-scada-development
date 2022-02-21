@@ -171,6 +171,7 @@ def UserUpdateData(request, pk):
     print(getann)
     data = []
     item = {
+        'id' : getann.id,
         'name': getann.Username,
         'password': getann.Password,
         'grp_name': getann.Group.GroupName,
@@ -182,7 +183,24 @@ def UserUpdateData(request, pk):
     return JsonResponse({'data': data})
 
 def UpdateUserData(request):
-    pass
+    if request.method == "POST":
+        getuserid = request.POST['id']
+        getusr = User.objects.get(id=getuserid)
+        getusr.Username = request.POST['usr']
+        getgrpname = request.POST['group_name']
+        getgrp = Group.objects.get(GroupName = getgrpname)
+        getusr.Group = getgrp
+        getusr.Department = request.POST['dept_name']
+        getusr.status = request.POST['status']
+        getusr.Password = request.POST['pswd']
+        getusr.PasswordChangeDuration = request.POST['passwdChangeDuration']
+        getusr.save()
+        print("DATA_UPDATED")
+        return redirect("user-management")
+
+
+
+
 
 
 def StoreDatabaseSetting(request):
@@ -858,7 +876,6 @@ def AboutUs(request):
     else:
         return redirect("loginpage")
 
-<<<<<<< HEAD
 
 def StoreSmsSetting(request):
     if request.method == "POST":
@@ -904,7 +921,7 @@ def MasterPasswordSetting(request):
         else:
             print("OLD PASSWORD IS WRONG")
             return redirect("master-password-setting")
-=======
+
 def EquipmentList(request):
     if 'username' in request.session:
         return render(request, "nivdas/supervise-equip-list.html")
@@ -923,4 +940,3 @@ def StatusReport(request):
     else:
         return redirect("loginpage")
         # supervise-status-reports
->>>>>>> 9c38b3fadf50a0b28d09a307d8f52072d611e874
