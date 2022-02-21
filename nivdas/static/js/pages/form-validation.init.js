@@ -9,9 +9,6 @@
                 // if (document.getElementsByClassName("form-control").length + document.getElementsByClassName("form-select").length-2 == 4) {
                 if ($(".invalid-feedback:visible").length == 0) {
                     $('#modal').modal('show');
-                    if ($(".invalid-feedback:visible").length == 0) {
-                        document.getElementById('new-form').submit();
-                    }
                 }
             },!1)
         })

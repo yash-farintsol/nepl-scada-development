@@ -732,7 +732,8 @@ def EquipmentCreation(request):
 
 def EquipmentParameter(request):
     if 'username' in request.session:
-        return render(request, "nivdas/eqp_param.html")
+        equipment = Equipment.objects.all()
+        return render(request, "nivdas/eqp_param.html", {'equip': equipment})
     else:
         return redirect("loginpage")
 
@@ -993,4 +994,25 @@ def CreateEquipment(request):
         Equip.save()
 
         return redirect("indexpage")
+
+
+def EquipParamUpdateData(request, pk):
+    print(pk)
+    getequip = Equipment.objects.get(EquipmentName=pk)
+    print(getequip)
+    item = {
+        'equip_name' : getequip.EquipmentName,
+        'equip_type' : getequip.EquipmentType,
+        'param' : getequip.NumberOfParams,
+        'sensors' : getequip.NumberOfSensor,
+        # 'log_intervals' : getequip.DataLogIntervals,
+        # 'ipaddress' : getequip.IPAddress,
+        # 'machine_code' : getequip.MachineCode,
+        'photostability' : getequip.IsPhotoStability,
+        'dual' : getequip.IsDual,
+        # 'dep_name' : getequip.DepartmentName,
+        # 'protocol' : getequip.Protocol,
+        # 'comment' : getequip.Comments
+    }
+    return JsonResponse({'data': item})
 

@@ -54,7 +54,7 @@
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="home">Dashboard</a></li>
+                                            <li class="breadcrumb-item"><a href="{% url 'indexpage' %}">Dashboard</a></li>
                                             <li class="breadcrumb-item"><a href="#">Master Settings</a></li>
                                             <li class="breadcrumb-item active">Equipment Parameter</li>
                                         </ol>
@@ -65,7 +65,7 @@
                         </div>
                         <div class="card">
                             <div class="card-body">
-                                <form id="new-form" class="needs-validation" novalidate>
+                                <form id="new-form"  class="needs-validation" novalidate>
                                     <div class="row">
                                         <div class="col-xl-4 col-md-6">
                                             <div class="form-group mb-3">
@@ -74,8 +74,9 @@
                                                     Name</label>
                                                 <select class="form-select" id="eqp-name" name="Eqp-name" required>
                                                     <option selected disabled value="">Select</option>
-                                                    <option value=""></option>
-                                                    <option value=""></option>
+                                                    {% for i in equip %}
+                                                        <option>{{i.EquipmentName}}</option>
+                                                    {% endfor %}
                                                 </select>
                                                 <div class="valid-feedback">
                                                     Looks Good!
@@ -87,294 +88,272 @@
                                         </div>
                                     </div>
 
-                                    <hr class="my-5">
-
-                                    <h5 class="card-title mb-4">Temperature (°C)</h5>
-
                                     <div class="row">
-                                        <div class="col-xl-4 col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom02" class="form-label">Set Value</label>
-                                                <input type="text" class="form-control" id="value" name="Value"
-                                                    placeholder="0" required>
-                                                <div class="valid-feedback">
-                                                    Looks Good!
+
+                                        <div class="col-md-4">
+                                            <div class="mt-1 border p-4">
+    
+                                                <h5>Temperature (°C)</h5>
+
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom02" class="form-label">Set Value</label>
+                                                    <input type="text" class="form-control" id="value" name="Value"
+                                                        placeholder="0" pattern="[0-9]{1,}" required>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
                                                 </div>
-                                                <div class="invalid-feedback">
-                                                    Looks Bad!
+    
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom03" class="form-label">Lower Limit</label>
+                                                    <input type="text" class="form-control" pattern="[0-9]{1,}" id="low-limit" name="Low-limit"
+                                                        placeholder="0" required>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom03" class="form-label">Lower Limit</label>
-                                                <input type="text" class="form-control" id="low-limit" name="Low-limit"
-                                                    placeholder="0" required>
-                                                <div class="valid-feedback">
-                                                    Looks Good!
+    
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom04" class="form-label">Upper Limit</label>
+                                                    <input type="text" class="form-control" pattern="[0-9]{1,}" id="up-limit" name="Up-limit"
+                                                        placeholder="0" required>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
                                                 </div>
-                                                <div class="invalid-feedback">
-                                                    Looks Bad!
+    
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom05" class="form-label">Total Sensor</label>
+                                                    <input type="text" class="form-control" pattern="[0-9]{1,}" id="sensor" name="Sensor"
+                                                        placeholder="0" required>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom04" class="form-label">Upper Limit</label>
-                                                <input type="text" class="form-control" id="up-limit" name="Up-limit"
-                                                    placeholder="0" required>
-                                                <div class="valid-feedback">
-                                                    Looks Good!
+    
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom06" class="form-label">Cooling</label>
+                                                    <select class="form-select" id="cooling" name="Cooling" required>
+                                                        <option selected disabled value="">Select</option>
+                                                        <option value="">ON</option>
+                                                        <option value="">OFF</option>
+                                                    </select>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
                                                 </div>
-                                                <div class="invalid-feedback">
-                                                    Looks Bad!
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xl-4 col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom05" class="form-label">Total Sensor</label>
-                                                <input type="text" class="form-control" id="sensor" name="Sensor"
-                                                    placeholder="0" required>
-                                                <div class="valid-feedback">
-                                                    Looks Good!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Looks Bad!
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom06" class="form-label">Cooling</label>
-                                                <select class="form-select" id="cooling" name="Cooling" required>
-                                                    <option selected disabled value="">Select</option>
-                                                    <option value="">ON</option>
-                                                    <option value="">OFF</option>
-                                                </select>
-                                                <div class="valid-feedback">
-                                                    Looks Good!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Looks Bad!
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-md-4">
-                                            <div class="form-group mb-3">
+
                                                 <br>
                                                 <button class="btn btn-primary waves-effect waves-light"
-                                                    style="float: left;" type="submit" id="sync-temp"
+                                                    style="float: right;" type="button" id="sync-temp"
                                                     name="Sync-temp">Sync Temp
                                                 </button>
+                                                <br><br>
                                             </div>
                                         </div>
-                                    </div>
+    
+    
+                                        <div class="col-md-4">
+                                            <div class="mt-1 border p-4">
+    
+                                                <h5>Humidity (%RH)</h5>
 
-                                    <hr class="my-5">
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom07" class="form-label">Set Value</label>
+                                                    <input type="text" class="form-control" id="value1" name="Value1"
+                                                        placeholder="0" pattern="[0-9]{1,}" required disabled>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
+                                                </div>
 
-                                    <h5 class="card-title mb-4">Humidity (%RH)</h5>
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom08" class="form-label">Lower Limit</label>
+                                                    <input type="text" class="form-control" id="low-limit1"
+                                                        name="Low-limit1" pattern="[0-9]{1,}" placeholder="0" required disabled>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
+                                                </div>
 
-                                    <div class="row">
-                                        <div class="col-xl-4 col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom07" class="form-label">Set Value</label>
-                                                <input type="text" class="form-control" id="value1" name="Value1"
-                                                    placeholder="0" required>
-                                                <div class="valid-feedback">
-                                                    Looks Good!
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom09" class="form-label">Upper Limit</label>
+                                                    <input type="text" class="form-control" pattern="[0-9]{1,}" id="up-limit1" name="Up-limit1"
+                                                        placeholder="0" required disabled>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
                                                 </div>
-                                                <div class="invalid-feedback">
-                                                    Looks Bad!
+
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom10" class="form-label">Total Sensor</label>
+                                                    <input type="text" class="form-control" pattern="[0-9]{1,}" id="sensor1" name="Sensor1"
+                                                        placeholder="0" required disabled>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom08" class="form-label">Lower Limit</label>
-                                                <input type="text" class="form-control" id="low-limit1"
-                                                    name="Low-limit1" placeholder="0" required>
-                                                <div class="valid-feedback">
-                                                    Looks Good!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Looks Bad!
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom09" class="form-label">Upper Limit</label>
-                                                <input type="text" class="form-control" id="up-limit1" name="Up-limit1"
-                                                    placeholder="0" required>
-                                                <div class="valid-feedback">
-                                                    Looks Good!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Looks Bad!
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xl-4 col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom10" class="form-label">Total Sensor</label>
-                                                <input type="text" class="form-control" id="sensor1" name="Sensor1"
-                                                    placeholder="0" required>
-                                                <div class="valid-feedback">
-                                                    Looks Good!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Looks Bad!
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-8 col-md-4">
-                                            <div class="form-group mb-3">
+                                                
                                                 <br>
                                                 <button class="btn btn-primary waves-effect waves-light"
-                                                    style="float: left;" type="submit" id="sync-humidity"
-                                                    name="Sync-humidity">Sync Humidity
+                                                    style="float: right;" type="button" id="sync-humidity"
+                                                    name="Sync-humidity" disabled>Sync Humidity
                                                 </button>
+                                                <br><br>
                                             </div>
                                         </div>
-                                    </div>
+    
+                                        <div class="col-md-4">
+                                            <div class="mt-1 border p-4">
+    
+                                                <h5>Lux/UV</h5>
 
-                                    <hr class="my-5">
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom11" class="form-label">Set Lux</label>
+                                                    <input type="text" class="form-control" id="lux" name="Lux"
+                                                        placeholder="KluxHrs" required disabled>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
+                                                </div>
+    
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom12" class="form-label">Set Measured Lux
+                                                        Intensity</label>
+                                                    <input type="text" class="form-control" id="lux-intensity" disabled
+                                                        name="Lux-intensity" placeholder="Watt Hrs/Sq Mtr" required>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom13" class="form-label">Set UV</label>
+                                                    <input type="text" class="form-control" id="uv" name="Uv"
+                                                        placeholder="Watt Hrs/Sq Mtr" required disabled>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
+                                                </div>
 
-                                    <h5 class="card-title mb-4">Lux/UV</h5>
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom14" class="form-label">Set Measured UV
+                                                        Intensity</label>
+                                                    <input type="text" class="form-control" id="uv-intensity"
+                                                        name="Uv-intensity" placeholder="0" required disabled>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
+                                                </div>
 
-                                    <div class="row">
-                                        <div class="col-xl-4 col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom11" class="form-label">Set Lux</label>
-                                                <input type="text" class="form-control" id="lux" name="Lux"
-                                                    placeholder="KluxHrs" required>
-                                                <div class="valid-feedback">
-                                                    Looks Good!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Looks Bad!
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom12" class="form-label">Set Measured Lux
-                                                    Intensity</label>
-                                                <input type="text" class="form-control" id="lux-intensity"
-                                                    name="Lux-intensity" placeholder="Watt Hrs/Sq Mtr" required>
-                                                <div class="valid-feedback">
-                                                    Looks Good!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Looks Bad!
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xl-4 col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom13" class="form-label">Set UV</label>
-                                                <input type="text" class="form-control" id="uv" name="Uv"
-                                                    placeholder="Watt Hrs/Sq Mtr" required>
-                                                <div class="valid-feedback">
-                                                    Looks Good!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Looks Bad!
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom14" class="form-label">Set Measured UV
-                                                    Intensity</label>
-                                                <input type="text" class="form-control" id="uv-intensity"
-                                                    name="Uv-intensity" placeholder="0" required>
-                                                <!-- <label for="validationCustom14" class="form-label">Watt Hrs/Sq Mtr</label> -->
-                                                <div class="valid-feedback">
-                                                    Looks Good!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Looks Bad!
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-md-4">
-                                            <div class="form-group mb-3">
                                                 <br>
                                                 <button class="btn btn-primary waves-effect waves-light"
-                                                    style="float: right;" type="submit" id="sync-lux-uv"
-                                                    name="Sync-lux-uv">Sync Lux UV
+                                                    style="float: right;" type="button" id="sync-lux-uv"
+                                                    name="Sync-lux-uv" disabled>Sync Lux UV
                                                 </button>
+                                                <br><br>
                                             </div>
                                         </div>
+    
                                     </div>
-
+    
+                                    <br>
+    
                                     <div style="float: right;">
-                                        <button class="btn btn-primary waves-effect waves-light"
-                                            type="submit" id="save" name="Save">Save
+                                        <button class="btn btn-primary waves-effect waves-light" type="button" id="save"
+                                            name="Save">Save
                                         </button> &nbsp; &nbsp;
-                                        <button class="btn btn-primary waves-effect waves-light"
-                                            type="submit" id="clear" name="Clear" onclick="clearForm()">Clear
+                                        <button class="btn btn-primary waves-effect waves-light" type="submit" id="clear"
+                                            name="Clear" onclick="clearForm()">Clear
                                         </button>
                                     </div>
-                                </form>
                                 
                         
-                        <!-- Modal starts -->
-                        <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
-                        id="modal" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Verify Admin</h5>
-                                    <button type="button" class="btn-close"
-                                        style="padding: 0rem 2rem; width: 2px"
-                                        data-bs-dismiss="modal" aria-label="Close">
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form method="POST" id="lrform" class="needs-validation" novalidate>
-                                        {% csrf_token %}
-                                        <div data-repeater-list="outer-group" class="outer">
-                                            <div data-repeater-item class="outer">
-
-                                                <div class="form-group row mb-4">
-                                                    <label class="col-form-label col-lg-4" for="validationCustom01">Username<span style="color:red">*</span></label>
-                                                    <div class="col-lg-8">
-                                                        <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
-                                                        id="username" name="Username" placeholder="Enter Username" required>
-                                                    </div>
+                                    <!-- Modal starts -->
+                                    <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
+                                        id="modal" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Verify Admin</h5>
+                                                    <button type="button" class="btn-close"
+                                                        style="padding: 0rem 2rem; width: 2px"
+                                                        data-bs-dismiss="modal" aria-label="Close">
+                                                    </button>
                                                 </div>
-
-                                                <div class="form-group row mb-4">
-                                                    <label class="col-form-label col-lg-4">Password<span style="color:red">*</span></label>
-                                                    <div class="col-lg-8">
-                                                        <input type="password" class="form-control" pattern="[a-zA-Z0-9!@#$%&*]{1,}" 
-                                                        id="password" name="Password" placeholder="Enter Password" required>
-                                                    </div>
+                                                <div class="modal-body">
+                                                        <div data-repeater-list="outer-group" class="outer">
+                                                            <div data-repeater-item class="outer">
+                
+                                                                <div class="form-group row mb-4">
+                                                                    <label class="col-form-label col-lg-4" for="validationCustom01">Username<span style="color:red">*</span></label>
+                                                                    <div class="col-lg-8">
+                                                                        <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
+                                                                        id="username" name="Username" placeholder="Enter Username" required>
+                                                                    </div>
+                                                                </div>
+                
+                                                                <div class="form-group row mb-4">
+                                                                    <label class="col-form-label col-lg-4">Password<span style="color:red">*</span></label>
+                                                                    <div class="col-lg-8">
+                                                                        <input type="password" class="form-control" pattern="[a-zA-Z0-9!@#$%&*]{1,}" 
+                                                                        id="password" name="Password" placeholder="Enter Password" required>
+                                                                    </div>
+                                                                </div>
+                                                            
+                                                            </div>
+                                                        </div>
+                                                        <div class="row justify-content-end">
+                                                            <div class="col-lg-10">
+                                                                <button type="button" style="float: right;"
+                                                                    class="btn btn-primary" id="submit-btn">Submit
+                                                                </button>
+                                                            </div>
+                                                        </div>
                                                 </div>
-                                            
-                                            </div>
-                                        </div>
-                                        <div class="row justify-content-end">
-                                            <div class="col-lg-10">
-                                                <button type="submit" style="float: right;"
-                                                    class="btn btn-primary" id="submit-btn">Submit
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                    </div><!-- /.modal -->
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -422,6 +401,65 @@
             function clearForm() {
                 document.getElementById("new-form").reset();
             }
+        </script>
+
+        <script>
+            $("#eqp-name").on("change",function(){
+                console.log("change")
+                var aid = this.value
+                console.log("UPdatebtn pREsseS",aid)
+
+                $.ajax
+                ({
+                    method : "GET",
+                    url : `/equipment-parameter-data/${aid}/`,
+
+                    success: function(response)
+                    {
+                        r = response.data;
+                        console.log(r);
+
+                        if (r.param == 2 && r.photostability == false) {
+                            document.getElementById("lux-intensity").disabled = true
+                            document.getElementById("lux").disabled = true
+                            document.getElementById("uv-intensity").disabled = true
+                            document.getElementById("uv").disabled = true
+                            document.getElementById("sync-lux-uv").disabled = true
+                            document.getElementById("value1").disabled = false
+                            document.getElementById("low-limit1").disabled = false
+                            document.getElementById("up-limit1").disabled = false
+                            document.getElementById("sensor1").disabled = false
+                            document.getElementById("sync-humidity").disabled = false
+                        }
+
+                        else if (r.photostability == true) {
+                            document.getElementById("lux-intensity").disabled = false
+                            document.getElementById("lux").disabled = false
+                            document.getElementById("uv-intensity").disabled = false
+                            document.getElementById("uv").disabled = false
+                            document.getElementById("sync-lux-uv").disabled = false
+                            document.getElementById("value1").disabled = false
+                            document.getElementById("low-limit1").disabled = false
+                            document.getElementById("up-limit1").disabled = false
+                            document.getElementById("sensor1").disabled = false
+                            document.getElementById("sync-humidity").disabled = false
+                        }
+
+                        else {
+                            document.getElementById("lux-intensity").disabled = true
+                            document.getElementById("lux").disabled = true
+                            document.getElementById("uv-intensity").disabled = true
+                            document.getElementById("uv").disabled = true
+                            document.getElementById("sync-lux-uv").disabled = true
+                            document.getElementById("value1").disabled = true
+                            document.getElementById("low-limit1").disabled = true
+                            document.getElementById("up-limit1").disabled = true
+                            document.getElementById("sensor1").disabled = true
+                            document.getElementById("sync-humidity").disabled = true
+                        }
+                    }
+                });
+            });
         </script>
 
 

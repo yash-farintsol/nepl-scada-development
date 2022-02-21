@@ -56,4 +56,5 @@ urlpatterns = [
     path('equipment-list/', views.EquipmentList, name="equipment-list"),
     path('report-approval/', views.ReportApproval, name="report-approval"),
     path('status-report/', views.StatusReport, name="status-report"),
+    path('equipment-parameter-data/<str:pk>/', views.EquipParamUpdateData, name="equipment-parameter-data"),
 ]
