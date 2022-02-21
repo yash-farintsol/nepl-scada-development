@@ -1016,3 +1016,8 @@ def EquipParamUpdateData(request, pk):
     }
     return JsonResponse({'data': item})
 
+def Graph1(request):
+    return render(request, "nivdas/graph.html")
+
+def Graph2(request):
+    return render(request, "nivdas/graph2.html")
