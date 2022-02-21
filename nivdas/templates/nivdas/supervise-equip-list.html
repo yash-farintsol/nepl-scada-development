@@ -6,7 +6,7 @@
     <head>
         
         <meta charset="utf-8" />
-        <title>Dashboard | NIV-DAS</title>
+        <title>Equipment List | NIV-DAS</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
@@ -60,11 +60,13 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">Dashboard</h4>
+                                    <h4 class="mb-sm-0 font-size-18">Equipment List</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item active">Dashboard</li>
+                                            <li class="breadcrumb-item"><a href="home">Dashboard</a></li>
+                                            <li class="breadcrumb-item"><a href="#">Supervise</a></li>
+                                            <li class="breadcrumb-item active">Equipment List</li>
                                         </ol>
                                     </div>
 
@@ -73,6 +75,7 @@
                         </div>
                         <div class="card">
                             <div class="card-body">
+                                <form class="needs-validation" novalidate>
                                     <div class="row">
                                         <div class="col-xl-12">
                                             <div class="table-responsive">
@@ -127,10 +130,27 @@
                                             </div>
                                         </div> <!-- end col -->
                                     </div> <!-- end row -->
+
+                                    <br>
+
+                                    <div class="row justify-content-end">
+                                        <div class="col-lg-12">
+                                            <div style="float: right;">
+                                                <!-- <button class="btn btn-primary waves-effect waves-light" type="view">View</button> &nbsp;&nbsp; -->
+                                                <button class="btn btn-primary waves-effect waves-light" type="graph">Graph</button> &nbsp;&nbsp;
+                                                <button class="btn btn-primary waves-effect waves-light" type="report">Report</button>&nbsp;&nbsp;
+                                                <button class="btn btn-primary waves-effect waves-light" type="mkt">MKT</button> &nbsp;&nbsp;
+                                                <button class="btn btn-primary waves-effect waves-light" type="sendforApproval">Send for Approval</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </div>
+
+                    </div> <!-- container-fluid -->
                 </div>
+                <!-- End Page-content -->
 
                 <footer class="footer">
                     <div class="container-fluid">
@@ -165,9 +185,6 @@
         <script src="{% static 'libs/pace-js/pace.min.js' %}"></script>
     
         <script src="{% static 'js/app.js' %}"></script>
-    
-        <!-- form validation -->
-        <script src="{% static 'js/pages/form-validation.init.js' %}"></script>
 
         <!-- Required datatable js -->
         <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
@@ -267,6 +284,19 @@
                 $(".dataTables_length select").addClass("form-select form-select-sm")
             });
         </script>
+
+        <!-- <script>
+            $('.form-check-input').on('change', function() {
+                landscape = document.getElementById("landscape")
+                portrait = document.getElementById("portrait")
+                if(document.getElementById("landscape").checked) {
+                    document.getElementById("portrait").required = false
+                }
+                if(document.getElementById("portrait").checked) {
+                    document.getElementById("landscape").required = false
+                }
+            })
+        </script> -->
 
 
     </body>

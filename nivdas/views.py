@@ -858,6 +858,7 @@ def AboutUs(request):
     else:
         return redirect("loginpage")
 
+<<<<<<< HEAD
 
 def StoreSmsSetting(request):
     if request.method == "POST":
@@ -903,3 +904,23 @@ def MasterPasswordSetting(request):
         else:
             print("OLD PASSWORD IS WRONG")
             return redirect("master-password-setting")
+=======
+def EquipmentList(request):
+    if 'username' in request.session:
+        return render(request, "nivdas/supervise-equip-list.html")
+    else:
+        return redirect("loginpage")
+
+def ReportApproval(request):
+    if 'username' in request.session:
+        return render(request, "nivdas/supervise-report-approval.html")
+    else:
+        return redirect("loginpage")
+
+def StatusReport(request):
+    if 'username' in request.session:
+        return render(request, "nivdas/supervise-status-reports.html")
+    else:
+        return redirect("loginpage")
+        # supervise-status-reports
+>>>>>>> 9c38b3fadf50a0b28d09a307d8f52072d611e874

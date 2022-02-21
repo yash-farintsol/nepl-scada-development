@@ -51,4 +51,7 @@ urlpatterns = [
     path('password-setting/', views.PasswordSetting, name="password-setting"),
     path('print-multiple-reports/', views.PrintMultipleReports, name="print-multiple-reports"),
     path('about-us/', views.AboutUs, name="about-us"),
+    path('equipment-list/', views.EquipmentList, name="equipment-list"),
+    path('report-approval/', views.ReportApproval, name="report-approval"),
+    path('status-report/', views.StatusReport, name="status-report"),
 ]
