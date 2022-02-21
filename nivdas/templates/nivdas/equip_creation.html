@@ -79,26 +79,14 @@
                                         <form class="needs-validation" novalidate method="post" id="new-form">
                                             {% csrf_token %}
                                             <div class="row">
-                                                <div class="col-xl-4 col-md-6">
-                                                    <div class="form-group mb-3">
-                                                        <label>No of Parameters</label>
-                                                        <select class="form-select" name="param">
-                                                            <option selected disabled value="">Select</option>
-                                                            <option>1</option>
-                                                            <option>2</option>
-                                                        </select>
-                                                        <div id="noerror" class="valid-feedback">
-                                                            Looks good!
-                                                        </div>
-                                                        <div id="error" class="invalid-feedback">
-                                                            Looks bad!
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-4 col-md-6">
+                                                <div class="col-xl-6 col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label>Equipment Name</label>
-                                                        <input class="form-control" type="text" name = "eqp_name" placeholder="Enter Equipment Name">
+                                                        <input class="form-control" type="text" list="equipment_name" name = "eqp_name" placeholder="Enter Equipment Name">
+                                                        <datalist id="equipment_name" class="form-datalist-lg mb-5" aria-label=".form-datalist-lg example">
+                                                            <option>dfthedth</option>
+                                                            <option>dfthbd</option>
+                                                        </datalist>
                                                         <div class="valid-feedback">
                                                             Looks good!
                                                         </div>
@@ -107,7 +95,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-4 col-md-6">
+                                                <div class="col-xl-6 col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label>Type of Equipment</label>
                                                         <input class="form-control" type="text" name = "eqp_type" placeholder="Enter Type of Equipment">
@@ -122,7 +110,23 @@
                                             </div>
                                             
                                             <div class="row">
-                                                <div class="col-xl-4 col-md-6">
+                                                <div class="col-xl-6 col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label>No. of Parameters</label>
+                                                        <select class="form-select" name="param">
+                                                            <option selected disabled value="">Select</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                        </select>
+                                                        <div id="noerror" class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                        <div id="error" class="invalid-feedback">
+                                                            Looks bad!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label>No of Sensors</label>
                                                         <select class="form-select" name="param">
@@ -146,7 +150,10 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-4 col-md-6">
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-xl-6 col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label>Data Log Intervals</label>
                                                         <input class="form-control" type="text" name="log_inv" pattern="[6-9]|\d{2,}|\d{3,}" 
@@ -159,7 +166,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-4 col-md-6">
+                                                <div class="col-xl-6 col-md-6">
                                                     <div class="form-group mb-3"> <br>
                                                         <label>(Minimum 5 minutes)</label> &emsp;&emsp;
                                                         <!-- <div style="float: right;"> -->
@@ -173,7 +180,7 @@
                                                 <div class="col-xl-2 col-md-3 col-sm-3">
                                                     <div class="form-group mb-3">
                                                         <label>IP Address</label>
-                                                        <input type="text" class="form-control form-control-lg text-center" 
+                                                        <input type="text" class="form-control text-center" 
                                                             name="t1" id="digit1-input" pattern="[0-9]{1,4}" required>
                                                         <div class="valid-feedback">
                                                             Looks good!
@@ -186,7 +193,7 @@
             
                                                 <div class="col-xl-2 col-md-3 col-sm-3">
                                                     <div class="form-group mb-3">
-                                                        <input type="text" class="form-control form-control-lg text-center" 
+                                                        <input type="text" class="form-control text-center" 
                                                         name="t2" id="digit2-input" pattern="[0-9]{1,4}" required style="margin-top: 27px;">
                                                         <div class="valid-feedback">
                                                             Looks good!
@@ -200,7 +207,7 @@
                                                 <div class="col-xl-2 col-md-3 col-sm-3">
                                                     <div class="form-group mb-3">
                                                         <label for="digit3-input" class="visually-hidden"></label>
-                                                        <input type="text" class="form-control form-control-lg text-center" 
+                                                        <input type="text" class="form-control text-center" 
                                                         name="t3" id="digit3-input" pattern="[0-9]{1,4}" required style="margin-top: 27px;">
                                                         <div class="valid-feedback">
                                                             Looks good!
@@ -210,11 +217,11 @@
                                                         </div>
                                                     </div>
                                                 </div>
-            
+                                                <!--  form-control-lg -->
                                                 <div class="col-xl-2 col-md-3 col-sm-3">
                                                     <div class="form-group mb-3">
                                                         <label for="digit4-input" class="visually-hidden"></label>
-                                                        <input type="text" class="form-control form-control-lg text-center" 
+                                                        <input type="text" class="form-control text-center" 
                                                         name="t4" id="digit4-input" pattern="[0-9]{1,4}" required style="margin-top: 27px;">
                                                         <div class="valid-feedback">
                                                             Looks good!
@@ -224,27 +231,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-2 col-md-6"><br><br>
-                                                    <div class="form-check font-size-16">
-                                                        <input class="form-check-input" type="checkbox" name="PhotoStability"
-                                                            value="Photo-stability" id="photoStability">
-                                                        <label class="form-check-label" for="admincheck03">
-                                                            Is Photo Stability
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-2 col-md-6"><br><br>
-                                                    <div class="form-check font-size-16">
-                                                        <input class="form-check-input" type="checkbox" name="Dual"
-                                                            value="Dual" id="dual">
-                                                        <label class="form-check-label" for="admincheck03">
-                                                            Is Dual
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
                                                 <div class="col-xl-4 col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label>Machine Code</label>
@@ -257,7 +243,28 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-4 col-md-6">
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-xl-3 col-md-6"><br><br>
+                                                    <div class="form-check font-size-16">
+                                                        <input class="form-check-input" type="checkbox" name="PhotoStability"
+                                                            value="Photo-stability" id="photoStability">
+                                                        <label class="form-check-label" for="admincheck03">
+                                                            Is Photo Stability
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6"><br><br>
+                                                    <div class="form-check font-size-16">
+                                                        <input class="form-check-input" type="checkbox" name="Dual"
+                                                            value="Dual" id="dual">
+                                                        <label class="form-check-label" for="admincheck03">
+                                                            Is Dual
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label>Comments</label>
                                                         <textarea class="form-control" name="comment" rows="3" placeholder="Enter Comments"></textarea>
