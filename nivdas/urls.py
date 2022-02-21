@@ -9,6 +9,7 @@ urlpatterns = [
     path("group-security/",views.GroupSec,name="groupsec"),
     path("user-update/",views.UpdateUserData,name="user-update"),
     path("database-setting/",views.DatabaseSettingPage,name="DatabaseSettingPage"),
+    path("create-equip/",views.CreateEquipment,name="equipment"),
     path("login/",views.Login,name="login"),
     path("Add-user/",views.AddUser,name="AddUser"),
     path("store-sms-setting/",views.StoreSmsSetting,name="storesms"),

@@ -76,7 +76,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <form class="needs-validation" novalidate method="post" id="new-form">
+                                        <form class="needs-validation" action="{% url 'equipment' %}" novalidate method="POST" id="new-form">
                                             {% csrf_token %}
                                             <div class="row">
                                                 <div class="col-xl-6 col-md-6">
@@ -129,7 +129,7 @@
                                                 <div class="col-xl-6 col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label>No. of Sensors</label>
-                                                        <select class="form-select" name="param">
+                                                        <select class="form-select" name="sensor">
                                                             <option selected disabled value="">Select</option>
                                                             <option>1</option>
                                                             <option>2</option>
@@ -248,7 +248,7 @@
                                             <div class="row">
                                                 <div class="col-xl-3 col-md-6"><br><br>
                                                     <div class="form-check font-size-16">
-                                                        <input class="form-check-input" type="checkbox" name="PhotoStability"
+                                                        <input class="form-check-input" type="checkbox" name="Dual"
                                                             value="Photo-stability" id="photoStability">
                                                         <label class="form-check-label" for="admincheck03">
                                                             Is Photo Stability
@@ -297,7 +297,7 @@
                                                 <div class="col-xl-6 col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label>Protocol</label>
-                                                        <select class="form-select" name="param">
+                                                        <select class="form-select" name="protocol">
                                                             <option selected disabled value="">-- Select Option --</option>
                                                             <option>TCP/IP</option>
                                                             <option>FTP</option>

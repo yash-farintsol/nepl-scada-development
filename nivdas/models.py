@@ -213,4 +213,6 @@ class Equipment(models.Model):
     MachineCode = models.CharField(max_length=50)
     IsPhotoStability = models.BooleanField(default=False)
     IsDual = models.BooleanField(default=False)
+    DepartmentName = models.CharField(max_length=50,default="Department")
+    Protocol = models.CharField(max_length=50,default="PROTOCOL")
     Comments = models.CharField(max_length=200)

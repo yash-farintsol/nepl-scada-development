@@ -960,11 +960,37 @@ def CreateEquipment(request):
     if request.method == "POST":
         EquipmentName = request.POST['eqp_name']
         EquipmentType = request.POST['eqp_type']
-        NumberOfParams = request.POST['eqp_type']
-        NumberOfSensor = request.POST['eqp_type']
-        DataLogIntervals = request.POST['eqp_type']
-        IPAddress = request.POST['eqp_type']
-        MachineCode = request.POST['eqp_type']
-        IsPhotoStability = request.POST['eqp_type']
-        IsDual = request.POST['eqp_type']
-        Comments = request.POST['eqp_type']
+        NumberOfParams = request.POST['param']
+        NumberOfSensor = request.POST['sensor']
+        DataLogIntervals = request.POST['log_inv']
+        IP1 = request.POST['t1']
+        IP2 = request.POST['t2']
+        IP3 = request.POST['t3']
+        IP4 = request.POST['t4']
+        IPaddress = f"{IP1}.{IP2}.{IP3}.{IP4}"
+        MachineCode = request.POST['mach_code']
+        DepartmentName = request.POST['dep_name']
+        Protocol = request.POST['protocol']
+        Comments = request.POST['comment']
+
+        Equip = Equipment.objects.create(
+            EquipmentName = EquipmentName,
+            EquipmentType = EquipmentType,
+            NumberOfParams = NumberOfParams,
+            NumberOfSensor = NumberOfSensor,
+            DataLogIntervals = DataLogIntervals,
+            IPAddress = IPaddress,
+            MachineCode = MachineCode,
+            DepartmentName = DepartmentName,
+            Protocol = Protocol,
+            Comments = Comments
+        )
+        list_checkbox = request.POST.getlist('Dual')
+        if "Photo-stability" in list_checkbox:
+            Equip.IsPhotoStability = True
+        if "Dual" in list_checkbox:
+            Equip.IsDual = True
+        Equip.save()
+
+        return redirect("indexpage")
+
