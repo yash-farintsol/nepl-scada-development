@@ -272,7 +272,11 @@ def GroupSecurityData(request, pk):
 
 def UserSecurityData(request, pk):
     GetUser = User.objects.get(Username=pk)
-    get_security = UserSecurity.objects.get(User=GetUser)
+    get_sec = UserSecurity.objects.filter(User=GetUser)
+    if len(get_sec) > 0:
+        get_security = UserSecurity.objects.get(User=GetUser)
+    else:
+        get_security = GroupSecurity.objects.get(Group=GetUser.Group)
     item = {
         'userCreation': get_security.UserCreation,
         'groupSec': get_security.GroupSec,
@@ -509,7 +513,12 @@ def AssignGroupSecurity(request):
 def AssignUserSecurity(request):
     if request.method == "POST":
         getUser = User.objects.get(Username = request.POST['User'])
-        getSecurity = UserSecurity.objects.get(User=getUser)
+        user_security = UserSecurity.objects.filter(User=getUser)
+        if len(user_security) > 0:
+            getSecurity = UserSecurity.objects.get(User=getUser)
+        else:
+            getSecurity = UserSecurity.objects.create(User=getUser)
+        
         admin = request.POST.getlist('Admin1')
         masterSetting = request.POST.getlist('Master1')
         supervise = request.POST.getlist('Supervise1')
