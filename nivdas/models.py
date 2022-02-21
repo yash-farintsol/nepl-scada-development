@@ -129,23 +129,30 @@ class UserSecurity(models.Model):
     Help = models.BooleanField(default=False)
 
 
+class DatabaseSetting(models.Model):
+    days = models.IntegerField()
+    time1 = models.TimeField()
+    time2 = models.TimeField()
+    time3 = models.TimeField()
+    time4 = models.TimeField()
+    time5 = models.TimeField()
+    DataBackupPath = models.CharField(max_length=50)
+    AutoBackupStatus = models.CharField(max_length=50)
+    lastdatabckup = models.DateTimeField(auto_now_add=True)
 
+class SMSsetting(models.Model):
+    IntervalTime = models.IntegerField(default=50)
+    PortNum = models.IntegerField(default=50)
+    BaudRate = models.IntegerField(default=50)
+    SmsStatus = models.BooleanField(default=False)
 
-class sms_setting(models.Model):
-    objects = models.Manager()
-    itime = models.IntegerField()
-    port_num = models.IntegerField()
-    baud_rate = models.IntegerField()
-    sms_status = models.BooleanField()
-
-class mail_setting(models.Model):
-    objects = models.Manager()
-    email = models.CharField(max_length=50)
-    mpaswd = models.CharField(max_length=50)
-    smtp_server = models.CharField(max_length=50)
-    smtp_port = models.IntegerField()
-    ssl = models.CharField(max_length=50)
-    mail_status = models.BooleanField()
+class MailSetting(models.Model):
+    Email = models.CharField(max_length=50)
+    Passwd = models.CharField(max_length=50)
+    SmtpServerName = models.CharField(max_length=50)
+    SmtpPort = models.IntegerField()
+    SSL = models.CharField(max_length=50)
+    Mail_Status = models.BooleanField(default=False)
 
 class db_setting(models.Model):
     objects = models.Manager()
@@ -194,3 +201,18 @@ class operator_group(models.Model):
     master_page = models.CharField(max_length=500)
     history_page = models.CharField(max_length=500)
     help_page = models.CharField(max_length=500)
+
+
+class Equipment(models.Model):
+    EquipmentName = models.CharField(max_length=50)
+    EquipmentType = models.CharField(max_length=50)
+    NumberOfParams = models.IntegerField(default=0)
+    NumberOfSensor = models.IntegerField(default=0)
+    DataLogIntervals = models.IntegerField(default=0)
+    IPAddress = models.CharField(max_length=50)
+    MachineCode = models.CharField(max_length=50)
+    IsPhotoStability = models.BooleanField(default=False)
+    IsDual = models.BooleanField(default=False)
+    DepartmentName = models.CharField(max_length=50,default="Department")
+    Protocol = models.CharField(max_length=50,default="PROTOCOL")
+    Comments = models.CharField(max_length=200)

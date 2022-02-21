@@ -65,14 +65,14 @@
                         </div>
                         <div class="card">
                             <div class="card-body">
-                                <form id="new-form" class="needs-validation" novalidate>
-
+                                <form id="new-form" action="{% url 'masterpasswdsetting' %}" method="POST" class="needs-validation" novalidate>
+                                    {% csrf_token %}
                                     <div class="row">
                                         <div class="col-xl-4 col-md-4">
                                             <div class="form-group mb-3">
                                                 <label for="validationCustom11" class="form-label">Username</label>
-                                                <input type="text" class="form-control" id="username" name="Username"
-                                                    value="{{user.username}}" readonly required>
+                                                <input type="text" class="form-control" id="username" name="username"
+                                                    value="{{request.session.username}}" readonly required>
                                                 <div class="valid-feedback">
                                                     Looks Good!
                                                 </div>
@@ -86,8 +86,8 @@
                                                 <label for="validationCustom12" class="form-label">
                                                     Old Password<span style="color:red"> *</span>
                                                 </label>
-                                                <input type="text" class="form-control" id="old-password" pattern="[a-zA-Z0-9]{8,}"
-                                                    name="Old-password" placeholder="Enter Old Password" required>
+                                                <input type="text" class="form-control" id="oldpasswd" pattern="[a-zA-Z0-9]{8,}"
+                                                    name="oldpasswd" placeholder="Enter Old Password" required>
                                                 <div class="valid-feedback">
                                                     Looks Good!
                                                 </div>
@@ -103,7 +103,7 @@
                                                 <label for="validationCustom13" class="form-label">
                                                     New Password<span style="color:red"> *</span>
                                                 </label>
-                                                <input type="text" class="form-control" id="new-password" name="New-password"
+                                                <input type="text" class="form-control" id="new-password" name="newpasswd"
                                                     placeholder="Enter New Password" pattern="[a-zA-Z0-9]{8,}" required>
                                                 <div class="valid-feedback">
                                                     Looks Good!
@@ -119,7 +119,7 @@
                                                     Confirm Password<span style="color:red"> *</span>
                                                 </label>
                                                 <input type="text" class="form-control" id="confirm-password" pattern="[a-zA-Z0-9]{8,}"
-                                                    name="Confirm-password" placeholder="Confirm Password" required>
+                                                    name="confpasswd" placeholder="Confirm Password" required>
                                                 <div class="valid-feedback">
                                                     Looks Good!
                                                 </div>
