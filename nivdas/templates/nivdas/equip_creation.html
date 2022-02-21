@@ -82,7 +82,7 @@
                                                 <div class="col-xl-6 col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label>Equipment Name</label>
-                                                        <input class="form-control" type="text" list="equipment_name" name = "eqp_name" placeholder="Enter Equipment Name">
+                                                        <input class="form-control" type="text" list="equipment_name" name = "eqp_name" value="Select">
                                                         <datalist id="equipment_name" class="form-datalist-lg mb-5" aria-label=".form-datalist-lg example">
                                                             <option>dfthedth</option>
                                                             <option>dfthbd</option>
@@ -128,7 +128,7 @@
                                                 </div>
                                                 <div class="col-xl-6 col-md-6">
                                                     <div class="form-group mb-3">
-                                                        <label>No of Sensors</label>
+                                                        <label>No. of Sensors</label>
                                                         <select class="form-select" name="param">
                                                             <option selected disabled value="">Select</option>
                                                             <option>1</option>
@@ -272,6 +272,40 @@
                                                             Looks good!
                                                         </div>
                                                         <div class="invalid-feedback">
+                                                            Looks bad!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xl-6 col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label>Department</label>
+                                                        <input class="form-control" type="text" list="department_name" name="dep_name" value="Select">
+                                                        <datalist id="department_name" class="form-datalist-lg mb-5" aria-label=".form-datalist-lg example">
+                                                            <option>dfthedth</option>
+                                                            <option>dfthbd</option>
+                                                        </datalist>
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                        <div class="invalid-feedback">
+                                                            Looks bad!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label>Protocol</label>
+                                                        <select class="form-select" name="param">
+                                                            <option selected disabled value="">-- Select Option --</option>
+                                                            <option>TCP/IP</option>
+                                                            <option>FTP</option>
+                                                        </select>
+                                                        <div id="noerror" class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                        <div id="error" class="invalid-feedback">
                                                             Looks bad!
                                                         </div>
                                                     </div>
