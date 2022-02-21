@@ -201,3 +201,16 @@ class operator_group(models.Model):
     master_page = models.CharField(max_length=500)
     history_page = models.CharField(max_length=500)
     help_page = models.CharField(max_length=500)
+
+
+class Equipment(models.Model):
+    EquipmentName = models.CharField(max_length=50)
+    EquipmentType = models.CharField(max_length=50)
+    NumberOfParams = models.IntegerField(default=0)
+    NumberOfSensor = models.IntegerField(default=0)
+    DataLogIntervals = models.IntegerField(default=0)
+    IPAddress = models.CharField(max_length=50)
+    MachineCode = models.CharField(max_length=50)
+    IsPhotoStability = models.BooleanField(default=False)
+    IsDual = models.BooleanField(default=False)
+    Comments = models.CharField(max_length=200)

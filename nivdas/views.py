@@ -50,97 +50,102 @@ def Login(request):
         usr = User.objects.filter(Username=username)
 
         if len(usr) > 0:
-            if usr[0].Password == password:
-                request.session['username'] = usr[0].Username
-                get_user_security = UserSecurity.objects.filter(User=usr[0])
-                get_group_security = GroupSecurity.objects.filter(Group=usr[0].Group)
-                
-                if len(get_user_security) > 0:
-                    print("GOT USER SECURITY")
-                    request.session['UserCreation'] = get_user_security[0].UserCreation
-                    request.session['GroupSec'] = get_user_security[0].GroupSec
-                    request.session['UserSec'] = get_user_security[0].UserSec
-                    request.session['DatabaseSetting'] = get_user_security[0].DatabaseSetting
-                    request.session['SMSsetting'] = get_user_security[0].SMSsetting
-                    request.session['EmailSetting'] = get_user_security[0].EmailSetting
-                    request.session['MasterPasswdSetting'] = get_user_security[0].MasterPasswdSetting
-                    request.session['GeneralSetting'] = get_user_security[0].GeneralSetting
-                    request.session['EquipmentCreation'] = get_user_security[0].EquipmentCreation
-                    request.session['EquipmentParameter'] = get_user_security[0].EquipmentParameter
-                    request.session['EquipmentActivation'] = get_user_security[0].EquipmentActivation
-                    request.session['Template'] = get_user_security[0].Template
-                    request.session['MobileNumber'] = get_user_security[0].MobileNumber
-                    request.session['MasterTemplate'] = get_user_security[0].MasterTemplate
-                    request.session['SyncDataTime'] = get_user_security[0].SyncDataTime
-                    request.session['ResetLuxUV'] = get_user_security[0].ResetLuxUV
-                    request.session['InputOutputStatus'] = get_user_security[0].InputOutputStatus
-                    request.session['EquipmentList'] = get_user_security[0].EquipmentList
-                    request.session['DataView'] = get_user_security[0].DataView
-                    request.session['LuxUVDataView'] = get_user_security[0].LuxUVDataView
-                    request.session['ReportApproval'] = get_user_security[0].ReportApproval
-                    request.session['StatusReports'] = get_user_security[0].StatusReports
-                    request.session['UserAudit'] = get_user_security[0].UserAudit
-                    request.session['AlarmAudit'] = get_user_security[0].AlarmAudit
-                    request.session['SMSAudit'] = get_user_security[0].SMSAudit
-                    request.session['EquipmentAudit'] = get_user_security[0].EquipmentAudit
-                    request.session['EmailAudit'] = get_user_security[0].EmailAudit
-                    request.session['DataReportGraph'] = get_user_security[0].DataReportGraph
-                    request.session['LuxUVDataView'] = get_user_security[0].LuxUVDataView
-                    request.session['HUserAudit'] = get_user_security[0].HUserAudit
-                    request.session['HAlarmAudit'] = get_user_security[0].HAlarmAudit
-                    request.session['HSMSAudit'] = get_user_security[0].HSMSAudit
-                    request.session['HEquipmentAudit'] = get_user_security[0].HEquipmentAudit
-                    request.session['HEmailAudit'] = get_user_security[0].HEmailAudit
-                    request.session['GraphSettings'] = get_user_security[0].GraphSettings
-                    request.session['PasswordSettings'] = get_user_security[0].PasswordSettings
-                    request.session['PrintMultipleReports'] = get_user_security[0].PrintMultipleReports
-                    request.session['AboutUs'] = get_user_security[0].AboutUs
-                    request.session['Help'] = get_user_security[0].Help
+            if usr[0].status == "Active":
+                if usr[0].Password == password:
+                    request.session['username'] = usr[0].Username
+                    get_user_security = UserSecurity.objects.filter(User=usr[0])
+                    get_group_security = GroupSecurity.objects.filter(Group=usr[0].Group)
+                    try:
+                        if len(get_user_security) > 0:
+                            print("GOT USER SECURITY")
+                            request.session['UserCreation'] = get_user_security[0].UserCreation
+                            request.session['GroupSec'] = get_user_security[0].GroupSec
+                            request.session['UserSec'] = get_user_security[0].UserSec
+                            request.session['DatabaseSetting'] = get_user_security[0].DatabaseSetting
+                            request.session['SMSsetting'] = get_user_security[0].SMSsetting
+                            request.session['EmailSetting'] = get_user_security[0].EmailSetting
+                            request.session['MasterPasswdSetting'] = get_user_security[0].MasterPasswdSetting
+                            request.session['GeneralSetting'] = get_user_security[0].GeneralSetting
+                            request.session['EquipmentCreation'] = get_user_security[0].EquipmentCreation
+                            request.session['EquipmentParameter'] = get_user_security[0].EquipmentParameter
+                            request.session['EquipmentActivation'] = get_user_security[0].EquipmentActivation
+                            request.session['Template'] = get_user_security[0].Template
+                            request.session['MobileNumber'] = get_user_security[0].MobileNumber
+                            request.session['MasterTemplate'] = get_user_security[0].MasterTemplate
+                            request.session['SyncDataTime'] = get_user_security[0].SyncDataTime
+                            request.session['ResetLuxUV'] = get_user_security[0].ResetLuxUV
+                            request.session['InputOutputStatus'] = get_user_security[0].InputOutputStatus
+                            request.session['EquipmentList'] = get_user_security[0].EquipmentList
+                            request.session['DataView'] = get_user_security[0].DataView
+                            request.session['LuxUVDataView'] = get_user_security[0].LuxUVDataView
+                            request.session['ReportApproval'] = get_user_security[0].ReportApproval
+                            request.session['StatusReports'] = get_user_security[0].StatusReports
+                            request.session['UserAudit'] = get_user_security[0].UserAudit
+                            request.session['AlarmAudit'] = get_user_security[0].AlarmAudit
+                            request.session['SMSAudit'] = get_user_security[0].SMSAudit
+                            request.session['EquipmentAudit'] = get_user_security[0].EquipmentAudit
+                            request.session['EmailAudit'] = get_user_security[0].EmailAudit
+                            request.session['DataReportGraph'] = get_user_security[0].DataReportGraph
+                            request.session['LuxUVDataView'] = get_user_security[0].LuxUVDataView
+                            request.session['HUserAudit'] = get_user_security[0].HUserAudit
+                            request.session['HAlarmAudit'] = get_user_security[0].HAlarmAudit
+                            request.session['HSMSAudit'] = get_user_security[0].HSMSAudit
+                            request.session['HEquipmentAudit'] = get_user_security[0].HEquipmentAudit
+                            request.session['HEmailAudit'] = get_user_security[0].HEmailAudit
+                            request.session['GraphSettings'] = get_user_security[0].GraphSettings
+                            request.session['PasswordSettings'] = get_user_security[0].PasswordSettings
+                            request.session['PrintMultipleReports'] = get_user_security[0].PrintMultipleReports
+                            request.session['AboutUs'] = get_user_security[0].AboutUs
+                            request.session['Help'] = get_user_security[0].Help
+                        else:
+                            print("GOT GROUP SECURITY")
+                            request.session['UserCreation'] = get_group_security[0].UserCreation
+                            request.session['GroupSec'] = get_group_security[0].GroupSec
+                            request.session['UserSec'] = get_group_security[0].UserSec
+                            request.session['DatabaseSetting'] = get_group_security[0].DatabaseSetting
+                            request.session['SMSsetting'] = get_group_security[0].SMSsetting
+                            request.session['EmailSetting'] = get_group_security[0].EmailSetting
+                            request.session['MasterPasswdSetting'] = get_group_security[0].MasterPasswdSetting
+                            request.session['GeneralSetting'] = get_group_security[0].GeneralSetting
+                            request.session['EquipmentCreation'] = get_group_security[0].EquipmentCreation
+                            request.session['EquipmentParameter'] = get_group_security[0].EquipmentParameter
+                            request.session['EquipmentActivation'] = get_group_security[0].EquipmentActivation
+                            request.session['Template'] = get_group_security[0].Template
+                            request.session['MobileNumber'] = get_group_security[0].MobileNumber
+                            request.session['MasterTemplate'] = get_group_security[0].MasterTemplate
+                            request.session['SyncDataTime'] = get_group_security[0].SyncDataTime
+                            request.session['ResetLuxUV'] = get_group_security[0].ResetLuxUV
+                            request.session['InputOutputStatus'] = get_group_security[0].InputOutputStatus
+                            request.session['EquipmentList'] = get_group_security[0].EquipmentList
+                            request.session['DataView'] = get_group_security[0].DataView
+                            request.session['LuxUVDataView'] = get_group_security[0].LuxUVDataView
+                            request.session['ReportApproval'] = get_group_security[0].ReportApproval
+                            request.session['StatusReports'] = get_group_security[0].StatusReports
+                            request.session['UserAudit'] = get_group_security[0].UserAudit
+                            request.session['AlarmAudit'] = get_group_security[0].AlarmAudit
+                            request.session['SMSAudit'] = get_group_security[0].SMSAudit
+                            request.session['EquipmentAudit'] = get_group_security[0].EquipmentAudit
+                            request.session['EmailAudit'] = get_group_security[0].EmailAudit
+                            request.session['DataReportGraph'] = get_group_security[0].DataReportGraph
+                            request.session['LuxUVDataView'] = get_group_security[0].LuxUVDataView
+                            request.session['HUserAudit'] = get_group_security[0].HUserAudit
+                            request.session['HAlarmAudit'] = get_group_security[0].HAlarmAudit
+                            request.session['HSMSAudit'] = get_group_security[0].HSMSAudit
+                            request.session['HEquipmentAudit'] = get_group_security[0].HEquipmentAudit
+                            request.session['HEmailAudit'] = get_group_security[0].HEmailAudit
+                            request.session['GraphSettings'] = get_group_security[0].GraphSettings
+                            request.session['PasswordSettings'] = get_group_security[0].PasswordSettings
+                            request.session['PrintMultipleReports'] = get_group_security[0].PrintMultipleReports
+                            request.session['AboutUs'] = get_group_security[0].AboutUs
+                            request.session['Help'] = get_group_security[0].Help
+                        return redirect("indexpage")
+                    except:
+                        return redirect("indexpage")
                 else:
-                    print("GOT GROUP SECURITY")
-                    request.session['UserCreation'] = get_group_security[0].UserCreation
-                    request.session['GroupSec'] = get_group_security[0].GroupSec
-                    request.session['UserSec'] = get_group_security[0].UserSec
-                    request.session['DatabaseSetting'] = get_group_security[0].DatabaseSetting
-                    request.session['SMSsetting'] = get_group_security[0].SMSsetting
-                    request.session['EmailSetting'] = get_group_security[0].EmailSetting
-                    request.session['MasterPasswdSetting'] = get_group_security[0].MasterPasswdSetting
-                    request.session['GeneralSetting'] = get_group_security[0].GeneralSetting
-                    request.session['EquipmentCreation'] = get_group_security[0].EquipmentCreation
-                    request.session['EquipmentParameter'] = get_group_security[0].EquipmentParameter
-                    request.session['EquipmentActivation'] = get_group_security[0].EquipmentActivation
-                    request.session['Template'] = get_group_security[0].Template
-                    request.session['MobileNumber'] = get_group_security[0].MobileNumber
-                    request.session['MasterTemplate'] = get_group_security[0].MasterTemplate
-                    request.session['SyncDataTime'] = get_group_security[0].SyncDataTime
-                    request.session['ResetLuxUV'] = get_group_security[0].ResetLuxUV
-                    request.session['InputOutputStatus'] = get_group_security[0].InputOutputStatus
-                    request.session['EquipmentList'] = get_group_security[0].EquipmentList
-                    request.session['DataView'] = get_group_security[0].DataView
-                    request.session['LuxUVDataView'] = get_group_security[0].LuxUVDataView
-                    request.session['ReportApproval'] = get_group_security[0].ReportApproval
-                    request.session['StatusReports'] = get_group_security[0].StatusReports
-                    request.session['UserAudit'] = get_group_security[0].UserAudit
-                    request.session['AlarmAudit'] = get_group_security[0].AlarmAudit
-                    request.session['SMSAudit'] = get_group_security[0].SMSAudit
-                    request.session['EquipmentAudit'] = get_group_security[0].EquipmentAudit
-                    request.session['EmailAudit'] = get_group_security[0].EmailAudit
-                    request.session['DataReportGraph'] = get_group_security[0].DataReportGraph
-                    request.session['LuxUVDataView'] = get_group_security[0].LuxUVDataView
-                    request.session['HUserAudit'] = get_group_security[0].HUserAudit
-                    request.session['HAlarmAudit'] = get_group_security[0].HAlarmAudit
-                    request.session['HSMSAudit'] = get_group_security[0].HSMSAudit
-                    request.session['HEquipmentAudit'] = get_group_security[0].HEquipmentAudit
-                    request.session['HEmailAudit'] = get_group_security[0].HEmailAudit
-                    request.session['GraphSettings'] = get_group_security[0].GraphSettings
-                    request.session['PasswordSettings'] = get_group_security[0].PasswordSettings
-                    request.session['PrintMultipleReports'] = get_group_security[0].PrintMultipleReports
-                    request.session['AboutUs'] = get_group_security[0].AboutUs
-                    request.session['Help'] = get_group_security[0].Help
-
-                return redirect("indexpage")
+                    messages.success(request, "Password is Incorrect")
+                    return redirect("loginpage")
             else:
-                messages.success(request, "Password is Incorrect")
+                messages.success(request, "Your account is Inactive, Please contact administrator")
                 return redirect("loginpage")
         else:
             messages.success(request, "User Doesn't Exist")
@@ -949,3 +954,17 @@ def StatusReport(request):
     else:
         return redirect("loginpage")
         # supervise-status-reports
+
+
+def CreateEquipment(request):
+    if request.method == "POST":
+        EquipmentName = request.POST['eqp_name']
+        EquipmentType = request.POST['eqp_type']
+        NumberOfParams = request.POST['eqp_type']
+        NumberOfSensor = request.POST['eqp_type']
+        DataLogIntervals = request.POST['eqp_type']
+        IPAddress = request.POST['eqp_type']
+        MachineCode = request.POST['eqp_type']
+        IsPhotoStability = request.POST['eqp_type']
+        IsDual = request.POST['eqp_type']
+        Comments = request.POST['eqp_type']
