@@ -140,21 +140,19 @@ class DatabaseSetting(models.Model):
     AutoBackupStatus = models.CharField(max_length=50)
     lastdatabckup = models.DateTimeField(auto_now_add=True)
 
-class sms_setting(models.Model):
-    objects = models.Manager()
-    itime = models.IntegerField()
-    port_num = models.IntegerField()
-    baud_rate = models.IntegerField()
-    sms_status = models.BooleanField()
+class SMSsetting(models.Model):
+    IntervalTime = models.IntegerField(default=50)
+    PortNum = models.IntegerField(default=50)
+    BaudRate = models.IntegerField(default=50)
+    SmsStatus = models.BooleanField(default=False)
 
-class mail_setting(models.Model):
-    objects = models.Manager()
-    email = models.CharField(max_length=50)
-    mpaswd = models.CharField(max_length=50)
-    smtp_server = models.CharField(max_length=50)
-    smtp_port = models.IntegerField()
-    ssl = models.CharField(max_length=50)
-    mail_status = models.BooleanField()
+class MailSetting(models.Model):
+    Email = models.CharField(max_length=50)
+    Passwd = models.CharField(max_length=50)
+    SmtpServerName = models.CharField(max_length=50)
+    SmtpPort = models.IntegerField()
+    SSL = models.CharField(max_length=50)
+    Mail_Status = models.BooleanField(default=False)
 
 class db_setting(models.Model):
     objects = models.Manager()

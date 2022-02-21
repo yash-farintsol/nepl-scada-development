@@ -65,8 +65,8 @@
                         </div>
                         <div class="card">
                             <div class="card-body">
-                                <form id="new-form" class="needs-validation" novalidate>
-
+                                <form id="new-form" method="POST" action="{% url 'storeemail' %}" class="needs-validation" novalidate>
+                                    {% csrf_token %}
                                     <div class="row">
                                         <div class="col-xl-4 col-md-4">
                                             <div class="form-group mb-3">
@@ -74,7 +74,7 @@
                                                     <span style="color:red"> *</span>
                                                 </label>
                                                 <input type="text" class="form-control" id="email" 
-                                                    name="Email" placeholder="email@example.com" 
+                                                    name="emailid" placeholder="email@example.com" 
                                                     pattern="\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+" required>
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -89,7 +89,7 @@
                                                 <label for="validationCustom02" class="form-label">Password 
                                                     <span style="color:red"> *</span>
                                                 </label>
-                                                <input type="text" class="form-control" id="password" name="Password"
+                                                <input type="text" class="form-control" id="password" name="passwd"
                                                     placeholder="Enter Password" pattern="[A-Z-a-z0-9]{1,}" required>
                                                     <div class="valid-feedback">
                                                         Looks good!
@@ -104,7 +104,7 @@
                                                 <label for="validationCustom02" class="form-label">SMTP 
                                                     Server Name <span style="color:red"> *</span>
                                                 </label>
-                                                <input type="text" class="form-control" id="smtp-server" name="Smtp-server"
+                                                <input type="text" class="form-control" id="smtp-server" name="smtpservername"
                                                     placeholder="Enter SMTP Server Name" pattern="[a-zA-Z0-9]{1,}" required>
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -122,7 +122,7 @@
                                                 <label for="validationCustom02" class="form-label">SMTP  
                                                     Port<span style="color:red"> *</span>
                                                 </label>
-                                                <input type="text" class="form-control" id="smtp-port" name="Smtp-port"
+                                                <input type="text" class="form-control" id="smtp-port" name="SmtpPort"
                                                     placeholder="Enter SMTP Port" pattern="[0-9]{1,}" required>
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -137,7 +137,7 @@
                                                 <label for="validationCustom02" class="form-label">SSL 
                                                     <span style="color:red"> *</span>
                                                 </label>
-                                                <select class="form-control" id="interval-time" name="Interval-time"  required>
+                                                <select class="form-control" id="interval-time" name="ssl"  required>
                                                     <option value="" selected disabled>-- Select Option --</option>
                                                     <option>Yes</option>
                                                     <option>No</option>

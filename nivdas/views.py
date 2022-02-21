@@ -56,6 +56,7 @@ def Login(request):
                 get_group_security = GroupSecurity.objects.filter(Group=usr[0].Group)
                 
                 if len(get_user_security) > 0:
+                    print("GOT USER SECURITY")
                     request.session['UserCreation'] = get_user_security[0].UserCreation
                     request.session['GroupSec'] = get_user_security[0].GroupSec
                     request.session['UserSec'] = get_user_security[0].UserSec
@@ -96,6 +97,7 @@ def Login(request):
                     request.session['AboutUs'] = get_user_security[0].AboutUs
                     request.session['Help'] = get_user_security[0].Help
                 else:
+                    print("GOT GROUP SECURITY")
                     request.session['UserCreation'] = get_group_security[0].UserCreation
                     request.session['GroupSec'] = get_group_security[0].GroupSec
                     request.session['UserSec'] = get_group_security[0].UserSec
@@ -179,7 +181,10 @@ def UserUpdateData(request, pk):
     data.append(item)
     return JsonResponse({'data': data})
 
-<<<<<<< HEAD
+def UpdateUserData(request):
+    pass
+
+
 def StoreDatabaseSetting(request):
     if request.method == "POST":
         days = request.POST['days']
@@ -198,7 +203,7 @@ def StoreDatabaseSetting(request):
         AutoBackupStatus=AutoBackupStatus)
 
         return redirect("indexpage")
-=======
+
 def GroupSecurityData(request, pk):
     print(pk)
     GetGroup = Group.objects.get(GroupName=pk)
@@ -249,7 +254,7 @@ def GroupSecurityData(request, pk):
 
 def UserSecurityData(request, pk):
     GetUser = User.objects.get(Username=pk)
-    get_security = GroupSecurity.objects.get(Group=GetUser.Group)
+    get_security = UserSecurity.objects.get(User=GetUser)
     item = {
         'userCreation': get_security.UserCreation,
         'groupSec': get_security.GroupSec,
@@ -303,7 +308,12 @@ def UserSec(request):
 def AssignGroupSecurity(request):
     if request.method == "POST":
         getGroup = Group.objects.get(GroupName = request.POST['Group'])
-        getSecurity = GroupSecurity.objects.get(Group=getGroup)
+        group_security = GroupSecurity.objects.filter(Group=getGroup)
+        if len(group_security) > 0:
+            getSecurity = GroupSecurity.objects.get(Group=getGroup)
+        else:
+            getSecurity = GroupSecurity.objects.create(Group=getGroup)
+        print("GetSecurity-->",getSecurity)
         admin = request.POST.getlist('Admin1')
         masterSetting = request.POST.getlist('Master1')
         supervise = request.POST.getlist('Supervise1')
@@ -481,7 +491,7 @@ def AssignGroupSecurity(request):
 def AssignUserSecurity(request):
     if request.method == "POST":
         getUser = User.objects.get(Username = request.POST['User'])
-        getSecurity = GroupSecurity.objects.get(Group=getUser.Group)
+        getSecurity = UserSecurity.objects.get(User=getUser)
         admin = request.POST.getlist('Admin1')
         masterSetting = request.POST.getlist('Master1')
         supervise = request.POST.getlist('Supervise1')
@@ -847,4 +857,49 @@ def AboutUs(request):
         return render(request, "nivdas/aboutus.html")
     else:
         return redirect("loginpage")
->>>>>>> c48daa75fb00120121d6c2d42fcec9a379afb1fa
+
+
+def StoreSmsSetting(request):
+    if request.method == "POST":
+        interval_time = request.POST['Interval-time']
+        port = request.POST['Port-no']
+        baud = request.POST['Baud-rate']
+
+        StoreSMSsetting = SMSsetting.objects.create(IntervalTime=interval_time,
+        PortNum=port,BaudRate=baud)
+        return redirect("indexpage")
+
+def StoreEmailSetting(request):
+    if request.method == "POST":
+        emailid = request.POST['emailid']
+        passwd = request.POST['passwd']
+        SMTPserverName = request.POST['smtpservername']
+        smtpPort = request.POST['SmtpPort']
+        ssl = request.POST['ssl']
+
+        StoreEmail = MailSetting.objects.create(Email=emailid,
+        Passwd=passwd,SmtpServerName=SMTPserverName,
+        SmtpPort = smtpPort,SSL = ssl
+        )
+
+        return redirect("indexpage")
+
+def MasterPasswordSetting(request):
+    if request.method == "POST":
+        getuser = request.POST['username']
+        oldpasswd = request.POST['oldpasswd']
+        newpasswd = request.POST['newpasswd']
+        confpasswd = request.POST['confpasswd']
+
+        usr = User.objects.get(Username=getuser)
+        if usr.Password == oldpasswd:
+            if newpasswd == confpasswd:
+                usr.Password = confpasswd
+                usr.save()
+                return redirect("indexpage")
+            else:
+                print("Password and Confirm password doesn't match")
+                return redirect("master-password-setting")
+        else:
+            print("OLD PASSWORD IS WRONG")
+            return redirect("master-password-setting")

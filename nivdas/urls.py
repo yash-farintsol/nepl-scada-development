@@ -10,10 +10,11 @@ urlpatterns = [
     path("database-setting/",views.DatabaseSettingPage,name="DatabaseSettingPage"),
     path("login/",views.Login,name="login"),
     path("Add-user/",views.AddUser,name="AddUser"),
+    path("store-sms-setting/",views.StoreSmsSetting,name="storesms"),
+    path("store-email-setting/",views.StoreEmailSetting,name="storeemail"),
+    path("update-master-password-setting/",views.MasterPasswordSetting,name="masterpasswdsetting"),
     path('user-update-data/<str:pk>/', views.UserUpdateData, name="user-update-data"),
-<<<<<<< HEAD
     path("store-database-setting/",views.StoreDatabaseSetting,name="StoreDatabaseSetting"),
-=======
     path('group-security-data/<str:pk>/', views.GroupSecurityData, name="group-security-data"),
     path('user-security-data/<str:pk>/', views.UserSecurityData, name="user-security-data"),
     path("user-security/",views.UserSec,name="usersec"),
@@ -50,5 +51,4 @@ urlpatterns = [
     path('password-setting/', views.PasswordSetting, name="password-setting"),
     path('print-multiple-reports/', views.PrintMultipleReports, name="print-multiple-reports"),
     path('about-us/', views.AboutUs, name="about-us"),
->>>>>>> c48daa75fb00120121d6c2d42fcec9a379afb1fa
 ]

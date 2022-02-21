@@ -65,8 +65,8 @@
                         </div>
                         <div class="card">
                             <div class="card-body">
-                                <form id="new-form" class="needs-validation" novalidate>
-
+                                <form id="new-form" action="{% url 'storesms' %}" method="POST" class="needs-validation" novalidate>
+                                    {% csrf_token %}
                                     <div class="row">
                                         <div class="col-xl-4 col-md-4">
                                             <div class="form-group mb-3">
@@ -117,16 +117,10 @@
 
                                     <div style="float: right;">
                                         <button class="btn btn-primary waves-effect waves-light"
-<<<<<<< HEAD
-                                            type="button" id="save" name="Save">Save
-                                        </button>
-                                    </div>
-=======
                                             type="submit" id="save" name="Save">Save
                                         </button>
                                     </div>
                                 </form>
->>>>>>> c48daa75fb00120121d6c2d42fcec9a379afb1fa
                             </div>
                         </div>
                     </div>
