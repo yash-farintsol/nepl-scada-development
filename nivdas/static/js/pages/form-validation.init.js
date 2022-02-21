@@ -5,7 +5,9 @@
         Array.prototype.filter.call(e,function(t){
             t.addEventListener("submit",function(e){
                 !1===t.checkValidity()&&(e.preventDefault(),e.stopPropagation()),
+                // t.classList.remove("needs-validation")
                 t.classList.add("was-validated")
+                // $('#modal').modal('show');
             },!1)
         })
     },!1)
