@@ -10,9 +10,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
-        
+
         <!-- App favicon -->
         <link rel="shortcut icon" href="{% static 'images/nepl-logo.png' %}">
+
+        <!-- DataTables -->
+        <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet"
+            type="text/css" />
+        <link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet"
+            type="text/css" />
+
+        <!-- Responsive datatable examples -->
+        <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}"
+            rel="stylesheet" type="text/css" />
 
         <!-- preloader css -->
         <link rel="stylesheet" href="{% static 'css/preloader.min.css' %}" type="text/css" />
@@ -85,10 +95,12 @@
                                         </div>
                                         <div class="col-xl-4 col-md-4">
                                             <div class="form-group mb-3">
-                                                <label for="validationCustom02" class="form-label">Time 1 
-                                                    <span style="color:red"> *</span>
-                                                </label> &nbsp;&nbsp;
-                                                <input class="form-check-input" type="checkbox" name="Time1-ck" value="yes" id="time1-ck">
+                                                <div class="form-check form-check-right">
+                                                    <label for="validationCustom02" class="form-label">
+                                                        Time 1 <span style="color:red"> *</span>
+                                                    </label>
+                                                    <input class="form-check-input" type="checkbox" name="Time1-ck" value="yes" id="time1-ck">
+                                                </div>
                                                 <input type="time" class="form-control" id="time1" name="time1"
                                                     placeholder="12:01" required>
                                                 <div class="valid-feedback">
@@ -226,6 +238,55 @@
                                             type="submit" id="save" name="Save">Save
                                         </button>
                                     </div>
+                        
+                                    <!-- Modal starts -->
+                                    <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
+                                        id="modal" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Verify Admin</h5>
+                                                    <button type="button" class="btn-close"
+                                                        style="padding: 0rem 2rem; width: 2px"
+                                                        data-bs-dismiss="modal" aria-label="Close">
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="POST" id="lrform" class="needs-validation" novalidate>
+                                                        {% csrf_token %}
+                                                        <div data-repeater-list="outer-group" class="outer">
+                                                            <div data-repeater-item class="outer">
+            
+                                                                <div class="form-group row mb-4">
+                                                                    <label class="col-form-label col-lg-4" for="validationCustom01">Username<span style="color:red">*</span></label>
+                                                                    <div class="col-lg-8">
+                                                                        <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
+                                                                        id="username" name="Username" placeholder="Enter Username" required>
+                                                                    </div>
+                                                                </div>
+            
+                                                                <div class="form-group row mb-4">
+                                                                    <label class="col-form-label col-lg-4">Password<span style="color:red">*</span></label>
+                                                                    <div class="col-lg-8">
+                                                                        <input type="password" class="form-control" pattern="[a-zA-Z0-9!@#$%&*]{1,}" 
+                                                                        id="password" name="Password" placeholder="Enter Password" required>
+                                                                    </div>
+                                                                </div>
+                                                            
+                                                            </div>
+                                                        </div>
+                                                        <div class="row justify-content-end">
+                                                            <div class="col-lg-10">
+                                                                <button type="submit" style="float: right;"
+                                                                    class="btn btn-primary" id="submit-btn">Submit
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
                                 </form>
                             </div>
                         </div>
@@ -263,9 +324,9 @@
         <script src="{% static 'libs/feather-icons/feather.min.js' %}"></script>
         <!-- pace js -->
         <script src="{% static 'libs/pace-js/pace.min.js' %}"></script>
-    
+
         <script src="{% static 'js/app.js' %}"></script>
-    
+
         <!-- form validation -->
         <script src="{% static 'js/pages/form-validation.init.js' %}"></script>
 

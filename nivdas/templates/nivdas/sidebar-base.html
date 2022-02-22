@@ -196,10 +196,10 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         {% if request.session.AboutUs == True %}
-                            <li><a href="{% url 'about-us' %}" data-key="t-product-detail">About Us</a></li>
+                            <li><a href="javascript: void(0);" data-key="t-product-detail">About Us</a></li>
                         {% endif %}
                         {% if request.session.Help == True %}
-                            <li><a href="#" data-key="t-orders">Help</a></li>
+                            <li><a href="javascript: void(0);" data-key="t-orders">Help</a></li>
                         {% endif %}
                     </ul>
                 </li>
@@ -209,4 +209,4 @@
         <!-- Sidebar -->
     </div>
 </div>
-<!-- Left Sidebar End -->
+<!-- Left Sidebar End {% url 'about-us' %}-->
