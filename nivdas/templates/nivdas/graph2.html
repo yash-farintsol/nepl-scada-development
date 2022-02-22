@@ -54,7 +54,9 @@
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="home">Dashboard</a></li>
+                                            <li class="breadcrumb-item"><a href="{% url 'indexpage' %}">Dashboard</a></li>
+                                            <li class="breadcrumb-item"><a href="#">Supervise</a></li>
+                                            <li class="breadcrumb-item"><a href="{% url 'equipment-list' %}">Equipment List</a></li>
                                             <li class="breadcrumb-item active">Graph</li>
                                         </ol>
                                     </div>
@@ -254,7 +256,7 @@
             }
         },
         color:mixlinebarColors,
-        legend:{data:["Inward","Final","Outward"],
+        legend:{data:["Device 1","Device 2","Device 3"],
         textStyle:{color:"#858d98"}},
         xAxis:[{
             type:"category",
@@ -265,13 +267,13 @@
         yAxis:[
             {
                 type:"value",
-                name:"Qty in pcs",
+                name:"",
                 min:0,
                 max:100,
                 interval:25,
                 axisLine:{lineStyle:{color:"#858d98"}},
                 splitLine:{lineStyle:{color:"rgba(133, 141, 152, 0.1)"}},
-                axisLabel:{formatter:"{value} pcs"}
+                axisLabel:{formatter:"{value}"}
             }
             ,
             {
@@ -286,9 +288,9 @@
             }
         ],
         series:[
-            {name:"Inward",type:"bar",data:[32,29,27,45,30,21,48]},
-            {name:"Final",type:"line",data:[88,63,58,61,53,57,77]},
-            {name:"Outward",type:"bar",yAxisIndex:1,data:[24,54,32,42,38,17,28]}
+            {name:"Device 1",type:"bar",data:[32,29,27,45,30,21,48]},
+            {name:"Device 2",type:"line",data:[88,63,58,61,53,57,77]},
+            {name:"Device 3",type:"bar",yAxisIndex:1,data:[24,54,32,42,38,17,28]}
         ]
     },option&&"object"==typeof option&&myChart.setOption(option,!0);
 
