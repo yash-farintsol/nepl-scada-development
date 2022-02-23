@@ -199,25 +199,25 @@ $(document).ready(function(){
                 select.append( '<option value="Male">Male</option>' )
                 select.append( '<option value="Female">Female</option>' )
             })
-            this.api().columns(10).every( function ()
-            {
-                var column = this;
-                var select = $(' <select class="form-select"><option value="">All</option></select>')
-                    .appendTo('#datatable-buttons thead tr #sort10')
-                    .on( 'change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex(
-                            $(this).val()
-                        );
+            // this.api().columns(10).every( function ()
+            // {
+            //     var column = this;
+            //     var select = $(' <select class="form-select"><option value="">All</option></select>')
+            //         .appendTo('#datatable-buttons thead tr #sort10')
+            //         .on( 'change', function () {
+            //             var val = $.fn.dataTable.util.escapeRegex(
+            //                 $(this).val()
+            //             );
 
-                        column
-                            .search( val ? '^'+val+'$' : '', true, false )
-                            .draw();
-                    } );
+            //             column
+            //                 .search( val ? '^'+val+'$' : '', true, false )
+            //                 .draw();
+            //         } );
 
-                column.data().unique().sort().each( function ( d, j ) {
-                    select.append( '<option value="'+d+'">'+d+'</option>' )
-                });
-            })
+            //     column.data().unique().sort().each( function ( d, j ) {
+            //         select.append( '<option value="'+d+'">'+d+'</option>' )
+            //     });
+            // })
 
         },
 

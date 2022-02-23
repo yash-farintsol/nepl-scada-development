@@ -6,7 +6,7 @@
     <head>
         
         <meta charset="utf-8" />
-        <title>Input Output Status | NIV-DAS</title>
+        <title>Graph | NIV-DAS</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
@@ -28,7 +28,7 @@
 
     <body data-topbar="dark">
 
-    <!--  onload=display_ct(); -->
+    <!-- <body data-layout="horizontal"> -->
 
         <!-- Begin page -->
         <div id="layout-wrapper">
@@ -50,13 +50,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">Input Output Status</h4>
+                                    <h4 class="mb-sm-0 font-size-18">Graph</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="{% url 'indexpage' %}">Dashboard</a></li>
-                                            <li class="breadcrumb-item"><a href="#">Master Settings</a></li>
-                                            <li class="breadcrumb-item active">Input Output Status</li>
+                                            <li class="breadcrumb-item active">Graph</li>
                                         </ol>
                                     </div>
 
@@ -64,57 +63,15 @@
                             </div>
                         </div>
                         <div class="card">
-                            <div class="card-body">
-                                <form id="new-form" class="needs-validation" novalidate>
-
-                                    <div class="row">
-                                        <div class="col-xl-4 col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom11" class="form-label">
-                                                    Equipment Name<span style="color:red"> *</span>
-                                                </label>
-                                                <select class="form-control" id="equip" name="Equip" required>
-                                                    <option selected disabled value="">-- Select Option --</option>
-                                                    <option>Active</option>
-                                                </select>
-                                                <div class="valid-feedback">
-                                                    Looks Good!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Looks Bad!
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <br>
-                                    <div class="row">
-                                        <div class="col-xl-4 col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom11" class="form-label">
-                                                    Input Status
-                                                </label>
-                                                <label></label>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom11" class="form-label">
-                                                    Output Status
-                                                </label>
-                                                <label></label>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom11" class="form-label">
-                                                    Live Data
-                                                </label>
-                                                <label></label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </form>
+                            <div class="card-header">
+                                <h4 class="card-title mb-0">Graph</h4>
                             </div>
+                            <div class="card-body">
+                                <div id="line_chart_datalabel" data-colors='["#df825f", "#f8956f", "#dfb15b", "#4d446f", "#706695", "#86e3c3", "#fc91d4", "#d0e6a5", "#138086", "#31db92"]' class="apex-charts" dir="ltr"></div> 
+                            </div>
+                            <!-- <div class="card-body">
+                                <div id="line_chart_datalabel" data-colors='["#f00", "#ff8000", "#ff0", "#0f0", "#0ff", "#00f", "#b266ff", "#a05195", "#ff007f", "#606060"]' class="apex-charts" dir="ltr"></div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -152,9 +109,75 @@
         <script src="{% static 'libs/pace-js/pace.min.js' %}"></script>
     
         <script src="{% static 'js/app.js' %}"></script>
+
+        <!-- apexcharts js -->
+        <script src="{% static 'libs/apexcharts/apexcharts.min.js' %}"></script>
+        <!-- apexcharts init -->
+        <!-- <script src="{% static 'assets/js/pages/apexcharts.init.js' %}"></script> -->
     
-        <!-- form validation -->
-        <script src="{% static 'js/pages/form-validation.init.js' %}"></script>
+    
+        <script>
+            function getChartColorsArray(e){
+                e=$(e).attr("data-colors");
+                return(e=JSON.parse(e)).map(function(e){
+                    e=e.replace(" ","");
+                    if(-1==e.indexOf("--"))
+                        return e;
+                    e=getComputedStyle(document.documentElement).getPropertyValue(e);
+                    return e||void 0
+                })
+            }
+    
+            var lineDatalabelColors=getChartColorsArray("#line_chart_datalabel"),
+            options={chart:{height:499,type:"line",
+            zoom:{enabled:!1},
+            toolbar:{show:!1}},
+            colors:lineDatalabelColors,
+            dataLabels:{enabled:!1},
+            stroke:{width:[3,3,3,3,3,3,3,3,3,3],curve:"straight"},
+            series:[
+                {name:"CH-1", data:[31, 52, 25, 20, 17, 23, 16]},
+                {name:"CH-2", data:[18, 28, 12, 17, 13, 12, 45]},
+                {name:"CH-3", data:[10, 5, 21, 1, 17, 23, 304]},
+                {name:"CH-4", data:[16, 19, 13, 18, 15, 40, 54]},
+                {name:"CH-5", data:[25, 20, 17, 31, 52, 25, 66]},
+                {name:"CH-6", data:[30, 48, 14, 33, 1, 4, 18]},
+                {name:"CH-7", data:[21, 1, 14, 22, 6, 39, 7]},
+                {name:"CH-8", data:[5, 3, 6, 7, 4, 5, 7]},
+                {name:"CH-9", data:[4, 9, 8, 13, 12, 5, 20]},
+                {name:"CH-10", data:[0, 13, 12, 45, 28, 12, 17]},
+            ],
+            title:{
+                text:"Inward & Outward Weekly",
+                align:"left",
+                style:{fontWeight:"500"}
+            },
+            grid:{
+                row:{
+                    colors:["transparent","transparent","transparent","transparent","transparent","transparent","transparent","transparent","transparent","transparent"],
+                    opacity:.2
+                },borderColor:"#f1f1f1"
+            },markers:{
+                style:"inverted",
+                size:0},
+                xaxis:{
+                    categories:["Week 1","Week 2","Week 3","Week 4","Week 5","Week 6","Week 7","Week 8"],
+                    title:{text:"Week"}
+                },yaxis:{
+                    title:{text:"Qty in pcs"},
+                },legend:{
+                    position:"top",
+                    horizontalAlign:"right",
+                    floating:!0,
+                    offsetY:-25,
+                    offsetX:-5
+                },responsive:[{
+                    breakpoint:600,
+                    options:{chart:{toolbar:{show:!1}},legend:{show:!1}}
+                }]
+            },
+            chart=new ApexCharts(document.querySelector("#line_chart_datalabel"),options);chart.render();
+        </script>
 
 
     </body>
