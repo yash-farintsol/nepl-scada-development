@@ -145,7 +145,7 @@ def Login(request):
                     messages.success(request, "Password is Incorrect")
                     return redirect("loginpage")
             else:
-                messages.success(request, "Your account is Inactive, Please contact administrator")
+                messages.success(request, "Your account is inactive, Please contact the administrator")
                 return redirect("loginpage")
         else:
             messages.success(request, "User Doesn't Exist")
