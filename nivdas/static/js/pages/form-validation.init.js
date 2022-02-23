@@ -2,14 +2,15 @@
     "use strict";
     window.addEventListener("load",function(){
         var e=document.getElementsByClassName("needs-validation");
+        var x = document.querySelectorAll('button[type=button]')
         Array.prototype.filter.call(e,function(t){
-            t.addEventListener("submit",function(e){
+            x.addEventListener("click",function(e){
                 !1===t.checkValidity()&&(e.preventDefault(),e.stopPropagation()),
                 t.classList.add("was-validated")
                 // if (document.getElementsByClassName("form-control").length + document.getElementsByClassName("form-select").length-2 == 4) {
-                // if ($(".invalid-feedback:visible").length == 0) {
-                //     $('#modal').modal('show');
-                // }
+                if ($(".invalid-feedback:visible").length == 0) {
+                    $('#modal').modal('show');
+                }
             },!1)
         })
     },!1)
