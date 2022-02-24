@@ -1021,3 +1021,11 @@ def Graph1(request):
 
 def Graph2(request):
     return render(request, "nivdas/graph2.html")
+
+def PDFTemplate(request):
+    return render(request, "nivdas/pdf-template.html")
+
+def Samp(request):
+    return render(request, "nivdas/user-interest.html")
+
+    # user-interest

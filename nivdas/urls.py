@@ -59,4 +59,6 @@ urlpatterns = [
     path('equipment-parameter-data/<str:pk>/', views.EquipParamUpdateData, name="equipment-parameter-data"),
     path('graph1/', views.Graph1, name="graph1"),
     path('graph2/', views.Graph2, name="graph2"),
+    path('pdf-template/', views.PDFTemplate, name="pdf-template"),
+    path('samp/', views.Samp, name="samp"),
 ]
