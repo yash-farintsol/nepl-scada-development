@@ -1,19 +1,24 @@
-!function(){
-    "use strict";
-    window.addEventListener("load",function(){
-        var e=document.getElementsByClassName("needs-validation");
-        Array.prototype.filter.call(e,function(t){
-            t.addEventListener("submit",function(e){
-                !1===t.checkValidity()&&(e.preventDefault(),e.stopPropagation()),
-                t.classList.add("was-validated")
-                // if (document.getElementsByClassName("form-control").length + document.getElementsByClassName("form-select").length-2 == 4) {
-                // if ($(".invalid-feedback:visible").length == 0) {
-                //     $('#modal').modal('show');
-                // }
-            },!1)
+!function () 
+{ 
+    "use strict"; 
+    window.addEventListener("load", function () 
+    { 
+        var e = document.getElementsByClassName("needs-validation"); 
+        Array.prototype.filter.call(e, function (t) 
+        { 
+            $('button[type=submit]').on('click', function() {
+                // alert('Hello')
+                t.addEventListener("submit", function (e) 
+                { 
+                    !1 === t.checkValidity() && (e.preventDefault(), e.stopPropagation()), t.classList.add("was-validated")
+                    if ($(".invalid-feedback:visible").length == 0 && !$('#modal').hasClass('show')) {
+                        $('#modal').modal('show') && (e.preventDefault(), e.stopPropagation());
+                    }
+                }, !1) 
+            })
         })
-    },!1)
-}(),
+    }, !1) 
+}(), 
 window.onload=function(){
     var e=document.getElementById("pristine-valid-example"), t=new Pristine(e);
     e.addEventListener("submit",function(e){

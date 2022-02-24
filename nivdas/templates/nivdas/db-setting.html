@@ -14,16 +14,6 @@
         <!-- App favicon -->
         <link rel="shortcut icon" href="{% static 'images/nepl-logo.png' %}">
 
-        <!-- DataTables -->
-        <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet"
-            type="text/css" />
-        <link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet"
-            type="text/css" />
-
-        <!-- Responsive datatable examples -->
-        <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}"
-            rel="stylesheet" type="text/css" />
-
         <!-- preloader css -->
         <link rel="stylesheet" href="{% static 'css/preloader.min.css' %}" type="text/css" />
 
@@ -237,8 +227,8 @@
                                         <button class="btn btn-primary waves-effect waves-light"
                                             type="submit" id="save" name="Save">Save
                                         </button>
-                                    </div>
-                        
+                                    </div>                        
+                                        
                                     <!-- Modal starts -->
                                     <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
                                         id="modal" aria-hidden="true">
@@ -252,41 +242,47 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form method="POST" id="lrform" class="needs-validation" novalidate>
-                                                        {% csrf_token %}
-                                                        <div data-repeater-list="outer-group" class="outer">
-                                                            <div data-repeater-item class="outer">
-            
-                                                                <div class="form-group row mb-4">
-                                                                    <label class="col-form-label col-lg-4" for="validationCustom01">Username<span style="color:red">*</span></label>
-                                                                    <div class="col-lg-8">
-                                                                        <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
-                                                                        id="username" name="Username" placeholder="Enter Username" required>
-                                                                    </div>
+                                                    <div data-repeater-list="outer-group" class="outer">
+                                                        <div data-repeater-item class="outer">
+        
+                                                            <div class="form-group row mb-4">
+                                                                <label class="col-form-label col-lg-4" for="validationCustom01">Username<span style="color:red">*</span></label>
+                                                                <div class="col-lg-8">
+                                                                    <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
+                                                                    id="username" name="Username" placeholder="Enter Username" required>
                                                                 </div>
-            
-                                                                <div class="form-group row mb-4">
-                                                                    <label class="col-form-label col-lg-4">Password<span style="color:red">*</span></label>
-                                                                    <div class="col-lg-8">
-                                                                        <input type="password" class="form-control" pattern="[a-zA-Z0-9!@#$%&*]{1,}" 
-                                                                        id="password" name="Password" placeholder="Enter Password" required>
-                                                                    </div>
+                                                            </div>
+        
+                                                            <div class="form-group row mb-4">
+                                                                <label class="col-form-label col-lg-4">Password<span style="color:red">*</span></label>
+                                                                <div class="col-lg-8">
+                                                                    <input type="password" class="form-control" pattern="[a-zA-Z0-9!@#$%&*]{1,}" 
+                                                                    id="password" name="Password" placeholder="Enter Password" required>
                                                                 </div>
-                                                            
                                                             </div>
-                                                        </div>
-                                                        <div class="row justify-content-end">
-                                                            <div class="col-lg-10">
-                                                                <button type="submit" style="float: right;"
-                                                                    class="btn btn-primary" id="submit-btn">Submit
-                                                                </button>
+        
+                                                            <div class="form-group row mb-4">
+                                                                <label class="col-form-label col-lg-4" for="validationCustom01">Comments<span style="color:red">*</span></label>
+                                                                <div class="col-lg-8">
+                                                                    <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
+                                                                    id="comments" name="Comments" placeholder="Enter Username" required>
+                                                                </div>
                                                             </div>
+                                                        
                                                         </div>
-                                                    </form>
+                                                    </div>
+                                                    <div class="row justify-content-end">
+                                                        <div class="col-lg-10">
+                                                            <button type="submit" style="float: right;"
+                                                                class="btn btn-primary" id="submit-btn">Submit
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div><!-- /.modal-content -->
                                         </div><!-- /.modal-dialog -->
                                     </div><!-- /.modal -->
+                                    
                                 </form>
                             </div>
                         </div>

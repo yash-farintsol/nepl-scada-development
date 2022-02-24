@@ -160,7 +160,7 @@
 
                                                 <br>
                                                 <button class="btn btn-primary waves-effect waves-light"
-                                                    style="float: right;" type="button" id="sync-temp"
+                                                    style="float: right;" type="submit" id="sync-temp"
                                                     name="Sync-temp">Sync Temp
                                                 </button>
                                                 <br><br>
@@ -223,7 +223,7 @@
                                                 
                                                 <br>
                                                 <button class="btn btn-primary waves-effect waves-light"
-                                                    style="float: right;" type="button" id="sync-humidity"
+                                                    style="float: right;" type="submit" id="sync-humidity"
                                                     name="Sync-humidity" disabled>Sync Humidity
                                                 </button>
                                                 <br><br>
@@ -287,7 +287,7 @@
 
                                                 <br>
                                                 <button class="btn btn-primary waves-effect waves-light"
-                                                    style="float: right;" type="button" id="sync-lux-uv"
+                                                    style="float: right;" type="submit" id="sync-lux-uv"
                                                     name="Sync-lux-uv" disabled>Sync Lux UV
                                                 </button>
                                                 <br><br>
@@ -299,15 +299,14 @@
                                     <br>
     
                                     <div style="float: right;">
-                                        <button class="btn btn-primary waves-effect waves-light" type="button" id="save"
+                                        <button class="btn btn-primary waves-effect waves-light" type="submit" id="save"
                                             name="Save">Save
                                         </button> &nbsp; &nbsp;
                                         <button class="btn btn-primary waves-effect waves-light" type="submit" id="clear"
                                             name="Clear" onclick="clearForm()">Clear
                                         </button>
-                                    </div>
-                                
-                        
+                                    </div>                        
+                                        
                                     <!-- Modal starts -->
                                     <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
                                         id="modal" aria-hidden="true">
@@ -321,38 +320,47 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                        <div data-repeater-list="outer-group" class="outer">
-                                                            <div data-repeater-item class="outer">
-                
-                                                                <div class="form-group row mb-4">
-                                                                    <label class="col-form-label col-lg-4" for="validationCustom01">Username<span style="color:red">*</span></label>
-                                                                    <div class="col-lg-8">
-                                                                        <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
-                                                                        id="username" name="Username" placeholder="Enter Username" required>
-                                                                    </div>
+                                                    <div data-repeater-list="outer-group" class="outer">
+                                                        <div data-repeater-item class="outer">
+        
+                                                            <div class="form-group row mb-4">
+                                                                <label class="col-form-label col-lg-4" for="validationCustom01">Username<span style="color:red">*</span></label>
+                                                                <div class="col-lg-8">
+                                                                    <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
+                                                                    id="username" name="Username" placeholder="Enter Username" required>
                                                                 </div>
-                
-                                                                <div class="form-group row mb-4">
-                                                                    <label class="col-form-label col-lg-4">Password<span style="color:red">*</span></label>
-                                                                    <div class="col-lg-8">
-                                                                        <input type="password" class="form-control" pattern="[a-zA-Z0-9!@#$%&*]{1,}" 
-                                                                        id="password" name="Password" placeholder="Enter Password" required>
-                                                                    </div>
+                                                            </div>
+        
+                                                            <div class="form-group row mb-4">
+                                                                <label class="col-form-label col-lg-4">Password<span style="color:red">*</span></label>
+                                                                <div class="col-lg-8">
+                                                                    <input type="password" class="form-control" pattern="[a-zA-Z0-9!@#$%&*]{1,}" 
+                                                                    id="password" name="Password" placeholder="Enter Password" required>
                                                                 </div>
-                                                            
                                                             </div>
-                                                        </div>
-                                                        <div class="row justify-content-end">
-                                                            <div class="col-lg-10">
-                                                                <button type="button" style="float: right;"
-                                                                    class="btn btn-primary" id="submit-btn">Submit
-                                                                </button>
+        
+                                                            <div class="form-group row mb-4">
+                                                                <label class="col-form-label col-lg-4" for="validationCustom01">Comments<span style="color:red">*</span></label>
+                                                                <div class="col-lg-8">
+                                                                    <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
+                                                                    id="comments" name="Comments" placeholder="Enter Username" required>
+                                                                </div>
                                                             </div>
+                                                        
                                                         </div>
+                                                    </div>
+                                                    <div class="row justify-content-end">
+                                                        <div class="col-lg-10">
+                                                            <button type="submit" style="float: right;"
+                                                                class="btn btn-primary" id="submit-btn">Submit
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div><!-- /.modal-content -->
                                         </div><!-- /.modal-dialog -->
                                     </div><!-- /.modal -->
+                                    
                                 </form>
                             </div>
                         </div>
