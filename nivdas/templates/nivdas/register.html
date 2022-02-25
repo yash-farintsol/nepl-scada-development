@@ -159,7 +159,12 @@
                                                             <div class="form-group row mb-4">
                                                                 <label class="col-form-label col-lg-4">Status<span style="color:red"> *</span></label>
                                                                 <div class="col-lg-8">
-                                                                    <select class="form-control" id="status" name="status" required>
+                                                                    <!-- <select class="form-control" id="status" name="status" required>
+                                                                        <option value="" selected disabled>Select</option>
+                                                                        <option>Active</option>
+                                                                        <option>Inactive</option>
+                                                                    </select> -->
+                                                                    <select class="form-control" id="status1" name="status" required>
                                                                         <option value="" selected disabled>Select</option>
                                                                         <option>Active</option>
                                                                         <option>Inactive</option>
@@ -546,7 +551,7 @@
                         document.getElementById("password").value = r[0].password;
                         document.getElementById("group-name").value = r[0].grp_name;
                         document.getElementById("department-name").value = r[0].dep_name;
-                        document.getElementById("status").value = r[0].status;
+                        document.getElementById("status1").value = r[0].status;
                         document.getElementById("password-change").value = r[0].cpassword;
                     }
                 });

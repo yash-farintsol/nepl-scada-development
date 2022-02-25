@@ -1,0 +1,329 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8" />
+        <title>Interests | AHFL</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesbrand" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+
+        <!-- choices css -->
+        <link href="{% static 'libs/choices.js/public/assets/styles/choices.min.css' %}" rel="stylesheet" type="text/css" />
+
+        <!-- color picker css -->
+        <link rel="stylesheet" href="{% static 'libs/@simonwep/pickr/themes/classic.min.css' %}"/> <!-- 'classic' theme -->
+        <link rel="stylesheet" href="{% static 'libs/@simonwep/pickr/themes/monolith.min.css' %}"/> <!-- 'monolith' theme -->
+        <link rel="stylesheet" href="{% static 'libs/@simonwep/pickr/themes/nano.min.css' %}"/> <!-- 'nano' theme -->
+
+        <!-- datepicker css -->
+        <link rel="stylesheet" href="{% static 'libs/flatpickr/flatpickr.min.css' %}">
+
+        <!-- preloader css -->
+        <link rel="stylesheet" href="{% static 'css/preloader.min.css' %}" type="text/css" />
+
+        <!-- Bootstrap Css -->
+        <link href="{% static 'css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+
+        
+
+    </head>
+
+    <body data-topbar="dark">
+
+    <!-- <body data-layout="horizontal"> -->
+        <div class="auth-page">
+            <div class="container-fluid p-0">
+                <div class="row g-0">
+                    <div class="col-xxl-3 col-lg-4 col-md-5">
+                        <div class="auth-full-page-content d-flex p-sm-5 p-4">
+                            <div class="w-100">
+                                <div class="d-flex flex-column h-100">
+                                    <div class="mb-4 mb-md-5 text-center">
+                                        <a href="index.html" class="d-block auth-logo">
+                                            <img src="{% static 'assets/images/logo.png' %}" alt="" width="150" height="60"> <span class="logo-txt"></span>
+                                        </a>
+                                    </div>
+                                    <div class="auth-content my-auto">
+                                        <div class="text-center">
+                                            <h5 class="mb-0">Selected Your Interest!</h5>
+                                            <!-- <p class="text-muted mt-2">Sign in to continue to Buddy platform.</p> -->
+                                        </div>
+                                        <form class="needs-validation" novalidate id="select2Form" action="" method="post">
+                                            {% csrf_token %}
+                                            <div class="form-floating form-floating-custom mb-4">
+                                                <div class="mb-3">
+                                                    <label for="choices-multiple-default" class="form-label font-size-15 ">Interest</label>
+                                                    <select class="form-control" data-trigger required
+                                                        name="interests" id="choices-multiple-default"
+                                                        placeholder="This is a placeholder" multiple>
+                                                        <option value="" disabled>Select your Interests</option>
+                                                        <option>Reading</option>
+                                                        <option>Sports</option>
+                                                        <option>Travelling</option>
+                                                        <option>Watching Movies</option>
+                                                        <option>Upgrading Skills</option>
+                                                        <option>Sociology</option>
+                                                        <option>Technology</option>
+                                                        <option>Arts</option>
+                                                        <option>History/ Geography/ Mythology</option>
+                                                        <option>Mountaineering</option>
+                                                        <option>Knowledge Sharing</option>
+                                                        <option>Improving networking skills - Networking</option>
+                                                    </select>
+                                                </div>
+                                                <div id="multiple-valid" style="display: none;" class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                                <div id="multiple-invalid" style="display: block;" class="invalid-feedback">
+                                                    Looks bad!
+                                                </div>
+                                            </div>
+
+                                            <!-- <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                                <label class="form-check-label" for="inlineRadio1" style="word-break: break-all;">Password 1</label>
+                                              </div>
+                                              <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="other_radio" id="chkYes" value="option2">
+                                                <label class="form-check-label" for="inlineRadio2" style="word-break: break-all;">Other</label>
+                                              </div>
+                                              <div>
+                                               
+                                                <textbox id="other_textbox" style="display: none"></textbox>
+                                            </div> -->
+                                            <h5>Expectations from the Buddy</h5>
+                                            <div class="form-check font-size-14">
+                                                <input type="checkbox" class="form-check-input" value="To understand the various roles in Aadhar" id="chk1" name="chk[]" required />
+                                                <label class="form-check-label">
+                                                    To understand the various roles in Aadhar
+                                                </label>
+                                            </div>
+                                            <div class="form-check font-size-14">
+                                                <input type="checkbox" class="form-check-input" value="Product knowledge" id="chk2" name="chk[]" required />
+                                                <label class="form-check-label">
+                                                    Product knowledge
+                                                </label>
+                                            </div>
+                                            <div class="form-check font-size-14">
+                                                <input type="checkbox" class="form-check-input" value="Process knowledge" id="chk3" name="chk[]" required />
+                                                <label class="form-check-label">
+                                                    Process knowledge
+                                                </label>
+                                            </div>
+                                            <div class="form-check font-size-14">
+                                                <input type="checkbox" class="form-check-input" value="Understanding Company Policies" id="chk4" name="chk[]" required />
+                                                <label class="form-check-label">
+                                                    Understanding Company Policies
+                                                </label>
+                                            </div>
+                                            <div class="form-check font-size-14">
+                                                <input type="checkbox" class="form-check-input" value="Aadhar Culture" id="chk5" name="chk[]" required />
+                                                <label class="form-check-label">
+                                                    Aadhar Culture
+                                                </label>
+                                            </div>
+                                            <div class="form-check font-size-14">
+                                                <input type="checkbox" class="form-check-input" value="Bridge social connections" id="chk6" name="chk[]" required />
+                                                <label class="form-check-label">
+                                                    Bridge social connections
+                                                </label>
+                                            </div>
+                                            <div class="form-check font-size-14">
+                                                <input type="checkbox" class="form-check-input" value="Introduction to team" id="chk7" name="chk[]" required />
+                                                <label class="form-check-label">
+                                                    Introduction to team
+                                                </label>
+                                            </div>
+                                            <div class="form-check font-size-14">
+                                                <input type="checkbox" class="form-check-input" value="" id="chkYes" name="chk[]" required />
+                                                <labe class="form-check-label">
+                                                    Any other
+                                                </label>
+                                            </div>
+                                            <div class="row">                                                            
+                                                <div class="col-md-12">
+                                                    <div class="mb-3" id="textbox1" style="display: none">
+                                                        <textarea type="text" class="form-control" id="chkTxt" name="txt[]"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input" id="chkAll" name="chk9" required />
+                                                <label class="form-check-label font-size-14">
+                                                    All of the above
+                                                </label>
+                                                <div class="valid-feedback">
+                                                    Looks Good!
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Looks Bad!
+                                                </div>
+                                            </div>
+                                            <!-- <div class="row">
+                                                <div id="dvPassport" style="display: none" class="col-lg-12">
+                                                    <input type="text" id="txtPassportNumber" />
+                                                </div>
+                                            </div> -->
+
+                                            <br>
+                                            <div class="mb-3">
+                                                <button id="submit-err" class="btn btn-primary w-100 waves-effect waves-light" type="submit" disabled>Submit</button>
+                                            </div>
+                                        </form>
+                                       
+                                    </div>
+                                    <div class="mt-4 mt-md-5 text-center">
+                                        <p class="mb-0">© <script>document.write(new Date().getFullYear())</script> AHFL. Crafted with <i class="mdi mdi-heart text-danger"></i> by farintsol</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end auth full page content -->
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end container fluid -->
+        </div>
+
+
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'libs/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'libs/jquery/jquery.min' %}"></script>
+        <script src="{% static 'libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'libs/metismenu/metisMenu.min.js' %}"></script>
+        <script src="{% static 'libs/simplebar/simplebar.min.js' %}"></script>
+        <script src="{% static 'libs/node-waves/waves.min.js' %}"></script>
+        <script src="{% static 'libs/feather-icons/feather.min.js' %}"></script>
+        <!-- pace js -->
+        <script src="{% static 'libs/pace-js/pace.min.js' %}"></script>
+
+        <script src="{% static 'js/pages/pass-addon.init.js' %}"></script>
+
+        <script src="{% static 'js/pages/feather-icon.init.js' %}"></script>
+        <!-- choices js -->
+        <script src="{% static 'libs/choices.js/public/assets/scripts/choices.min.js' %}"></script>
+        <!-- color picker js -->
+        <script src="{% static 'libs/@simonwep/pickr/pickr.min.js' %}"></script>
+        <script src="{% static 'libs/@simonwep/pickr/pickr.es5.min.js' %}"></script>
+        <!-- datepicker js -->
+        <script src="{% static 'libs/flatpickr/flatpickr.min.js' %}"></script>
+        <!-- init js -->
+        <script src="{% static 'js/pages/form-advanced.init.js' %}"></script>
+
+        <script src="{% static 'js/pages/form-validation.init.js' %}"></script>
+
+        <script src="{% static 'js/app.js"></script>
+
+
+        <script>
+            // Display textbox on clicking Other checkbox
+            $('#chkYes').on('change', function() {
+                document.getElementById("textbox1").style.display = this.checked ? "block" : "none";
+                document.getElementById("chkTxt").required = this.checked ? true : false;
+            });
+           
+            // Assign textbox input as Other checkbox value
+            $('#chkTxt').on('change', function() {
+                document.getElementById('chkYes').value = document.getElementById('chkTxt').value;
+            });
+        </script>
+
+        <script>
+            // Select all checkbox -- basic check/uncheck all
+            $('#chkAll').on('click', function() {
+                var items = document.getElementsByName('chk[]');
+                if (this.checked==true)
+                {
+                    for (var i = 0; i < items.length; i++) {
+                        if (items[i].type == 'checkbox')
+                            items[i].checked = true;
+                    }
+                    document.getElementById("textbox1").style.display = "block";
+                    console.log('check')
+                }
+                else if (this.checked==false)
+                {
+                    for (var i = 0; i < items.length; i++) {
+                        if (items[i].type == 'checkbox')
+                            items[i].checked = false;
+                    }
+                    document.getElementById("textbox1").style.display = "none";
+                    console.log('uncheck')
+                }
+            });
+        </script>
+
+        <script>
+            // Decheck select all, if one checkbox is dechecked
+            $("input[type=checkbox]").click(function() {
+                if (!$(this).prop("checked")) {
+                    $("#chkAll").prop("checked", false);
+                }
+            });
+
+            // If all checkbox checked, check select all
+            $(".form-check-input").change(function() {
+                if ($('.form-check-input:checked').length == 8) {
+                    $("#chkAll").prop("checked", true);
+                }
+            });
+        </script>
+
+        <script>
+            $('.form-check-input').on('change', function() {
+                if ($('.form-check-input:checked').length == 0) {
+                    document.getElementById("chk1").required = true
+                    document.getElementById("chk2").required = true
+                    document.getElementById("chk3").required = true
+                    document.getElementById("chk4").required = true
+                    document.getElementById("chk5").required = true
+                    document.getElementById("chk6").required = true
+                    document.getElementById("chk7").required = true
+                    document.getElementById("chkYes").required = true
+                    document.getElementById("chkAll").required = true
+
+                }
+                else {
+                    document.getElementById("chk1").required = false
+                    document.getElementById("chk2").required = false
+                    document.getElementById("chk3").required = false
+                    document.getElementById("chk4").required = false
+                    document.getElementById("chk5").required = false
+                    document.getElementById("chk6").required = false
+                    document.getElementById("chk7").required = false
+                    document.getElementById("chkYes").required = false
+                    document.getElementById("chkAll").required = false
+                }
+            });
+        </script>
+
+        <script>
+            $(document.body).on("change", "#choices-multiple-default", function() {
+                if (document.getElementById("choices-multiple-default").value == '') {
+                    document.getElementById('multiple-valid').style.display = 'none'
+                    document.getElementById('multiple-invalid').style.display = 'block'
+                    document.getElementById('submit-err').disabled = true
+                }
+                else {
+                    document.getElementById('multiple-valid').style.display = 'block'
+                    document.getElementById('multiple-invalid').style.display = 'none'
+                    document.getElementById('submit-err').disabled = false
+                }
+            });
+        </script>
+
+
+    </body>
+
+</html>
