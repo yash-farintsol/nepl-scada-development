@@ -154,6 +154,7 @@ def Login(request):
 
 
 def AddUser(request):
+    print("FUNCTION CALLED")
     if request.method == "POST":
         username = request.POST['username']
         group = request.POST['group']
@@ -1039,6 +1040,10 @@ def StoreTemplate(request):
 
         return redirect("indexpage")
 
+def samp(request):
+    return render(request, 'nivdas/samp.html')
+
+
 def GeneratePdf(request):
-    pdf = html_to_pdf('nivdas/audit-user.html')
+    pdf = html_to_pdf('nivdas/samp.html')
     return HttpResponse(pdf, content_type='application/pdf')
