@@ -62,4 +62,5 @@ urlpatterns = [
     path('graph1/', views.Graph1, name="graph1"),
     path('graph2/', views.Graph2, name="graph2"),
     path('pdf/', views.GeneratePdf,name="pdf"),
+    path('samp/',views.samp,name="samp"),
 ]
