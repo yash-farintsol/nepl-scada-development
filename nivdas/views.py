@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,HttpResponse
 from django.http import HttpResponse
 from .models import *
 from django.contrib.auth import authenticate, login, logout
@@ -8,7 +8,8 @@ from datetime import datetime, timedelta
 import paho.mqtt.client as mqtt
 import ast
 from django.http import JsonResponse
-
+from .PdfProcess import html_to_pdf
+from django.views.generic import View
 
 def LoginPage(request):
     return render(request, "nivdas/login.html")
@@ -145,7 +146,7 @@ def Login(request):
                     messages.success(request, "Password is Incorrect")
                     return redirect("loginpage")
             else:
-                messages.success(request, "Your account is Inactive, Please contact administrator")
+                messages.success(request, "Your account is inactive, Please contact the administrator")
                 return redirect("loginpage")
         else:
             messages.success(request, "User Doesn't Exist")
@@ -1022,10 +1023,22 @@ def Graph1(request):
 def Graph2(request):
     return render(request, "nivdas/graph2.html")
 
-def PDFTemplate(request):
-    return render(request, "nivdas/pdf-template.html")
 
-def Samp(request):
-    return render(request, "nivdas/user-interest.html")
+def StoreTemplate(request):
+    if request.method == "POST":
+        tempname = request.POST['Temp-name']
+        equipname = request.POST['Eqp-name']
+        header = request.POST['Header']
+        footer = request.POST['Footer']
+        address = request.POST['Address']
+        logo = request.POST['Logo']
 
-    # user-interest
+        StoreTemplateConf = MailTemplate.objects.create(TemplateName=tempname,
+        EquipmentName=equipname,Header=header,Footer=footer,
+        Address=address,Logo=logo)
+
+        return redirect("indexpage")
+
+def GeneratePdf(request):
+    pdf = html_to_pdf('nivdas/audit-user.html')
+    return HttpResponse(pdf, content_type='application/pdf')

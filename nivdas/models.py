@@ -154,55 +154,6 @@ class MailSetting(models.Model):
     SSL = models.CharField(max_length=50)
     Mail_Status = models.BooleanField(default=False)
 
-class db_setting(models.Model):
-    objects = models.Manager()
-    days = models.IntegerField()
-    t1inv = models.TimeField()
-    t1activ = models.BooleanField()
-    t2inv = models.TimeField()
-    t2activ = models.BooleanField()
-    t3inv = models.TimeField()
-    t3activ = models.BooleanField()
-    t4inv = models.TimeField()
-    t4activ = models.BooleanField()
-    t5inv = models.TimeField()
-    t5activ = models.BooleanField()
-    db_path = models.CharField(max_length=50)
-    bkup_status = models.CharField(max_length=50)
-    lastdatabckup = models.DateTimeField()
-
-
-class admin_group(models.Model):
-    objects = models.Manager()
-    group_select = models.CharField(max_length=30)
-    admin_page = models.CharField(max_length=500)
-    supervise_page = models.CharField(max_length=500)
-    audit_page = models.CharField(max_length=500)
-    master_page = models.CharField(max_length=500)
-    history_page = models.CharField(max_length=500)
-    help_page = models.CharField(max_length=500)
-
-
-class supervise_group(models.Model):
-    objects = models.Manager()
-    admin_page = models.CharField(max_length=500)
-    supervise_page = models.CharField(max_length=500)
-    audit_page = models.CharField(max_length=500)
-    master_page = models.CharField(max_length=500)
-    history_page = models.CharField(max_length=500)
-    help_page = models.CharField(max_length=500)
-
-
-class operator_group(models.Model):
-    objects = models.Manager()
-    admin_page = models.CharField(max_length=500)
-    supervise_page = models.CharField(max_length=500)
-    audit_page = models.CharField(max_length=500)
-    master_page = models.CharField(max_length=500)
-    history_page = models.CharField(max_length=500)
-    help_page = models.CharField(max_length=500)
-
-
 class Equipment(models.Model):
     EquipmentName = models.CharField(max_length=50)
     EquipmentType = models.CharField(max_length=50)
@@ -216,3 +167,12 @@ class Equipment(models.Model):
     DepartmentName = models.CharField(max_length=50,default="Department")
     Protocol = models.CharField(max_length=50,default="PROTOCOL")
     Comments = models.CharField(max_length=200)
+
+class MailTemplate(models.Model):
+    TemplateName = models.CharField(max_length=200)
+    EquipmentName = models.CharField(max_length=200)
+    Header = models.CharField(max_length=500)
+    Footer = models.CharField(max_length=500)
+    Address = models.TextField(default="Address")
+    Logo = models.FileField(upload_to="template-logo/",default="no-logo.png")
+    

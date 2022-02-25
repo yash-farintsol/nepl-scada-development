@@ -65,8 +65,8 @@
                         </div>
                         <div class="card">
                             <div class="card-body">
-                                <form id="new-form" class="needs-validation" novalidate>
-
+                                <form id="new-form" action="{% url 'store_mail_template' %}" method="POST" class="needs-validation" novalidate>
+                                    {% csrf_token %}
                                     <div class="row">
                                         <div class="col-xl-6 col-md-4">
                                             <div class="form-group mb-3">

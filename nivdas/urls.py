@@ -2,6 +2,7 @@ from unicodedata import name
 from django.urls import path
 from . import views
 
+
 urlpatterns = [
     path("",views.LoginPage,name="loginpage"),
     path("dashboard/",views.IndexPage,name="indexpage"),
@@ -30,6 +31,7 @@ urlpatterns = [
     path('equipment-parameter', views.EquipmentParameter, name="equipment-parameter"),
     path('equipment-activation', views.EquipmentActivation, name="equipment-activation"),
     path('template/', views.MSTemplate, name="template"),
+    path('store-template-settings/',views.StoreTemplate,name="store_mail_template"),
     path('mobile-number/', views.MobileNo, name="mobile-number"),
     path('master-template/', views.MasterTemplate, name="master-template"),
     path('synchronize-date-time/', views.SyncDateTime, name="synchronize-date-time"),
@@ -59,6 +61,5 @@ urlpatterns = [
     path('equipment-parameter-data/<str:pk>/', views.EquipParamUpdateData, name="equipment-parameter-data"),
     path('graph1/', views.Graph1, name="graph1"),
     path('graph2/', views.Graph2, name="graph2"),
-    path('pdf-template/', views.PDFTemplate, name="pdf-template"),
-    path('samp/', views.Samp, name="samp"),
+    path('pdf/', views.GeneratePdf,name="pdf"),
 ]
