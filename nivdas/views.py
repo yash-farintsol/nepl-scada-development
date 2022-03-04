@@ -1053,8 +1053,13 @@ def samp(request):
 
 
 def GeneratePdf(request):
+<<<<<<< HEAD
+    pdf = html_to_pdf('nivdas/audit-user.html')
+    return HttpResponse(pdf, content_type='application/pdf')
+=======
     pdf = html_to_pdf('nivdas/samp.html')
     return HttpResponse(pdf, content_type='application/pdf')
+<<<<<<< HEAD
 
 def GetData(request):
     output_status()
@@ -1063,3 +1068,6 @@ def GetData(request):
     print("")
     temp_act_values()
     return redirect("indexpage")
+=======
+>>>>>>> 2de2daeb500189b76b73668e5bb98d0b7c99b116
+>>>>>>> 55935f75fe9321f1aa45cf4154814e95063c323b
