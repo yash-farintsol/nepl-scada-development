@@ -24,107 +24,471 @@
         <!-- App Css-->
         <link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
 
+        <!-- <style>@page {
+            background-image: url(../images/loginback.jpg);
+        }</style> -->
+
     </head>
 
     <body data-topbar="dark">
 
-                <div class="row" style="justify-content: center;">
-                    <div class="col-10">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-10">
-                                            <h4 class="mb-sm-0 font-size-18">Nihaar Equipment Private Limited</h4>
-                                            <br>
-                                            <p>117/CD, Kandivli Co-Op Indl.Est.Ltd, Near Hindustan Naka, Charkop, Kandivli (W), Mumbai - 400 067, India.</p>
-                                    </div>
-                                    <div class="col-2">
-                                        <img id="blah" src="{% static 'images/nepl-logo.png' %}" style="float: right;" width="40%" alt="{% static 'images/nepl-logo.png' %}" />
-                                    </div>
-                                </div>
+        <div class="row" style="justify-content: center;">
+            <div class="col-10">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-10">
+                                    <h4 class="mb-sm-0 font-size-18">Nihaar Equipment Private Limited</h4>
+                                    <br>
+                                    <p>117/CD, Kandivli Co-Op Indl.Est.Ltd, Near Hindustan Naka, Charkop, Kandivli (W), Mumbai - 400 067, India.</p>
+                            </div>
+                            <div class="col-2">
+                                <img id="blah" src="{% static 'images/loginback.jpg' %}" style="z-index: 0;float: right;"  height="100px" alt="{% static 'images/nepl-logo.png' %}" />
+                            </div>
+                        </div>
 
-                                <hr class="my-5">
-                                
-                                <div class="row">
-                                    <strong>User Audit Log Report</strong> 
-                                    <br><br>
-                                    <div class="col-6">
-                                        From Date : {{Date}}
-                                    </div>
-                                    <div class="col-6">
-                                        To Date : {{Date}}
-                                    </div>
-                                </div>
-                                <br>
+                        <hr class="my-5">
+                        
+                        <div class="row">
+                            <strong>User Audit Log Report</strong> 
+                            <br><br>
+                            <div class="col-6">
+                                From Date : {{Date}}
+                            </div>
+                            <div class="col-6">
+                                To Date : {{Date}}
+                            </div>
+                        </div>
+                        <br>
 
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered border-success mb-0">
+                        <div class="row">
+                            <div class="col-12">
+                                <!-- <div class="table-responsive"> -->
+                                    <table cellpadding="4" border="1" class="table table-bordered border-success mb-0">
                                         
-                                                <thead>
-                                                    <tr>
-                                                        <th><strong>Username</strong></th>
-                                                        <th><strong>Date</strong></th>
-                                                        <th><strong>Time</strong></th>
-                                                        <th><strong>Log Status</strong></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>admin</td>
-                                                        <td>07/02/2022</td>
-                                                        <td>15:58</td>
-                                                        <td>Logged in from IP: 192.168.1.114</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>admin</td>
-                                                        <td>08/02/2022</td>
-                                                        <td>05:23</td>
-                                                        <td>Logged in from IP: 192.168.1.14</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>admin</td>
-                                                        <td>07/02/2022</td>
-                                                        <td>16:34</td>
-                                                        <td>Equipment 'SMART OVEN' Deactivated Successfully</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>admin</td>
-                                                        <td>08/02/2022</td>
-                                                        <td>17:58</td>
-                                                        <td>New Equipment 'Cooling Chamber' Added Successfully</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>admin</td>
-                                                        <td>07/02/2022</td>
-                                                        <td>20:00</td>
-                                                        <td>Equipment 'Cooling Chamber' Activated Successfully</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div> <!-- end col -->
-                                </div> <!-- end row --> <br><br>
+                                        <thead>
+                                            <tr>
+                                                <th><strong>Username</strong></th>
+                                                <th><strong>Date</strong></th>
+                                                <th><strong>Time</strong></th>
+                                                <th><strong>Log Status</strong></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>15:58</td>
+                                                <td>Logged in from IP: 192.168.1.114</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>05:23</td>
+                                                <td>Logged in from IP: 192.168.1.14</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>16:34</td>
+                                                <td>Equipment 'SMART OVEN' Deactivated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>17:58</td>
+                                                <td>New Equipment 'Cooling Chamber' Added Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>20:00</td>
+                                                <td>Equipment 'Cooling Chamber' Activated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>15:58</td>
+                                                <td>Logged in from IP: 192.168.1.114</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>05:23</td>
+                                                <td>Logged in from IP: 192.168.1.14</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>16:34</td>
+                                                <td>Equipment 'SMART OVEN' Deactivated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>17:58</td>
+                                                <td>New Equipment 'Cooling Chamber' Added Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>20:00</td>
+                                                <td>Equipment 'Cooling Chamber' Activated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>15:58</td>
+                                                <td>Logged in from IP: 192.168.1.114</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>05:23</td>
+                                                <td>Logged in from IP: 192.168.1.14</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>16:34</td>
+                                                <td>Equipment 'SMART OVEN' Deactivated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>17:58</td>
+                                                <td>New Equipment 'Cooling Chamber' Added Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>20:00</td>
+                                                <td>Equipment 'Cooling Chamber' Activated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>15:58</td>
+                                                <td>Logged in from IP: 192.168.1.114</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>05:23</td>
+                                                <td>Logged in from IP: 192.168.1.14</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>16:34</td>
+                                                <td>Equipment 'SMART OVEN' Deactivated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>17:58</td>
+                                                <td>New Equipment 'Cooling Chamber' Added Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>20:00</td>
+                                                <td>Equipment 'Cooling Chamber' Activated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>15:58</td>
+                                                <td>Logged in from IP: 192.168.1.114</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>05:23</td>
+                                                <td>Logged in from IP: 192.168.1.14</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>16:34</td>
+                                                <td>Equipment 'SMART OVEN' Deactivated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>17:58</td>
+                                                <td>New Equipment 'Cooling Chamber' Added Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>20:00</td>
+                                                <td>Equipment 'Cooling Chamber' Activated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>15:58</td>
+                                                <td>Logged in from IP: 192.168.1.114</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>05:23</td>
+                                                <td>Logged in from IP: 192.168.1.14</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>16:34</td>
+                                                <td>Equipment 'SMART OVEN' Deactivated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>17:58</td>
+                                                <td>New Equipment 'Cooling Chamber' Added Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>20:00</td>
+                                                <td>Equipment 'Cooling Chamber' Activated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>15:58</td>
+                                                <td>Logged in from IP: 192.168.1.114</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>05:23</td>
+                                                <td>Logged in from IP: 192.168.1.14</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>16:34</td>
+                                                <td>Equipment 'SMART OVEN' Deactivated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>17:58</td>
+                                                <td>New Equipment 'Cooling Chamber' Added Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>20:00</td>
+                                                <td>Equipment 'Cooling Chamber' Activated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>15:58</td>
+                                                <td>Logged in from IP: 192.168.1.114</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>05:23</td>
+                                                <td>Logged in from IP: 192.168.1.14</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>16:34</td>
+                                                <td>Equipment 'SMART OVEN' Deactivated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>17:58</td>
+                                                <td>New Equipment 'Cooling Chamber' Added Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>20:00</td>
+                                                <td>Equipment 'Cooling Chamber' Activated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>15:58</td>
+                                                <td>Logged in from IP: 192.168.1.114</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>05:23</td>
+                                                <td>Logged in from IP: 192.168.1.14</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>16:34</td>
+                                                <td>Equipment 'SMART OVEN' Deactivated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>17:58</td>
+                                                <td>New Equipment 'Cooling Chamber' Added Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>20:00</td>
+                                                <td>Equipment 'Cooling Chamber' Activated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>15:58</td>
+                                                <td>Logged in from IP: 192.168.1.114</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>05:23</td>
+                                                <td>Logged in from IP: 192.168.1.14</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>16:34</td>
+                                                <td>Equipment 'SMART OVEN' Deactivated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>17:58</td>
+                                                <td>New Equipment 'Cooling Chamber' Added Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>20:00</td>
+                                                <td>Equipment 'Cooling Chamber' Activated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>15:58</td>
+                                                <td>Logged in from IP: 192.168.1.114</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>05:23</td>
+                                                <td>Logged in from IP: 192.168.1.14</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>16:34</td>
+                                                <td>Equipment 'SMART OVEN' Deactivated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>17:58</td>
+                                                <td>New Equipment 'Cooling Chamber' Added Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>20:00</td>
+                                                <td>Equipment 'Cooling Chamber' Activated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>15:58</td>
+                                                <td>Logged in from IP: 192.168.1.114</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>05:23</td>
+                                                <td>Logged in from IP: 192.168.1.14</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>16:34</td>
+                                                <td>Equipment 'SMART OVEN' Deactivated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>17:58</td>
+                                                <td>New Equipment 'Cooling Chamber' Added Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>20:00</td>
+                                                <td>Equipment 'Cooling Chamber' Activated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>15:58</td>
+                                                <td>Logged in from IP: 192.168.1.114</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>05:23</td>
+                                                <td>Logged in from IP: 192.168.1.14</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>16:34</td>
+                                                <td>Equipment 'SMART OVEN' Deactivated Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>08/02/2022</td>
+                                                <td>17:58</td>
+                                                <td>New Equipment 'Cooling Chamber' Added Successfully</td>
+                                            </tr>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>07/02/2022</td>
+                                                <td>20:00</td>
+                                                <td>Equipment 'Cooling Chamber' Activated Successfully</td>
+                                            </tr>
+                                        </tbody>
 
-                                <div class="row">
-                                    <div class="col-9"><p>Nihaar Equipment Private Limited NIV-DAS 2.0 (Web) 24/02/2022 12:32 (User:admin)</p></div>
-                                    <div class="col-3" style="text-align: end;">Page 1 of n</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-5">
-                                        Review By :
-                                    </div>
-                                    <div class="col-5">
-                                        Review Approved By :
-                                    </div>
-                                </div>
+                                    </table>
+                                <!-- </div> -->
+                            </div> <!-- end col -->
+                        </div> <!-- end row --> <br><br>
 
-                            </div> <!-- end card-body -->
-                        </div> <!-- end card -->
-                                
-                    </div>
-                </div>
+                        <div class="row">
+                            <div class="col-9"><p>Nihaar Equipment Private Limited NIV-DAS 2.0 (Web) 24/02/2022 12:32 (User:admin)</p></div>
+                            <div class="col-3" style="text-align: end;">Page 1 of n</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                                Review By :
+                            </div>
+                            <div class="col-5">
+                                Review Approved By :
+                            </div>
+                        </div>
+
+                    </div> <!-- end card-body -->
+                </div> <!-- end card -->
+            </div>
+        </div>
 
 
         <!-- JAVASCRIPT -->

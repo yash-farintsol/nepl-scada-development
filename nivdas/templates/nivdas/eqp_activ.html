@@ -84,19 +84,21 @@
                                                 </thead>
 
                                                 <tbody>
+                                                    {% for i in eqp %}
                                                     <tr data-id="{{i.id}}">
-                                                        <td name="eqp_name">Deep Freezer</td>
-                                                        <td name="ip_addr">143.322.1.0</td>
-                                                        <td data-field="eqp_status" name="eqp_status">Active</td>
-                                                        <td name="sensors">2</td>
-                                                        <td name="param">1</td>
-                                                        <td name="mach_code">001</td>
+                                                        <td name="eqp_name">{{i.EquipmentName}}</td>
+                                                        <td name="ip_addr">{{i.IPAddress}}</td>
+                                                        <td data-field="eqp_status" name="eqp_status">{{i.EquipmentActivationStation}}</td>
+                                                        <td name="sensors">{{i.NumberOfSensor}}</td>
+                                                        <td name="param">{{i.NumberOfParams}}</td>
+                                                        <td name="mach_code">{{i.MachineCode}}</td>
                                                         <td>
                                                             <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
                                                                 <i class="fas fa-pencil-alt"></i>
                                                             </a>
                                                         </td>
                                                     </tr>
+                                                    {% endfor %}
                                                 </tbody>
                                             </table>
                                         </div>
@@ -141,8 +143,8 @@
                                                     <div class="form-group row mb-4">
                                                         <label class="col-form-label col-lg-4" for="validationCustom01">Comments<span style="color:red">*</span></label>
                                                         <div class="col-lg-8">
-                                                            <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
-                                                            id="comments" name="Comments" placeholder="Enter Username" required>
+                                                            <input type="text" class="form-control" pattern="[a-zA-Z0-9\s]{1,}" 
+                                                            id="comments" name="Comments" placeholder="Enter Comment" required>
                                                         </div>
                                                     </div>
                                                 

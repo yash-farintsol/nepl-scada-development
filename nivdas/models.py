@@ -167,6 +167,7 @@ class Equipment(models.Model):
     DepartmentName = models.CharField(max_length=50,default="Department")
     Protocol = models.CharField(max_length=50,default="PROTOCOL")
     Comments = models.CharField(max_length=200)
+    EquipmentActivationStation = models.CharField(max_length=200,default="Inactive")
 
 class MailTemplate(models.Model):
     TemplateName = models.CharField(max_length=200)

@@ -10,6 +10,7 @@ import ast
 from django.http import JsonResponse
 from .PdfProcess import html_to_pdf
 from django.views.generic import View
+from .pid_modbus import *
 
 def LoginPage(request):
     return render(request, "nivdas/login.html")
@@ -45,9 +46,20 @@ def DatabaseSettingPage(request):
 def Login(request):
     print("HELLO")
     if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-
+        
+        if 'username' in request.POST:
+            username = request.POST['username']
+        else:
+            message.succes(request, "Username field is required")
+            return redirect("loginpage")
+        
+        if 'password' in request.POST:
+            password = request.POST['password']
+        else:
+            message.succes(request, "Password field is required")
+            return redirect("loginpage")
+        
+        
         usr = User.objects.filter(Username=username)
 
         if len(usr) > 0:
@@ -204,11 +216,6 @@ def UpdateUserData(request):
         getusr.save()
         print("DATA_UPDATED")
         return redirect("user-management")
-
-
-
-
-
 
 def StoreDatabaseSetting(request):
     if request.method == "POST":
@@ -741,7 +748,8 @@ def EquipmentParameter(request):
 
 def EquipmentActivation(request):
     if 'username' in request.session:
-        return render(request, "nivdas/eqp_activ.html")
+        AllEquip = Equipment.objects.all()
+        return render(request, "nivdas/eqp_activ.html",{'eqp':AllEquip})
     else:
         return redirect("loginpage")
 
@@ -1047,3 +1055,11 @@ def samp(request):
 def GeneratePdf(request):
     pdf = html_to_pdf('nivdas/samp.html')
     return HttpResponse(pdf, content_type='application/pdf')
+
+def GetData(request):
+    output_status()
+    print("")
+    temp_set()
+    print("")
+    temp_act_values()
+    return redirect("indexpage")
