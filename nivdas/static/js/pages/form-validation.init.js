@@ -14,6 +14,37 @@
                     if ($(".invalid-feedback:visible").length == 0 && !$('#modal').hasClass('show')) {
                         $('#modal').modal('show') && (e.preventDefault(), e.stopPropagation());
                     }
+                    else if ($(".invalid-feedback:visible").length == 0 && $(".valid-feedback:visible").length > 0 && $('#modal').hasClass('show')) {
+                        e.preventDefault(), e.stopPropagation()
+                        // $("#submit-form").on('click', function() {
+                            if ($(".invalid-feedback:visible").length == 0 && $(".valid-feedback:visible").length > 0) {
+                                $.ajax ({
+                                    method: "POST",
+                                    url: `/verify-admin/`,
+
+                                    data: {
+                                        csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+                                        user: document.getElementById('v-username').value,
+                                        pass: document.getElementById('v-password').value,
+                                    },
+                                    success: function(response) {
+                                        // r = response.data;
+                                        // console.log(r);
+                                        if (response.data.valid == "YES") {
+                                            $("#form1").trigger('submit', [true]);
+                                        }
+                                        else {
+                                            e.preventDefault(), e.stopPropagation()
+                                            $('#alert_placeholder').html('<div class="alert alert-danger alert-dismissible fade show" role="alert">Invalid Admin Credentials!<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>')
+                                        }
+                                    }
+                                })
+                            }
+                        // })
+                    }
+                    else {
+                        e.preventDefault(), e.stopPropagation()
+                    }
                 }, !1) 
             })
         })

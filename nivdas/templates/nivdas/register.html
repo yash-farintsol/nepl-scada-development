@@ -234,16 +234,16 @@
                                                         <div class="form-group row mb-4">
                                                             <label class="col-form-label col-lg-4" for="validationCustom01">Username<span style="color:red">*</span></label>
                                                             <div class="col-lg-8">
-                                                                <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
-                                                                id="v-edit-username" name="V-username" placeholder="Enter Username" required>
+                                                                <input type="text" class="form-control" name="V-username" 
+                                                                id="v-edit-username" placeholder="Enter Username" required>
                                                             </div>
                                                         </div>
 
                                                         <div class="form-group row mb-4">
                                                             <label class="col-form-label col-lg-4">Password<span style="color:red">*</span></label>
                                                             <div class="col-lg-8">
-                                                                <input type="password" class="form-control" pattern="[a-zA-Z0-9!@#$%&*]{1,}" 
-                                                                id="v-edit-password" name="V-password" placeholder="Enter Password" required>
+                                                                <input type="password" class="form-control" name="V-password"
+                                                                id="v-edit-password" placeholder="Enter Password" required>
                                                             </div>
                                                         </div>
 
@@ -251,7 +251,7 @@
                                                             <label class="col-form-label col-lg-4" for="validationCustom01">Comments<span style="color:red">*</span></label>
                                                             <div class="col-lg-8">
                                                                 <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
-                                                                id="comments" name="Comments" placeholder="Enter Username" required>
+                                                                id="comments" name="Comments" placeholder="Enter Comments" required>
                                                                 <div class="valid-feedback"></div>
                                                                 <div class="invalid-feedback"></div>
                                                             </div>
@@ -787,13 +787,13 @@
                     Array.prototype.filter.call(e, function (t) 
                     { 
                         t.addEventListener("submit", function (e) 
-                        { 
+                        {
                             !1 === t.checkValidity() && (e.preventDefault(), e.stopPropagation()), t.classList.add("was-validated")
-                            if ($(".invalid-feedback:visible").length == 0 && !$('#modal').hasClass('show')) {
-                                $('#modal').modal('show') && (e.preventDefault(), e.stopPropagation());
+                            if ($(".invalid-feedback:visible").length == 0 && !$('#modal-edit').hasClass('show')) {
+                                $('#modal-edit').modal('show') && (e.preventDefault(), e.stopPropagation());
                                 $('#edit').modal('hide');
                             }
-                            else if ($(".invalid-feedback:visible").length == 0 && $(".valid-feedback:visible").length > 0 && $('#modal').hasClass('show')) {
+                            else if ($(".invalid-feedback:visible").length == 0 && $(".valid-feedback:visible").length > 0 && $('#modal-edit').hasClass('show')) {
                                 e.preventDefault(), e.stopPropagation()
                                 // $("#submit-form").on('click', function() {
                                     if ($(".invalid-feedback:visible").length == 0 && $(".valid-feedback:visible").length > 0) {
@@ -802,9 +802,9 @@
                                             url: `/verify-admin/`,
 
                                             data: {
-                                                csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[1].value,
-                                                user: document.getElementById('v-username').value,
-                                                pass: document.getElementById('v-password').value,
+                                                csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+                                                user: document.getElementById('v-edit-username').value,
+                                                pass: document.getElementById('v-edit-password').value,
                                             },
                                             success: function(response) {
                                                 // r = response.data;
