@@ -1041,14 +1041,24 @@ def StoreTemplate(request):
         return redirect("indexpage")
 
 def samp(request):
-    return render(request, 'nivdas/samp.html')
+    return render(request, 'nivdas/index.html')
 
 
 def GeneratePdf(request):
-<<<<<<< HEAD
-    pdf = html_to_pdf('nivdas/audit-user.html')
-    return HttpResponse(pdf, content_type='application/pdf')
-=======
     pdf = html_to_pdf('nivdas/samp.html')
     return HttpResponse(pdf, content_type='application/pdf')
->>>>>>> 2de2daeb500189b76b73668e5bb98d0b7c99b116
+
+def VerifyUser(request):
+    if request.is_ajax():
+        print(request.POST)
+        user = request.POST['user']
+        password = request.POST['pass']
+        valid_user = User.objects.filter(Username = user, Password = password)
+        if len(valid_user) > 0:
+            data = {'valid': "YES"}
+            print('------> Yes')
+        else:
+            data = {'valid': "NO"}
+            print('------> No')
+        return JsonResponse({'data': data})
+
