@@ -64,4 +64,5 @@ urlpatterns = [
     path('pdf/', views.GeneratePdf,name="pdf"),
     path('samp/',views.samp,name="samp"),
     path("verify-admin/", views.VerifyUser, name="verify-admin"),
+    path('equipment-update-data/<str:pk>/', views.EquipUpdateData, name="equipment-update-data"),
 ]

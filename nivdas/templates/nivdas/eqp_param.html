@@ -98,7 +98,7 @@
                                                 <div class="form-group mb-3">
                                                     <label for="validationCustom02" class="form-label">Set Value</label>
                                                     <input type="text" class="form-control" id="value" name="Value"
-                                                        placeholder="0" pattern="[0-9]{1,}" required>
+                                                        placeholder="0" pattern="[0-9]{1,}" required disabled>
                                                     <div class="valid-feedback">
                                                         Looks Good!
                                                     </div>
@@ -110,7 +110,7 @@
                                                 <div class="form-group mb-3">
                                                     <label for="validationCustom03" class="form-label">Lower Limit</label>
                                                     <input type="text" class="form-control" pattern="[0-9]{1,}" id="low-limit" name="Low-limit"
-                                                        placeholder="0" required>
+                                                        placeholder="0" required disabled>
                                                     <div class="valid-feedback">
                                                         Looks Good!
                                                     </div>
@@ -122,7 +122,7 @@
                                                 <div class="form-group mb-3">
                                                     <label for="validationCustom04" class="form-label">Upper Limit</label>
                                                     <input type="text" class="form-control" pattern="[0-9]{1,}" id="up-limit" name="Up-limit"
-                                                        placeholder="0" required>
+                                                        placeholder="0" required disabled>
                                                     <div class="valid-feedback">
                                                         Looks Good!
                                                     </div>
@@ -134,7 +134,7 @@
                                                 <div class="form-group mb-3">
                                                     <label for="validationCustom05" class="form-label">Total Sensor</label>
                                                     <input type="text" class="form-control" pattern="[0-9]{1,}" id="sensor" name="Sensor"
-                                                        placeholder="0" required>
+                                                        placeholder="0" required disabled>
                                                     <div class="valid-feedback">
                                                         Looks Good!
                                                     </div>
@@ -145,7 +145,7 @@
     
                                                 <div class="form-group mb-3">
                                                     <label for="validationCustom06" class="form-label">Cooling</label>
-                                                    <select class="form-select" id="cooling" name="Cooling" required>
+                                                    <select class="form-select" id="cooling" name="Cooling" required disabled>
                                                         <option selected disabled value="">Select</option>
                                                         <option value="">ON</option>
                                                         <option value="">OFF</option>
@@ -161,7 +161,7 @@
                                                 <br>
                                                 <button class="btn btn-primary waves-effect waves-light"
                                                     style="float: right;" type="submit" id="sync-temp"
-                                                    name="Sync-temp">Sync Temp
+                                                    name="Sync-temp" disabled>Sync Temp
                                                 </button>
                                                 <br><br>
                                             </div>
@@ -450,6 +450,12 @@
                             document.getElementById("uv-intensity").disabled = true
                             document.getElementById("uv").disabled = true
                             document.getElementById("sync-lux-uv").disabled = true
+                            document.getElementById("value").disabled = false
+                            document.getElementById("low-limit").disabled = false
+                            document.getElementById("up-limit").disabled = false
+                            document.getElementById("sensor").disabled = false
+                            document.getElementById("cooling").disabled = false
+                            document.getElementById("sync-temp").disabled = false
                             document.getElementById("value1").disabled = false
                             document.getElementById("low-limit1").disabled = false
                             document.getElementById("up-limit1").disabled = false
@@ -463,6 +469,12 @@
                             document.getElementById("uv-intensity").disabled = false
                             document.getElementById("uv").disabled = false
                             document.getElementById("sync-lux-uv").disabled = false
+                            document.getElementById("value").disabled = false
+                            document.getElementById("low-limit").disabled = false
+                            document.getElementById("up-limit").disabled = false
+                            document.getElementById("sensor").disabled = false
+                            document.getElementById("cooling").disabled = false
+                            document.getElementById("sync-temp").disabled = false
                             document.getElementById("value1").disabled = false
                             document.getElementById("low-limit1").disabled = false
                             document.getElementById("up-limit1").disabled = false
@@ -476,6 +488,12 @@
                             document.getElementById("uv-intensity").disabled = true
                             document.getElementById("uv").disabled = true
                             document.getElementById("sync-lux-uv").disabled = true
+                            document.getElementById("value").disabled = false
+                            document.getElementById("low-limit").disabled = false
+                            document.getElementById("up-limit").disabled = false
+                            document.getElementById("sensor").disabled = false
+                            document.getElementById("cooling").disabled = false
+                            document.getElementById("sync-temp").disabled = false
                             document.getElementById("value1").disabled = true
                             document.getElementById("low-limit1").disabled = true
                             document.getElementById("up-limit1").disabled = true
