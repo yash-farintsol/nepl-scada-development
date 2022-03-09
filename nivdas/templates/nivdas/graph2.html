@@ -227,74 +227,85 @@
         
         </script>
 
-<script>
-    function getChartColorsArray(e){
-        e=$(e).attr("data-colors");
-        return(e=JSON.parse(e)).map(function(e){
-            e=e.replace(" ","");
-            if(-1==e.indexOf("--"))return e;
-            e=getComputedStyle(document.documentElement).getPropertyValue(e);
-            return e||void 0
-        })
-    }
-    var mixlinebarColors=getChartColorsArray("#mix-line-bar"),
-    dom=document.getElementById("mix-line-bar"),
-    myChart=echarts.init(dom);
-    option=null,(app={}).title="Data view",
-    option={
-        grid:{zlevel:0,x:80,x2:50,y:30,y2:30,borderWidth:0,backgroundColor:"rgba(0,0,0,0)",borderColor:"rgba(0,0,0,0)"},
-        tooltip:{trigger:"axis",axisPointer:{type:"cross",crossStyle:{color:"#999"}}},
-        toolbox:{
-            orient:"center",
-            left:0,
-            top:20,
-            feature:{
-                // dataView:{readOnly:!1,title:"Data View"},
-                magicType:{type:["line","bar"],title:{line:"For line chart",bar:"For bar chart"}},
-                restore:{title:"restore"},
-                saveAsImage:{title:"Download Image"}
+        <script>
+            function getChartColorsArray(e){
+                e=$(e).attr("data-colors");
+                return(e=JSON.parse(e)).map(function(e){
+                    e=e.replace(" ","");
+                    if(-1==e.indexOf("--"))return e;
+                    e=getComputedStyle(document.documentElement).getPropertyValue(e);
+                    return e||void 0
+                })
             }
-        },
-        color:mixlinebarColors,
-        legend:{data:["Device 1","Device 2","Device 3"],
-        textStyle:{color:"#858d98"}},
-        xAxis:[{
-            type:"category",
-            data:["Sun","Mon","Tues","Wed","Thurs","Fri","Sat"],
-            axisPointer:{type:"shadow"},
-            axisLine:{lineStyle:{color:"#858d98"}}
-        }],
-        yAxis:[
-            {
-                type:"value",
-                name:"",
-                min:0,
-                max:100,
-                interval:25,
-                axisLine:{lineStyle:{color:"#858d98"}},
-                splitLine:{lineStyle:{color:"rgba(133, 141, 152, 0.1)"}},
-                axisLabel:{formatter:"{value}"}
-            }
-            ,
-            {
-                type:"",
-                name:"",
-                min:0,
-                max:100,
-                interval:25,
-                axisLine:{lineStyle:{color:"#858d98"}},
-                splitLine:{lineStyle:{color:"rgba(133, 141, 152, 0.1)"}},
-                axisLabel:{formatter:""}
-            }
-        ],
-        series:[
-            {name:"Device 1",type:"bar",data:[32,29,27,45,30,21,48]},
-            {name:"Device 2",type:"line",data:[88,63,58,61,53,57,77]},
-            {name:"Device 3",type:"bar",yAxisIndex:1,data:[24,54,32,42,38,17,28]}
-        ]
-    },option&&"object"==typeof option&&myChart.setOption(option,!0);
+            var mixlinebarColors=getChartColorsArray("#mix-line-bar"),
+            dom=document.getElementById("mix-line-bar"),
+            myChart=echarts.init(dom);
+            option=null,(app={}).title="Data view",
+            option={
+                grid:{zlevel:0,x:80,x2:50,y:30,y2:30,borderWidth:0,backgroundColor:"rgba(0,0,0,0)",borderColor:"rgba(0,0,0,0)"},
+                tooltip:{trigger:"axis",axisPointer:{type:"cross",crossStyle:{color:"#999"}}},
+                toolbox:{
+                    orient:"center",
+                    left:0,
+                    top:20,
+                    feature:{
+                        // dataView:{readOnly:!1,title:"Data View"},
+                        magicType:{type:["line","bar"],title:{line:"For line chart",bar:"For bar chart"}},
+                        restore:{title:"restore"},
+                        saveAsImage:{title:"Download Image"}
+                    }
+                },
+                color:mixlinebarColors,
+                legend:{data:["Device 1","Device 2","Device 3"],
+                textStyle:{color:"#858d98"}},
+                xAxis:[{
+                    type:"category",
+                    data:["Sun","Mon","Tues","Wed","Thurs","Fri","Sat"],
+                    axisPointer:{type:"shadow"},
+                    axisLine:{lineStyle:{color:"#858d98"}}
+                }],
+                yAxis:[
+                    {
+                        type:"value",
+                        name:"",
+                        min:0,
+                        max:100,
+                        interval:25,
+                        axisLine:{lineStyle:{color:"#858d98"}},
+                        splitLine:{lineStyle:{color:"rgba(133, 141, 152, 0.1)"}},
+                        axisLabel:{formatter:"{value}"}
+                    }
+                    ,
+                    {
+                        type:"",
+                        name:"",
+                        min:0,
+                        max:100,
+                        interval:25,
+                        axisLine:{lineStyle:{color:"#858d98"}},
+                        splitLine:{lineStyle:{color:"rgba(133, 141, 152, 0.1)"}},
+                        axisLabel:{formatter:""}
+                    }
+                ],
+                series:[
+                    {name:"Device 1",type:"bar",data:[32,29,27,45,30,21,48]},
+                    {name:"Device 2",type:"line",data:[88,63,58,61,53,57,77]},
+                    {name:"Device 3",type:"bar",yAxisIndex:1,data:[24,54,32,42,38,17,28]}
+                ]
+            },option&&"object"==typeof option&&myChart.setOption(option,!0);
 
-</script>
+        </script>
+
+        <script>
+            $('#vertical-menu-btn').on('click', function() {
+                if (document.getElementsByTagName("BODY")[0].getAttribute('data-sidebar-size') == 'sm') {
+                    document.getElementById('menu-div').style.width = '68px'
+                }
+                else {
+                    document.getElementById('menu-div').style.width = '88px'
+                }
+            })
+        </script>
 
 
     </body>
