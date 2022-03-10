@@ -562,6 +562,17 @@
             }
         </script>
 
+        <script>
+            $('#vertical-menu-btn').on('click', function() {
+                if (document.getElementsByTagName("BODY")[0].getAttribute('data-sidebar-size') == 'sm') {
+                    document.getElementById('menu-div').style.width = '68px'
+                }
+                else {
+                    document.getElementById('menu-div').style.width = '88px'
+                }
+            })
+        </script>
+
 
     </body>
 </html>

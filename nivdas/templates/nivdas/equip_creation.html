@@ -76,16 +76,18 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <form class="needs-validation" action="{% url 'equipment' %}" novalidate method="POST" id="new-form">
+                                        <form class="needs-validation" action="{% url 'equipment' %}" novalidate method="POST" id="form1">
                                             {% csrf_token %}
+                                            <input type="hidden" name="id" id="uid">
                                             <div class="row">
                                                 <div class="col-xl-6 col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label>Equipment Name</label>
-                                                        <input class="form-control" type="text" list="equipment_name" name = "eqp_name" value="Select">
+                                                        <input class="form-control" type="text" list="equipment_name" id="equip_name" name = "eqp_name" value="Select">
                                                         <datalist id="equipment_name" class="form-datalist-lg mb-5" aria-label=".form-datalist-lg example">
-                                                            <option>dfthedth</option>
-                                                            <option>dfthbd</option>
+                                                            {% for i in equip %}
+                                                                <option>{{i.EquipmentName}}</option>
+                                                            {% endfor %}
                                                         </datalist>
                                                         <div class="valid-feedback">
                                                             Looks good!
@@ -98,7 +100,7 @@
                                                 <div class="col-xl-6 col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label>Type of Equipment</label>
-                                                        <input class="form-control" type="text" name = "eqp_type" placeholder="Enter Type of Equipment">
+                                                        <input class="form-control" type="text" id="equip_type" name="eqp_type" placeholder="Enter Type of Equipment">
                                                         <div class="valid-feedback">
                                                             Looks good!
                                                         </div>
@@ -113,7 +115,7 @@
                                                 <div class="col-xl-6 col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label>No. of Parameters</label>
-                                                        <select class="form-select" name="param">
+                                                        <select class="form-select" id="Param" name="param">
                                                             <option selected disabled value="">Select</option>
                                                             <option>1</option>
                                                             <option>2</option>
@@ -129,7 +131,7 @@
                                                 <div class="col-xl-6 col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label>No. of Sensors</label>
-                                                        <select class="form-select" name="sensor">
+                                                        <select class="form-select" id="sensor" name="sensor">
                                                             <option selected disabled value="">Select</option>
                                                             <option>1</option>
                                                             <option>2</option>
@@ -156,7 +158,7 @@
                                                 <div class="col-xl-6 col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label>Data Log Intervals</label>
-                                                        <input class="form-control" type="text" name="log_inv" pattern="[6-9]|\d{2,}|\d{3,}" 
+                                                        <input class="form-control" type="text" name="log_inv" id="interval" pattern="[6-9]|\d{2,}|\d{3,}" 
                                                             placeholder="Enter Data Log Intervals" required>
                                                         <div class="valid-feedback">
                                                             Looks good!
@@ -234,11 +236,45 @@
                                                 <div class="col-xl-4 col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label>Machine Code</label>
-                                                        <input class="form-control" type="text" name = "mach_code" placeholder="Enter Machine Code">
+                                                        <input class="form-control" type="text" id="machine_code" name="mach_code" placeholder="Enter Machine Code">
                                                         <div class="valid-feedback">
                                                             Looks good!
                                                         </div>
                                                         <div class="invalid-feedback">
+                                                            Looks bad!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-xl-6 col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label>Department</label>
+                                                        <input class="form-control" type="text" list="department_name" id="department" name="dep_name" value="Select">
+                                                        <datalist id="department_name" class="form-datalist-lg mb-5" aria-label=".form-datalist-lg example">
+                                                            
+                                                        </datalist>
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                        <div class="invalid-feedback">
+                                                            Looks bad!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label>Protocol</label>
+                                                        <select class="form-select" name="protocol" id="Protocols">
+                                                            <option selected disabled value="">-- Select Option --</option>
+                                                            <option>TCP/IP</option>
+                                                            <option>FTP</option>
+                                                        </select>
+                                                        <div id="noerror" class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                        <div id="error" class="invalid-feedback">
                                                             Looks bad!
                                                         </div>
                                                     </div>
@@ -267,45 +303,11 @@
                                                 <div class="col-xl-6 col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label>Comments</label>
-                                                        <textarea class="form-control" name="comment" rows="3" placeholder="Enter Comments"></textarea>
+                                                        <textarea class="form-control" name="comment" id="Comments" rows="3" placeholder="Enter Comments"></textarea>
                                                         <div class="valid-feedback">
                                                             Looks good!
                                                         </div>
                                                         <div class="invalid-feedback">
-                                                            Looks bad!
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xl-6 col-md-6">
-                                                    <div class="form-group mb-3">
-                                                        <label>Department</label>
-                                                        <input class="form-control" type="text" list="department_name" name="dep_name" value="Select">
-                                                        <datalist id="department_name" class="form-datalist-lg mb-5" aria-label=".form-datalist-lg example">
-                                                            <option>dfthedth</option>
-                                                            <option>dfthbd</option>
-                                                        </datalist>
-                                                        <div class="valid-feedback">
-                                                            Looks good!
-                                                        </div>
-                                                        <div class="invalid-feedback">
-                                                            Looks bad!
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6 col-md-6">
-                                                    <div class="form-group mb-3">
-                                                        <label>Protocol</label>
-                                                        <select class="form-select" name="protocol">
-                                                            <option selected disabled value="">-- Select Option --</option>
-                                                            <option>TCP/IP</option>
-                                                            <option>FTP</option>
-                                                        </select>
-                                                        <div id="noerror" class="valid-feedback">
-                                                            Looks good!
-                                                        </div>
-                                                        <div id="error" class="invalid-feedback">
                                                             Looks bad!
                                                         </div>
                                                     </div>
@@ -319,44 +321,55 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                        </form>
                                         
-                                            <!-- Modal starts -->
-                                            <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
-                                                id="modal" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">Verify Admin</h5>
-                                                            <button type="button" class="btn-close"
-                                                                style="padding: 0rem 2rem; width: 2px"
-                                                                data-bs-dismiss="modal" aria-label="Close">
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
+                                        <!-- Modal starts -->
+                                        <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
+                                            id="modal" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Verify Admin</h5>
+                                                        <button type="button" class="btn-close"
+                                                            style="padding: 0rem 2rem; width: 2px"
+                                                            data-bs-dismiss="modal" aria-label="Close">
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div id="alert_placeholder"></div>
+                                                        <form class="needs-validation" novalidate>
                                                             <div data-repeater-list="outer-group" class="outer">
                                                                 <div data-repeater-item class="outer">
-                
+            
                                                                     <div class="form-group row mb-4">
                                                                         <label class="col-form-label col-lg-4" for="validationCustom01">Username<span style="color:red">*</span></label>
                                                                         <div class="col-lg-8">
                                                                             <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
-                                                                            id="username" name="Username" placeholder="Enter Username" required>
+                                                                            id="v-username" name="V-username" placeholder="Enter Username" required>
                                                                         </div>
                                                                     </div>
-                
+            
                                                                     <div class="form-group row mb-4">
                                                                         <label class="col-form-label col-lg-4">Password<span style="color:red">*</span></label>
                                                                         <div class="col-lg-8">
-                                                                            <input type="password" class="form-control" pattern="[a-zA-Z0-9!@#$%&*]{1,}" 
-                                                                            id="password" name="Password" placeholder="Enter Password" required>
+                                                                            <input type="password" class="form-control" name="V-password" 
+                                                                            id="v-password" placeholder="Enter Password" required>
                                                                         </div>
                                                                     </div>
-                
+            
                                                                     <div class="form-group row mb-4">
                                                                         <label class="col-form-label col-lg-4" for="validationCustom01">Comments<span style="color:red">*</span></label>
                                                                         <div class="col-lg-8">
+<<<<<<< HEAD
                                                                             <input type="text" class="form-control" pattern="[a-zA-Z0-9\s]{1,}" 
                                                                             id="comments" name="Comments" placeholder="Enter Comment" required>
+=======
+                                                                            <input type="text" class="form-control" name="Comments" 
+                                                                            id="comments" placeholder="Enter Comments" required>
+                                                                            <div class="valid-feedback"></div>
+                                                                            <div class="invalid-feedback"></div>
+>>>>>>> 4dffbe7708ca05de9cfa11623636027a88e66851
                                                                         </div>
                                                                     </div>
                                                                 
@@ -365,16 +378,16 @@
                                                             <div class="row justify-content-end">
                                                                 <div class="col-lg-10">
                                                                     <button type="submit" style="float: right;"
-                                                                        class="btn btn-primary" id="submit-btn">Submit
+                                                                        class="btn btn-primary" id="submit-form">Submit
                                                                     </button>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div><!-- /.modal-content -->
-                                                </div><!-- /.modal-dialog -->
-                                            </div><!-- /.modal -->
-                                            
-                                        </form>
+                                                        </form>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
+            
                                     </div>
                                 </div>
                             </div>
@@ -422,8 +435,100 @@
         <!-- clear form -->
         <script>
             function clearForm() {
-                document.getElementById("new-form").reset();
+                document.getElementById("form1").reset();
             }
+        </script>
+
+        <script>
+            $("#equip_name").on("change",function(){
+                console.log("change")
+                var aid = this.value
+                console.log("update",aid)
+
+                $.ajax
+                ({
+                    method : "GET",
+                    url : `/equipment-update-data/${aid}/`,
+
+                    success: function(response)
+                    {
+                        r = response.data;
+                        console.log(r);
+                        document.getElementById("uid").value = r.id;
+                        document.getElementById("equip_name").value = r.equip_name;
+                        document.getElementById("equip_type").value = r.equip_type;
+                        document.getElementById("Param").value = r.parameter;
+                        document.getElementById("sensor").value = r.sensor;
+                        document.getElementById("interval").value = r.data_log;
+                        document.getElementById("machine_code").value = r.machine_code;
+                        document.getElementById("department").value = r.department;
+                        document.getElementById("Protocols").value = r.protocol;
+                        document.getElementById("Comments").value = r.comment;
+                        if (r.photo_stability == true) {
+                            document.getElementById("photoStability").checked = true
+                        }
+                        else {
+                            document.getElementById("photoStability").checked = false
+                        }
+                        if (r.dual == true) {
+                            document.getElementById("dual").checked = true
+                        }
+                        else {
+                            document.getElementById("dual").checked = false
+                        }
+                        var address = r.ip_address;
+                        address = address.split(/[.]/);
+                        document.getElementById("digit1-input").value = address[0]
+                        document.getElementById("digit2-input").value = address[1]
+                        document.getElementById("digit3-input").value = address[2]
+                        document.getElementById("digit4-input").value = address[3]
+                    }
+                });
+            });
+        </script>
+
+        <script>
+            $('#dual').on('change', function() {
+                if (document.getElementById("dual").checked == true) {
+                    document.getElementById("photoStability").disabled = true
+                    document.getElementById("photoStability").checked = false
+                }
+                else {
+                    document.getElementById("photoStability").disabled = false
+                }
+            })
+            
+            $('#photoStability').on('change', function() {
+                if (document.getElementById("photoStability").checked == true) {
+                    document.getElementById("dual").disabled = true
+                    document.getElementById("dual").checked = false
+                }
+                else {
+                    document.getElementById("dual").disabled = false
+                }
+            })
+
+            $('#form1').on('click', function() {
+                if (document.getElementById("uid").value == "") {
+                    document.getElementById("Param").disabled = false;
+                    document.getElementById("sensor").disabled = false;
+                }
+                else {
+                    document.getElementById("Param").disabled = true;
+                    document.getElementById("sensor").disabled = true;
+                }
+            })
+        </script>
+
+        <script>
+            $('#vertical-menu-btn').on('click', function() {
+                if (document.getElementsByTagName("BODY")[0].getAttribute('data-sidebar-size') == 'sm') {
+                    document.getElementById('menu-div').style.width = '68px'
+                }
+                else {
+                    document.getElementById('menu-div').style.width = '88px'
+                }
+            })
         </script>
         
 

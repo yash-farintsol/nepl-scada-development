@@ -735,7 +735,8 @@ def GeneralSetting(request):
 
 def EquipmentCreation(request):
     if 'username' in request.session:
-        return render(request, "nivdas/equip_creation.html")
+        equipment = Equipment.objects.all()
+        return render(request, "nivdas/equip_creation.html", {'equip': equipment})
     else:
         return redirect("loginpage")
 
@@ -970,11 +971,18 @@ def StatusReport(request):
 
 def CreateEquipment(request):
     if request.method == "POST":
+        if request.POST['id']=='':
+        # if len(getEquip) > 0:
+            Equip = Equipment.objects.create()
+        else:
+            # getEquip = Equipment.objects.get(id=request.POST['id'])
+            Equip = Equipment.objects.get(id=request.POST['id'])
         EquipmentName = request.POST['eqp_name']
         EquipmentType = request.POST['eqp_type']
-        NumberOfParams = request.POST['param']
-        NumberOfSensor = request.POST['sensor']
-        DataLogIntervals = request.POST['log_inv']
+        # NumberOfParams = request.POST['param']
+        # NumberOfSensor = request.POST['sensor']
+        DataLogIntervals = int(request.POST['log_inv'])
+        print('-------->', DataLogIntervals)
         IP1 = request.POST['t1']
         IP2 = request.POST['t2']
         IP3 = request.POST['t3']
@@ -985,26 +993,28 @@ def CreateEquipment(request):
         Protocol = request.POST['protocol']
         Comments = request.POST['comment']
 
-        Equip = Equipment.objects.create(
-            EquipmentName = EquipmentName,
-            EquipmentType = EquipmentType,
-            NumberOfParams = NumberOfParams,
-            NumberOfSensor = NumberOfSensor,
-            DataLogIntervals = DataLogIntervals,
-            IPAddress = IPaddress,
-            MachineCode = MachineCode,
-            DepartmentName = DepartmentName,
-            Protocol = Protocol,
-            Comments = Comments
-        )
+        Equip.EquipmentName = EquipmentName,
+        Equip.EquipmentType = EquipmentType,
+        # Equip.NumberOfParams = NumberOfParams,
+        # Equip.NumberOfSensor = NumberOfSensor,
+        Equip.IPAddress = IPaddress,
+        Equip.MachineCode = MachineCode,
+        Equip.DepartmentName = DepartmentName,
+        Equip.Protocol = Protocol,
+        Equip.Comments = Comments,
+        Equip.DataLogIntervals = DataLogIntervals
         list_checkbox = request.POST.getlist('Dual')
         if "Photo-stability" in list_checkbox:
             Equip.IsPhotoStability = True
+        else:
+            Equip.IsPhotoStability = False
         if "Dual" in list_checkbox:
             Equip.IsDual = True
+        else:
+            Equip.IsDual = False
         Equip.save()
 
-        return redirect("indexpage")
+        return redirect("equipment-creation")
 
 
 def EquipParamUpdateData(request, pk):
@@ -1050,13 +1060,14 @@ def StoreTemplate(request):
         return redirect("indexpage")
 
 def samp(request):
-    return render(request, 'nivdas/samp.html')
+    return render(request, 'nivdas/index.html')
 
 
 def GeneratePdf(request):
     pdf = html_to_pdf('nivdas/samp.html')
     return HttpResponse(pdf, content_type='application/pdf')
 
+<<<<<<< HEAD
 def GetData(request):
     output_status()
     print("")
@@ -1064,3 +1075,64 @@ def GetData(request):
     print("")
     temp_act_values()
     return redirect("indexpage")
+=======
+def VerifyUser(request):
+    if request.is_ajax():
+        print(request.POST)
+        user = request.POST['user']
+        password = request.POST['pass']
+        valid_user = User.objects.filter(Username = user, Password = password)
+        if len(valid_user) > 0:
+            data = {'valid': "YES"}
+            print('------> Yes')
+        else:
+            data = {'valid': "NO"}
+            print('------> No')
+        return JsonResponse({'data': data})
+
+
+def EquipUpdateData(request, pk):
+    print(pk)
+    equip = Equipment.objects.get(EquipmentName=pk)
+    print(equip)
+    data = {
+        'id' : equip.id,
+        'equip_name' : equip.EquipmentName,
+        'equip_type': equip.EquipmentType,
+        'parameter': equip.NumberOfParams,
+        'sensor': equip.NumberOfSensor,
+        'data_log': equip.DataLogIntervals,
+        'ip_address': equip.IPAddress,
+        'machine_code': equip.MachineCode,
+        'photo_stability' : equip.IsPhotoStability,
+        'dual': equip.IsDual,
+        'department': equip.DepartmentName,
+        'protocol': equip.Protocol,
+        'comment': equip.Comments,
+    }
+    return JsonResponse({'data': data})
+
+# def UpdateEquipData(request):
+#     if request.method == "POST":
+#         getid = request.POST['id']
+#         getequip = Equipment.objects.get(id=getid)
+#         getequip.EquipmentName = request.POST['eqp_name']
+#         getequip.EquipmentType = request.POST['eqp_type']
+#         # getequip.NumberOfParams = request.POST['param']
+#         # getequip.NumberOfSensor = request.POST['sensor']
+#         getequip.DataLogIntervals = request.POST['log_inv']
+#         IP1 = request.POST['t1']
+#         IP2 = request.POST['t2']
+#         IP3 = request.POST['t3']
+#         IP4 = request.POST['t4']
+#         IPaddress = f"{IP1}.{IP2}.{IP3}.{IP4}"
+#         getequip.MachineCode = request.POST['usr']
+#         getequip.IsPhotoStability = request.POST['dept_name']
+#         getequip.IsDual = request.POST['dept_name']
+#         getequip.DepartmentName = request.POST['status']
+#         getequip.Protocol = request.POST['pswd']
+#         getequip.Comments = request.POST['pswd']
+#         getequip.save()
+#         print("DATA_UPDATED")
+#         return redirect("equipment")
+>>>>>>> 4dffbe7708ca05de9cfa11623636027a88e66851
