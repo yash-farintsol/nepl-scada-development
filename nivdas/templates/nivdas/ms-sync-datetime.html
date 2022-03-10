@@ -75,7 +75,9 @@
                                                 </label>
                                                 <select class="form-control" id="equip" name="Equip" required>
                                                     <option selected disabled value="">-- Select Option --</option>
-                                                    <option>Active</option>
+                                                    {% for i in eqp %}
+                                                        <option>{{i.EquipmentName}}</option>
+                                                    {% endfor %}
                                                 </select>
                                                 <div class="valid-feedback">
                                                     Looks Good!
