@@ -200,7 +200,7 @@ def UpdateUserData(request):
         getusr.Department = request.POST['dept_name']
         getusr.status = request.POST['status']
         getusr.Password = request.POST['pswd']
-        getusr.PasswordChangeDuration = request.POST['passwdChangeDuration']
+        getusr.PasswdChangeDuration = request.POST['passwdChangeDuration']
         getusr.save()
         print("DATA_UPDATED")
         return redirect("user-management")
@@ -962,18 +962,15 @@ def StatusReport(request):
 
 def CreateEquipment(request):
     if request.method == "POST":
-        if request.POST['id']=='':
-        # if len(getEquip) > 0:
-            Equip = Equipment.objects.create()
+        if request.POST['id'] == '':
+            Equip = Equipment.objects.create(NumberOfParams = request.POST['param'], NumberOfSensor = request.POST['sensor'])
+            print('if')
         else:
-            # getEquip = Equipment.objects.get(id=request.POST['id'])
             Equip = Equipment.objects.get(id=request.POST['id'])
+            print('else')
         EquipmentName = request.POST['eqp_name']
         EquipmentType = request.POST['eqp_type']
-        # NumberOfParams = request.POST['param']
-        # NumberOfSensor = request.POST['sensor']
         DataLogIntervals = int(request.POST['log_inv'])
-        print('-------->', DataLogIntervals)
         IP1 = request.POST['t1']
         IP2 = request.POST['t2']
         IP3 = request.POST['t3']
@@ -984,15 +981,13 @@ def CreateEquipment(request):
         Protocol = request.POST['protocol']
         Comments = request.POST['comment']
 
-        Equip.EquipmentName = EquipmentName,
-        Equip.EquipmentType = EquipmentType,
-        # Equip.NumberOfParams = NumberOfParams,
-        # Equip.NumberOfSensor = NumberOfSensor,
-        Equip.IPAddress = IPaddress,
-        Equip.MachineCode = MachineCode,
-        Equip.DepartmentName = DepartmentName,
-        Equip.Protocol = Protocol,
-        Equip.Comments = Comments,
+        Equip.EquipmentName = EquipmentName
+        Equip.EquipmentType = EquipmentType
+        Equip.IPAddress = IPaddress
+        Equip.MachineCode = MachineCode
+        Equip.DepartmentName = DepartmentName
+        Equip.Protocol = Protocol
+        Equip.Comments = Comments
         Equip.DataLogIntervals = DataLogIntervals
         list_checkbox = request.POST.getlist('Dual')
         if "Photo-stability" in list_checkbox:
