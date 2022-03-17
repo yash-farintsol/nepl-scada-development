@@ -13,11 +13,14 @@
                     !1 === t.checkValidity() && (e.preventDefault(), e.stopPropagation()), t.classList.add("was-validated")
                     if ($(".invalid-feedback:visible").length == 0 && !$('#modal').hasClass('show')) {
                         $('#modal').modal('show') && (e.preventDefault(), e.stopPropagation());
+                        alert('inside if')
                     }
                     else if ($(".invalid-feedback:visible").length == 0 && $(".valid-feedback:visible").length > 0 && $('#modal').hasClass('show')) {
                         e.preventDefault(), e.stopPropagation()
                         // $("#submit-form").on('click', function() {
+                            alert('else if')
                             if ($(".invalid-feedback:visible").length == 0 && $(".valid-feedback:visible").length > 0) {
+                                alert('ajax called')
                                 $.ajax ({
                                     method: "POST",
                                     url: `/verify-admin/`,

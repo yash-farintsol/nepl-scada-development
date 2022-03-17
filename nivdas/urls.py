@@ -63,10 +63,7 @@ urlpatterns = [
     path('graph2/', views.Graph2, name="graph2"),
     path('pdf/', views.GeneratePdf,name="pdf"),
     path('samp/',views.samp,name="samp"),
-<<<<<<< HEAD
     path("get/",views.GetData,name="get"),
-=======
     path("verify-admin/", views.VerifyUser, name="verify-admin"),
     path('equipment-update-data/<str:pk>/', views.EquipUpdateData, name="equipment-update-data"),
->>>>>>> 4dffbe7708ca05de9cfa11623636027a88e66851
 ]

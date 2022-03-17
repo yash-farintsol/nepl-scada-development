@@ -973,14 +973,17 @@ def CreateEquipment(request):
     if request.method == "POST":
         if request.POST['id']=='':
         # if len(getEquip) > 0:
-            Equip = Equipment.objects.create()
+            Equip = Equipment.objects.create(
+                EquipmentName = request.POST['eqp_name'],
+                NumberOfParams = request.POST['param'],
+                NumberOfSensor = request.POST['sensor']
+            )
         else:
             # getEquip = Equipment.objects.get(id=request.POST['id'])
             Equip = Equipment.objects.get(id=request.POST['id'])
         EquipmentName = request.POST['eqp_name']
         EquipmentType = request.POST['eqp_type']
-        # NumberOfParams = request.POST['param']
-        # NumberOfSensor = request.POST['sensor']
+        
         DataLogIntervals = int(request.POST['log_inv'])
         print('-------->', DataLogIntervals)
         IP1 = request.POST['t1']
@@ -1067,7 +1070,6 @@ def GeneratePdf(request):
     pdf = html_to_pdf('nivdas/samp.html')
     return HttpResponse(pdf, content_type='application/pdf')
 
-<<<<<<< HEAD
 def GetData(request):
     output_status()
     print("")
@@ -1075,7 +1077,7 @@ def GetData(request):
     print("")
     temp_act_values()
     return redirect("indexpage")
-=======
+
 def VerifyUser(request):
     if request.is_ajax():
         print(request.POST)
@@ -1135,4 +1137,3 @@ def EquipUpdateData(request, pk):
 #         getequip.save()
 #         print("DATA_UPDATED")
 #         return redirect("equipment")
->>>>>>> 4dffbe7708ca05de9cfa11623636027a88e66851
