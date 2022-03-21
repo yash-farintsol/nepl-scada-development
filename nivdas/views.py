@@ -766,7 +766,8 @@ def MasterTemplate(request):
 
 def SyncDateTime(request):
     if 'username' in request.session:
-        return render(request, "nivdas/ms-sync-datetime.html")
+        equip = Equipment.objects.all()
+        return render(request, "nivdas/ms-sync-datetime.html", {'equipment': equip})
     else:
         return redirect("loginpage")
 

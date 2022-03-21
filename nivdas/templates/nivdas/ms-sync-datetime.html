@@ -26,7 +26,7 @@
 
     </head>
 
-    <body data-topbar="dark" onload=display_ct();>
+    <body data-topbar="dark">
 
     <!-- <body data-layout="horizontal"> -->
 
@@ -68,14 +68,16 @@
                                 <form id="new-form" class="needs-validation" novalidate>
 
                                     <div class="row">
-                                        <div class="col-xl-6 col-md-4">
+                                        <div class="col-xl-6 col-md-6">
                                             <div class="form-group mb-3">
                                                 <label for="validationCustom11" class="form-label">
                                                     Select Equipment<span style="color:red"> *</span>
                                                 </label>
                                                 <select class="form-control" id="equip" name="Equip" required>
                                                     <option selected disabled value="">-- Select Option --</option>
-                                                    <option>Active</option>
+                                                    {% for i in equipment %}
+                                                        <option value="{{i.id}}">{{i.EquipmentName}}</option>
+                                                    {% endfor %}
                                                 </select>
                                                 <div class="valid-feedback">
                                                     Looks Good!
@@ -85,13 +87,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xl-6 col-md-4">
+                                        <div class="col-xl-6 col-md-6">
                                             <div class="form-group mb-3">
                                                 <label for="validationCustom11" class="form-label">
                                                     Current Date Time<span style="color:red"> *</span>
                                                 </label>
                                                 <input type="text" class="form-control" id="current-dt" name="Current-dt"
-                                                    placeholder="Enter Current Date Time" readonly required>
+                                                    placeholder="Enter Current Date Time" readonly>
                                                 <div class="valid-feedback">
                                                     Looks Good!
                                                 </div>
@@ -101,10 +103,26 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row justify-content-end">
-                                        <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-xl-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="validationCustom11" class="form-label">
+                                                    Select Equipment<span style="color:red"> *</span>
+                                                </label>
+                                                <input type="text" class="form-control" id="plc-dt" name="Plc-dt"
+                                                    placeholder="PLC Date Time" readonly>
+                                                <div class="valid-feedback">
+                                                    Looks Good!
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Looks Bad!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="row justify-content-end"> -->
+                                        <div class="col-xl-6 col-md-6">
                                             <div style="float: right;">
-                                                <button class="btn btn-primary waves-effect waves-light" type="submit">Get Date</button> &nbsp;&nbsp;
+                                                <button class="btn btn-primary waves-effect waves-light" id="getdate" type="button">Get Date</button> &nbsp;&nbsp;
                                                 <button class="btn btn-primary waves-effect waves-light" type="submit">Synchronize</button>
                                             </div>
                                         </div>
@@ -146,7 +164,7 @@
                                                                 <label class="col-form-label col-lg-4" for="validationCustom01">Comments<span style="color:red">*</span></label>
                                                                 <div class="col-lg-8">
                                                                     <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
-                                                                    id="comments" name="Comments" placeholder="Enter Username" required>
+                                                                    id="comments" name="Comments" placeholder="Enter Comments" required>
                                                                 </div>
                                                             </div>
                                                         
@@ -225,6 +243,37 @@
                 else {
                     document.getElementById('menu-div').style.width = '88px'
                 }
+            })
+        </script>
+
+        <script>
+            $('#getdate').on('click', function() {
+                console.log('function called')
+                // var e = document.getElementsByClassName("needs-validation"); 
+                // Array.prototype.filter.call(e, function (t) {
+                //     t.addEventListener("submit", function (e) { 
+                //         if (!t.checkValidity()) {
+                //             console.log('if')
+                //             e.preventDefault(), e.stopPropagation()
+                //         }
+                //         else {
+                //             console.log('else')
+                            val = document.getElementById('equip').value
+                            console.log(val)
+                            $.ajax({
+                                method: "GET",
+                                url: `/sync-datetime-ajax/${val}/`,
+                                success: function(response)
+                                {
+                                    r = response.data;
+                                    console.log(r);
+                                    document.getElementById("plc-dt").value = r + ", " + r;
+                                }
+                            })
+                //         }
+                //         t.classList.add("was-validated")
+                //     }, !1)
+                // })
             })
         </script>
 
