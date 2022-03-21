@@ -10,7 +10,7 @@ import ast
 from django.http import JsonResponse
 from .PdfProcess import html_to_pdf
 from django.views.generic import View
-from .pid_modbus import *
+from .PlcModbus import *
 
 def LoginPage(request):
     return render(request, "nivdas/login.html")
@@ -18,7 +18,7 @@ def LoginPage(request):
 
 def IndexPage(request):
     if 'username' in request.session:
-        return render(request, "nivdas/index.html")
+        return render(request, "nivdas/dashboard-list.html")
     else:
         return redirect("loginpage")
 
@@ -1055,7 +1055,7 @@ def StoreTemplate(request):
         return redirect("indexpage")
 
 def samp(request):
-    return render(request, 'nivdas/index.html')
+    return render(request, 'nivdas/dashboard-grid.html')
 
 
 def GeneratePdf(request):
@@ -1129,3 +1129,13 @@ def EquipUpdateData(request, pk):
 #         getequip.save()
 #         print("DATA_UPDATED")
 #         return redirect("equipment")
+
+def GetPLCDateTime(request):
+    if request.method == "POST":
+        eid = request.POST['eid']
+        print(eid)
+        GetEquip = Equipment.objects.get(id=eid)
+        IP = GetEquip.IPAddress
+        lst = read_registers(IP, [400151,400153,400147])
+        print("LIST----------->",IP,lst)
+        return redirect("synchronize-date-time")

@@ -4,7 +4,7 @@ from pymodbus.client.sync import ModbusTcpClient
 
 def read_registers(ip_address, values):
     result = {}
-    client = ModbusTcpClient(ip_address)  # "192.168.1.200"
+    client = ModbusTcpClient("192.168.1.200")  # "192.168.1.200"
     connection = client.connect()
     # print("Modbus connection ", connection, '\n')
     if connection:

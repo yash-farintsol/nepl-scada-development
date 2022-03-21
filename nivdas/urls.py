@@ -66,4 +66,5 @@ urlpatterns = [
     path("get/",views.GetData,name="get"),
     path("verify-admin/", views.VerifyUser, name="verify-admin"),
     path('equipment-update-data/<str:pk>/', views.EquipUpdateData, name="equipment-update-data"),
+    path('get-plc-date-time/',views.GetPLCDateTime,name="getplcdatetime"),
 ]
