@@ -294,7 +294,7 @@
                                                         <div class="form-group row mb-4">
                                                             <label class="col-form-label col-lg-4">Username<span style="color:red"> *</span></label>
                                                             <div class="col-lg-8">
-                                                                <input class="form-control" type="text" name="username" placeholder="Enter Username" required>
+                                                                <input class="form-control" type="text" name="username" id="username1" placeholder="Enter Username" required>
                                                                 <div class="valid-feedback">
                                                                     Looks good!
                                                                 </div>
@@ -544,26 +544,6 @@
                     buttons: ["copy", "excel", "pdf", "colvis"],
                     initComplete: function () {
 
-                        // this.api().columns(0).every(function () {
-                        //     var column = this;
-                        //     var select = $(' <select class="form-select"><option value=""></option></select>')
-                        //         // .appendTo(myTable.header())
-                        //         .appendTo('#datatable-buttons thead tr #sort0')
-                        //         .on('change', function () {
-                        //             var val = $.fn.dataTable.util.escapeRegex(
-                        //                 $(this).val()
-                        //             );
-
-                        //             column
-                        //                 .search(val ? '^' + val + '$' : '', true, false)
-                        //                 .draw();
-                        //         });
-
-                        //     column.data().unique().sort().each(function (d, j) {
-                        //         select.append('<option value="' + d + '">' + d + '</option>')
-                        //     });
-                        // })
-
                         this.api().columns(1).every(function () {
                             var column = this;
                             var select = $(' <select class="form-select"><option value=""></option></select>')
@@ -603,27 +583,6 @@
                                 select.append('<option value="' + d + '">' + d + '</option>')
                             });
                         })
-
-                        // this.api().columns(3).every(function () {
-                        //     var column = this;
-                        //     var select = $(' <select class="form-select"><option value=""></option></select>')
-                        //         // .appendTo(myTable.header())
-                        //         .appendTo('#datatable-buttons thead tr #sort3')
-                        //         .on('change', function () {
-                        //             var val = $.fn.dataTable.util.escapeRegex(
-                        //                 $(this).val()
-                        //             );
-
-                        //             column
-                        //                 .search(val ? '^' + val + '$' : '', true, false)
-                        //                 .draw();
-                        //         });
-
-                        //     column.data().unique().sort().each(function (d, j) {
-                        //         select.append('<option value="' + d + '">' + d + '</option>')
-                        //     });
-                        // })
-
                     },
                 }).buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)");
                 $(".dataTables_length select").addClass("form-select form-select-sm")
@@ -645,7 +604,6 @@
         </script>
 
          <script>
-            // ,'#U_name'
             $("#username").on("change",function(){
                 console.log("change")
                 var aid = this.value
