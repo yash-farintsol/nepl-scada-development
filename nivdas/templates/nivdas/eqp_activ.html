@@ -210,8 +210,8 @@
         <!-- <script src="{% static 'js/pages/form-validation.init.js' %}"></script> -->
 
         <!-- Table Editable plugin -->
-        <!-- <script src="{% static 'libs/table-edits/build/table-edits.min.js' %}"></script>
-        <script src="{% static 'js/pages/table-editable.int.js' %}"></script> -->
+        <script src="{% static 'libs/table-edits/build/table-edits.min.js' %}"></script>
+        <script src="{% static 'js/pages/table-editable.int.js' %}"></script>
 
         <script src="{% static 'js/pages/fontawesome.init.js' %}"></script>
     
@@ -227,36 +227,36 @@
                     var e = document.getElementsByClassName("needs-validation"); 
                     Array.prototype.filter.call(e, function (t) 
                     {
-                            t.addEventListener("submit", function (e) 
-                            { 
-                                !1 === t.checkValidity() && (e.preventDefault(), e.stopPropagation()), t.classList.add("was-validated")
-                                if (t.checkValidity() == true) {
-                                    $.ajax ({
-                                        method: "POST",
-                                        url: `/verify-admin/`,
+                        t.addEventListener("submit", function (e) 
+                        {
+                            // !1 === t.checkValidity() && (e.preventDefault(), e.stopPropagation()), t.classList.add("was-validated")
+                            if (!t.checkValidity()) {
+                                e.preventDefault(), e.stopPropagation()
+                            }
+                            else {
+                                $.ajax ({
+                                    method: "POST",
+                                    url: `/verify-admin/`,
 
-                                        data: {
-                                            csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
-                                            user: document.getElementById('v-username').value,
-                                            pass: document.getElementById('v-password').value,
-                                        },
-                                        success: function(response) {
-                                            // r = response.data;
-                                            // console.log(r);
-                                            if (response.data.valid == "YES") {
-                                                $("#form").trigger('submit', [true]);
-                                            }
-                                            else {
-                                                e.preventDefault(), e.stopPropagation()
-                                                $('#alert_placeholder').html('<div class="alert alert-danger alert-dismissible fade show" role="alert">Invalid Admin Credentials!<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>')
-                                            }
+                                    data: {
+                                        csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+                                        user: document.getElementById('v-username').value,
+                                        pass: document.getElementById('v-password').value,
+                                    },
+                                    success: function(response) {
+                                        // r = response.data;
+                                        // console.log(r);
+                                        if (response.data.valid == "YES") {
+                                            $("#form").trigger('submit', [true]);
                                         }
-                                    })
-                                }
-                                else {
-
-                                }
-                            }, !1) 
+                                        else {
+                                            e.preventDefault(), e.stopPropagation()
+                                            $('#alert_placeholder').html('<div class="alert alert-danger alert-dismissible fade show" role="alert">Invalid Admin Credentials!<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>')
+                                        }
+                                    }
+                                })
+                            }
+                        }, !1) 
                     })
                 }, !1) 
             }
