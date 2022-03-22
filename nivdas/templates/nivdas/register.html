@@ -18,12 +18,6 @@
         <!-- DataTables -->
         <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet"
             type="text/css" />
-        <link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet"
-            type="text/css" />
-
-        <!-- Responsive datatable examples -->
-        <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}"
-            rel="stylesheet" type="text/css" />
 
         <!-- preloader css -->
         <link rel="stylesheet" href="{% static 'css/preloader.min.css' %}" type="text/css" />
@@ -507,30 +501,12 @@
 
         <script src="{% static 'js/app.js' %}"></script>
 
-        <!-- form validation -->
-        <!-- <script src="{% static 'js/pages/form-validation.init.js' %}"></script> -->
-
         <!-- Required datatable js -->
         <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
         <script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
 
-        <!-- Buttons examples -->
-        <script src="{% static 'libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
-        <script src="{% static 'libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
-        <script src="{% static 'libs/jszip/jszip.min.js' %}"></script>
-        <script src="{% static 'libs/pdfmake/build/pdfmake.min.js' %}"></script>
-        <script src="{% static 'libs/pdfmake/build/vfs_fonts.js' %}"></script>
-        <script src="{% static 'libs/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
-        <script src="{% static 'libs/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
-        <script src="{% static 'libs/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
+        <script src="{% static 'js/pages/mode-styling.init.js' %}"></script>
 
-        <!-- Responsive examples -->
-        <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
-        <script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
-
-        <!-- Datatable init js -->
-        <!-- <script src="{% static 'js/pages/datatables.init.js' %}"></script> -->
-        <!-- <script src="{% static 'js/pages/custom-dt.init.js' %}"></script> -->
 
         <script>
             $(document).ready(function () {
@@ -540,8 +516,8 @@
                 var table = $('#datatable-buttons').DataTable({
                     orderCellsTop: true,
                     fixedHeader: true,
-                    lengthChange: !1,
-                    buttons: ["copy", "excel", "pdf", "colvis"],
+                    lengthChange: true,
+                    scrollX: true,
                     initComplete: function () {
 
                         this.api().columns(1).every(function () {
@@ -584,7 +560,7 @@
                             });
                         })
                     },
-                }).buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)");
+                });
                 $(".dataTables_length select").addClass("form-select form-select-sm")
             });
         </script>
@@ -786,17 +762,6 @@
                     })
                 }, !1) 
             }()
-        </script>
-
-        <script>
-            $('#vertical-menu-btn').on('click', function() {
-                if (document.getElementsByTagName("BODY")[0].getAttribute('data-sidebar-size') == 'sm') {
-                    document.getElementById('menu-div').style.width = '68px'
-                }
-                else {
-                    document.getElementById('menu-div').style.width = '88px'
-                }
-            })
         </script>
 
 

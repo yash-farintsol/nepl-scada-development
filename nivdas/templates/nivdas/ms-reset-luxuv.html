@@ -146,7 +146,7 @@
                                                                 <label class="col-form-label col-lg-4" for="validationCustom01">Comments<span style="color:red">*</span></label>
                                                                 <div class="col-lg-8">
                                                                     <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
-                                                                    id="comments" name="Comments" placeholder="Enter Username" required>
+                                                                    id="comments" name="Comments" placeholder="Enter Comments" required>
                                                                 </div>
                                                             </div>
                                                         
@@ -206,6 +206,9 @@
     
         <!-- form validation -->
         <script src="{% static 'js/pages/form-validation.init.js' %}"></script>
+    
+        <script src="{% static 'js/pages/mode-styling.init.js' %}"></script>
+
 
         <script>
             window.onload = displayClock();
@@ -215,17 +218,6 @@
                 document.getElementById("current-dt").value = date + ", " + display;
                 setTimeout(displayClock, 1000); 
             }
-        </script>
-
-        <script>
-            $('#vertical-menu-btn').on('click', function() {
-                if (document.getElementsByTagName("BODY")[0].getAttribute('data-sidebar-size') == 'sm') {
-                    document.getElementById('menu-div').style.width = '68px'
-                }
-                else {
-                    document.getElementById('menu-div').style.width = '88px'
-                }
-            })
         </script>
 
 

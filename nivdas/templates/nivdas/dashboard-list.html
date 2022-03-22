@@ -87,7 +87,7 @@
                                                 <a class="nav-link active" data-bs-toggle="tooltip" title="List"><i class="bx bx-list-ul"></i></a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="{% url 'indexpage' %}" data-bs-toggle="tooltip" title="Grid"><i class="bx bx-grid-alt"></i></a>
+                                                <a class="nav-link" href="{% url 'dashboard-grid' %}" data-bs-toggle="tooltip" title="Grid"><i class="bx bx-grid-alt"></i></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -237,23 +237,8 @@
         <script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
 
         <script src="{% static 'js/app.js' %}"></script>
-
-        <script>
-            $('#vertical-menu-btn').on('click', function() {
-                if (document.getElementsByTagName("BODY")[0].getAttribute('data-sidebar-size') == 'sm') {
-                    document.getElementById('menu-div').style.width = '68px'
-                }
-                else {
-                    document.getElementById('menu-div').style.width = '88px'
-                }
-            })
-        </script>
-        
-        <script>
-            $("#datatable").DataTable({
-                lengthChange: !1
-            })
-        </script>
+    
+        <script src="{% static 'js/pages/mode-styling.init.js' %}"></script>
 
 
     </body>

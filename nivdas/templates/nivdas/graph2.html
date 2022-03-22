@@ -132,6 +132,9 @@
 
         <!-- echarts js -->
         <script src="{% static 'libs/echarts/echarts.min.js' %}"></script>
+    
+        <script src="{% static 'js/pages/mode-styling.init.js' %}"></script>
+        
 
         <script>
             function getChartColorsArray(e){
@@ -294,17 +297,6 @@
                 ]
             },option&&"object"==typeof option&&myChart.setOption(option,!0);
 
-        </script>
-
-        <script>
-            $('#vertical-menu-btn').on('click', function() {
-                if (document.getElementsByTagName("BODY")[0].getAttribute('data-sidebar-size') == 'sm') {
-                    document.getElementById('menu-div').style.width = '68px'
-                }
-                else {
-                    document.getElementById('menu-div').style.width = '88px'
-                }
-            })
         </script>
 
 

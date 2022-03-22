@@ -84,21 +84,83 @@
                                                 </thead>
 
                                                 <tbody>
-                                                    <tr data-id="{{i.id}}">
-                                                        <td name="eqp_name">Deep Freezer</td>
-                                                        <td name="ip_addr">143.322.1.0</td>
-                                                        <td data-field="eqp_status" name="eqp_status">Active</td>
-                                                        <td name="sensors">2</td>
-                                                        <td name="param">1</td>
-                                                        <td name="mach_code">001</td>
-                                                        <td>
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
+                                                    <form id="form" action="" method="POST" >
+                                                        <tr>
+                                                            <td name="eqp_name">Deep Freezer</td>
+                                                            <td name="ip_addr">143.322.1.0</td>
+                                                            <td data-field="eqp_status" name="eqp_status">Active</td>
+                                                            <td name="sensors">2</td>
+                                                            <td name="param">1</td>
+                                                            <td name="mach_code">001</td>
+                                                            <td>
+                                                                <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
+                                                                    <i class="fas fa-pencil-alt"></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </form>
                                                 </tbody>
                                             </table>
+                                        
+                                            <!-- Modal starts -->
+                                            <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
+                                                id="modal" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Verify Admin</h5>
+                                                            <button type="button" class="btn-close"
+                                                                style="padding: 0rem 2rem; width: 2px"
+                                                                data-bs-dismiss="modal" aria-label="Close">
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div id="alert_placeholder"></div>
+                                                            <form class="needs-validation" novalidate>
+                                                                <div data-repeater-list="outer-group" class="outer">
+                                                                    <div data-repeater-item class="outer">
+                
+                                                                        <div class="form-group row mb-4">
+                                                                            <label class="col-form-label col-lg-4" for="validationCustom01">Username<span style="color:red">*</span></label>
+                                                                            <div class="col-lg-8">
+                                                                                <input type="text" class="form-control"
+                                                                                id="v-username" name="V-username" placeholder="Enter Username" required>
+                                                                            </div>
+                                                                        </div>
+                
+                                                                        <div class="form-group row mb-4">
+                                                                            <label class="col-form-label col-lg-4">Password<span style="color:red">*</span></label>
+                                                                            <div class="col-lg-8">
+                                                                                <input type="password" class="form-control" name="V-password" 
+                                                                                id="v-password" placeholder="Enter Password" required>
+                                                                            </div>
+                                                                        </div>
+                
+                                                                        <div class="form-group row mb-4">
+                                                                            <label class="col-form-label col-lg-4" for="validationCustom01">Comments<span style="color:red">*</span></label>
+                                                                            <div class="col-lg-8">
+                                                                                <input type="text" class="form-control" name="Comments" minlength="10"
+                                                                                id="comments" placeholder="Enter Comments" required>
+                                                                                <div class="valid-feedback"></div>
+                                                                                <div class="invalid-feedback"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row justify-content-end">
+                                                                    <div class="col-lg-10">
+                                                                        <button type="submit" style="float: right;"
+                                                                            class="btn btn-primary" id="submit-form">Submit
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div><!-- /.modal-content -->
+                                                </div><!-- /.modal-dialog -->
+                                            </div><!-- /.modal -->
+                
                                         </div>
                                     </div>
                                 </div>
@@ -106,60 +168,6 @@
                         </div>                        
                                         
                         <!-- Modal starts -->
-                        <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
-                            id="modal" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Verify Admin</h5>
-                                        <button type="button" class="btn-close"
-                                            style="padding: 0rem 2rem; width: 2px"
-                                            data-bs-dismiss="modal" aria-label="Close">
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form class="needs-validation" novalidate method="POST" action="">
-                                            <div data-repeater-list="outer-group" class="outer">
-                                                <div data-repeater-item class="outer">
-
-                                                    <div class="form-group row mb-4">
-                                                        <label class="col-form-label col-lg-4" for="validationCustom01">Username<span style="color:red">*</span></label>
-                                                        <div class="col-lg-8">
-                                                            <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
-                                                            id="username" name="Username" placeholder="Enter Username" required>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row mb-4">
-                                                        <label class="col-form-label col-lg-4">Password<span style="color:red">*</span></label>
-                                                        <div class="col-lg-8">
-                                                            <input type="password" class="form-control" pattern="[a-zA-Z0-9!@#$%&*]{1,}" 
-                                                            id="password" name="Password" placeholder="Enter Password" required>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row mb-4">
-                                                        <label class="col-form-label col-lg-4" for="validationCustom01">Comments<span style="color:red">*</span></label>
-                                                        <div class="col-lg-8">
-                                                            <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
-                                                            id="comments" name="Comments" placeholder="Enter Username" required>
-                                                        </div>
-                                                    </div>
-                                                
-                                                </div>
-                                            </div>
-                                            <div class="row justify-content-end">
-                                                <div class="col-lg-10">
-                                                    <button type="submit" style="float: right;"
-                                                        class="btn btn-primary" id="submit-btn">Submit
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div><!-- /.modal-content -->
-                            </div><!-- /.modal-dialog -->
-                        </div><!-- /.modal -->
                         
                     </div>
                 </div>
@@ -199,21 +207,59 @@
         <script src="{% static 'js/app.js' %}"></script>
 
         <!-- form validation -->
-        <script src="{% static 'js/pages/form-validation.init.js' %}"></script>
+        <!-- <script src="{% static 'js/pages/form-validation.init.js' %}"></script> -->
 
         <!-- Table Editable plugin -->
-        <script src="{%static 'libs/table-edits/build/table-edits.min.js' %}"></script>
-        <script src="{%static 'js/pages/table-editable.int.js' %}"></script>
+        <!-- <script src="{% static 'libs/table-edits/build/table-edits.min.js' %}"></script>
+        <script src="{% static 'js/pages/table-editable.int.js' %}"></script> -->
 
+        <script src="{% static 'js/pages/fontawesome.init.js' %}"></script>
+    
+        <script src="{% static 'js/pages/mode-styling.init.js' %}"></script>
+
+        
         <script>
-            $('#vertical-menu-btn').on('click', function() {
-                if (document.getElementsByTagName("BODY")[0].getAttribute('data-sidebar-size') == 'sm') {
-                    document.getElementById('menu-div').style.width = '68px'
-                }
-                else {
-                    document.getElementById('menu-div').style.width = '88px'
-                }
-            })
+            !function () 
+            { 
+                "use strict"; 
+                window.addEventListener("load", function () 
+                { 
+                    var e = document.getElementsByClassName("needs-validation"); 
+                    Array.prototype.filter.call(e, function (t) 
+                    {
+                            t.addEventListener("submit", function (e) 
+                            { 
+                                !1 === t.checkValidity() && (e.preventDefault(), e.stopPropagation()), t.classList.add("was-validated")
+                                if (t.checkValidity() == true) {
+                                    $.ajax ({
+                                        method: "POST",
+                                        url: `/verify-admin/`,
+
+                                        data: {
+                                            csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+                                            user: document.getElementById('v-username').value,
+                                            pass: document.getElementById('v-password').value,
+                                        },
+                                        success: function(response) {
+                                            // r = response.data;
+                                            // console.log(r);
+                                            if (response.data.valid == "YES") {
+                                                $("#form").trigger('submit', [true]);
+                                            }
+                                            else {
+                                                e.preventDefault(), e.stopPropagation()
+                                                $('#alert_placeholder').html('<div class="alert alert-danger alert-dismissible fade show" role="alert">Invalid Admin Credentials!<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>')
+                                            }
+                                        }
+                                    })
+                                }
+                                else {
+
+                                }
+                            }, !1) 
+                    })
+                }, !1) 
+            }
         </script>
 
 

@@ -17,7 +17,25 @@ def LoginPage(request):
 
 def IndexPage(request):
     if 'username' in request.session:
-        return render(request, "nivdas/index.html")
+        if 'grid' in request.session:
+            return redirect("dashboard-grid")
+        else:
+            return redirect("dashboard-list")
+    else:
+        return redirect("loginpage")
+
+def DashboardGrid(request):
+    if 'username' in request.session:
+        request.session['grid'] = 'grid'
+        return render(request, "nivdas/dashboard-grid.html")
+    else:
+        return redirect("loginpage")
+
+def DashboardList(request):
+    if 'username' in request.session:
+        if 'grid' in request.session:
+            del request.session['grid']
+        return render(request, "nivdas/dashboard-list.html")
     else:
         return redirect("loginpage")
 
@@ -1051,7 +1069,7 @@ def samp(request):
 
 
 def GeneratePdf(request):
-    pdf = html_to_pdf('nivdas/samp.html')
+    pdf = html_to_pdf('nivdas/pdf-template.html')
     return HttpResponse(pdf, content_type='application/pdf')
 
 def VerifyUser(request):
@@ -1089,6 +1107,8 @@ def EquipUpdateData(request, pk):
         'comment': equip.Comments,
     }
     return JsonResponse({'data': data})
+
+
 
 # def UpdateEquipData(request):
 #     if request.method == "POST":

@@ -65,4 +65,6 @@ urlpatterns = [
     path('samp/',views.samp,name="samp"),
     path("verify-admin/", views.VerifyUser, name="verify-admin"),
     path('equipment-update-data/<str:pk>/', views.EquipUpdateData, name="equipment-update-data"),
+    path('dashboard-grid/',views.DashboardGrid,name="dashboard-grid"),
+    path('dashboard-list/',views.DashboardList,name="dashboard-list"),
 ]

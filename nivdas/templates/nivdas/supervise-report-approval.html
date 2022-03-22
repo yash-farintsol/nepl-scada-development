@@ -136,17 +136,8 @@
         <script src="{% static 'libs/pace-js/pace.min.js' %}"></script>
 
         <script src="{% static 'js/app.js' %}"></script>
-
-        <script>
-            $('#vertical-menu-btn').on('click', function() {
-                if (document.getElementsByTagName("BODY")[0].getAttribute('data-sidebar-size') == 'sm') {
-                    document.getElementById('menu-div').style.width = '68px'
-                }
-                else {
-                    document.getElementById('menu-div').style.width = '88px'
-                }
-            })
-        </script>
+    
+        <script src="{% static 'js/pages/mode-styling.init.js' %}"></script>
 
 
     </body>
