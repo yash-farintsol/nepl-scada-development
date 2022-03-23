@@ -26,7 +26,7 @@
 
     </head>
 
-    <body data-topbar="dark" onload=display_ct();>
+    <body data-topbar="dark">
 
     <!-- <body data-layout="horizontal"> -->
 
@@ -65,10 +65,10 @@
                         </div>
                         <div class="card">
                             <div class="card-body">
-                                <form id="new-form" action="{% url 'getplcdatetime' %}" method="POST" class="needs-validation" novalidate>
+                                <form id="new-form" class="needs-validation" novalidate>
                                     {% csrf_token %}
                                     <div class="row">
-                                        <div class="col-xl-6 col-md-4">
+                                        <div class="col-xl-6 col-md-6">
                                             <div class="form-group mb-3">
                                                 <label for="validationCustom11" class="form-label">
                                                     Select Equipment<span style="color:red"> *</span>
@@ -87,28 +87,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xl-6 col-md-4">
+                                        <div class="col-xl-6 col-md-6">
                                             <div class="form-group mb-3">
                                                 <label for="validationCustom11" class="form-label">
                                                     Current Date Time<span style="color:red"> *</span>
                                                 </label>
                                                 <input type="text" class="form-control" id="current-dt" name="Current-dt"
-                                                    placeholder="Enter Current Date Time" readonly required>
-                                                <div class="valid-feedback">
-                                                    Looks Good!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Looks Bad!
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-12 col-md-12">
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom11" class="form-label">
-                                                    PLC Date Time<span style="color:red"> *</span>
-                                                </label>
-                                                <input type="text" class="form-control" id="current-dt" name="Current-dt"
-                                                    placeholder="PLease Select Equipment" readonly required>
+                                                    placeholder="Enter Current Date Time" readonly>
                                                 <div class="valid-feedback">
                                                     Looks Good!
                                                 </div>
@@ -118,10 +103,26 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row justify-content-end">
-                                        <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-xl-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="validationCustom11" class="form-label">
+                                                    PLC Date Time<span style="color:red"> *</span>
+                                                </label>
+                                                <input type="text" class="form-control" id="plc-dt" name="Plc-dt"
+                                                    placeholder="PLC Date Time" readonly>
+                                                <div class="valid-feedback">
+                                                    Looks Good!
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Looks Bad!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="row justify-content-end"> -->
+                                        <div class="col-xl-6 col-md-6">
                                             <div style="float: right;">
-                                                <button class="btn btn-primary waves-effect waves-light" type="submit">Get Date</button> &nbsp;&nbsp;
+                                                <button class="btn btn-primary waves-effect waves-light" id="getdate" type="button">Get Date</button> &nbsp;&nbsp;
                                                 <button class="btn btn-primary waves-effect waves-light" type="submit">Synchronize</button>
                                             </div>
                                         </div>
@@ -162,8 +163,8 @@
                                                             <div class="form-group row mb-4">
                                                                 <label class="col-form-label col-lg-4" for="validationCustom01">Comments<span style="color:red">*</span></label>
                                                                 <div class="col-lg-8">
-                                                                    <input type="text" class="form-control" name="Comments" 
-                                                                    id="comments" placeholder="Enter Comment" required>
+                                                                    <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
+                                                                    id="comments" name="Comments" placeholder="Enter Comments" required>
                                                                 </div>
                                                             </div>
                                                         
@@ -234,16 +235,68 @@
             }
         </script>
 
-        <!-- <script>
-            $('#vertical-menu-btn').on('click', function() {
+        <script>
+            $('#vertical-menu-btn').on('click', function() 
+            {
                 if (document.getElementsByTagName("BODY")[0].getAttribute('data-sidebar-size') == 'sm') {
                     document.getElementById('menu-div').style.width = '68px'
                 }
-                else {
+                else 
+                {
                     document.getElementById('menu-div').style.width = '88px'
                 }
             })
-        </script> -->
+        </script>
+
+        <script>
+            $('#getdate').on('click', function() {
+                console.log('function called')
+                val = document.getElementById('equip').value
+                console.log(val)
+                $.ajax({
+                    method: "POST",
+                    url: `/get-plc-date-time/`,
+                    data: {
+                        csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+                        eid: val,
+                    },
+                    success: function(response)
+                    {
+                        console.log(response)
+                        r = response.data;
+                        console.log(r);
+                        set = "AM";
+                        if (r.month == 1) { r.month = "Jan" }
+                        else if (r.month == 2) { r.month = "Feb" }
+                        else if (r.month == 3) { r.month = "Mar" }
+                        else if (r.month == 4) { r.month = "Apr" }
+                        else if (r.month == 5) { r.month = "May" }
+                        else if (r.month == 6) { r.month = "Jun" }
+                        else if (r.month == 7) { r.month = "Jul" }
+                        else if (r.month == 8) { r.month = "Aug" }
+                        else if (r.month == 9) { r.month = "Sep" }
+                        else if (r.month == 10) { r.month = "Oct" }
+                        else if (r.month == 11) { r.month = "Nov" }
+                        else if (r.month == 12) { r.month = "Dec" }
+                        
+                        if (r.hrs == 12) { set = "PM" }
+                        else if (r.hrs == 13) { r.hrs = 1; set = "PM" }
+                        else if (r.hrs == 14) { r.hrs = 2; set = "PM" }
+                        else if (r.hrs == 15) { r.hrs = 3; set = "PM" }
+                        else if (r.hrs == 16) { r.hrs = 4; set = "PM" }
+                        else if (r.hrs == 17) { r.hrs = 5; set = "PM" }
+                        else if (r.hrs == 18) { r.hrs = 6; set = "PM" }
+                        else if (r.hrs == 19) { r.hrs = 7; set = "PM" }
+                        else if (r.hrs == 20) { r.hrs = 8; set = "PM" }
+                        else if (r.hrs == 21) { r.hrs = 9; set = "PM" }
+                        else if (r.hrs == 22) { r.hrs = 10; set = "PM" }
+                        else if (r.hrs == 23) { r.hrs = 11; set = "PM" }
+                        else if (r.hrs == 24) { r.hrs = 0 }
+                        document.getElementById("plc-dt").value = r.month + " " + r.date + " " + r.year + ", " + r.hrs + ":" + r.mit + ":" + r.sec + " " + set ;
+                    }
+                })
+            })
+        </script>
 
 
     </body>

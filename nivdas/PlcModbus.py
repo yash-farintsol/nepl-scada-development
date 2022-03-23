@@ -4,7 +4,7 @@ from pymodbus.client.sync import ModbusTcpClient
 
 def read_registers(ip_address, values):
     result = {}
-    client = ModbusTcpClient("192.168.1.200")  # "192.168.1.200"
+    client = ModbusTcpClient(ip_address)  # "192.168.1.200"
     connection = client.connect()
     # print("Modbus connection ", connection, '\n')
     if connection:
@@ -39,5 +39,5 @@ def read_registers(ip_address, values):
 # - Modbus Connection Error on modbus disconnected
 # - Register address error on reading wrong registers
 
-list = read_registers("192.168.1.200", [400151,400153,400147,400087])
-print(list)
+# list = read_registers("192.168.1.200", [400151,400153,400147,400087])
+# print(list)
