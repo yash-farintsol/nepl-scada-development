@@ -30,9 +30,11 @@
                                         // r = response.data;
                                         // console.log(r);
                                         if (response.data.valid == "YES") {
+                                            console.log('yes')
                                             $("#form1").trigger('submit', [true]);
                                         }
                                         else {
+                                            console.log('no')
                                             e.preventDefault(), e.stopPropagation()
                                             $('#alert_placeholder').html('<div class="alert alert-danger alert-dismissible fade show" role="alert">Invalid Admin Credentials!<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>')
                                         }

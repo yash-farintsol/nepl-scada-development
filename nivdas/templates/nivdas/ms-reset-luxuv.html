@@ -65,8 +65,8 @@
                         </div>
                         <div class="card">
                             <div class="card-body">
-                                <form id="new-form" class="needs-validation" novalidate>
-
+                                <form id="form1" class="needs-validation" novalidate>
+                                    {% csrf_token %}
                                     <div class="row">
                                         <div class="col-xl-6 col-md-4">
                                             <div class="form-group mb-3">
@@ -75,7 +75,9 @@
                                                 </label>
                                                 <select class="form-control" id="equip" name="Equip" required>
                                                     <option selected disabled value="">-- Select Option --</option>
-                                                    <option>Active</option>
+                                                    {% for i in eqp %}
+                                                        <option value="{{i.id}}">{{i.EquipmentName}}</option>
+                                                    {% endfor %}
                                                 </select>
                                                 <div class="valid-feedback">
                                                     Looks Good!
@@ -108,8 +110,8 @@
                                                 <button class="btn btn-primary waves-effect waves-light" type="submit">Reset UV</button>
                                             </div>
                                         </div>
-                                    </div>
-                                        
+                                    </div>                
+                                
                                     <!-- Modal starts -->
                                     <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
                                         id="modal" aria-hidden="true">
@@ -123,42 +125,47 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <div data-repeater-list="outer-group" class="outer">
-                                                        <div data-repeater-item class="outer">
+                                                    <div id="alert_placeholder"></div>
+                                                    <form class="needs-validation" novalidate>
+                                                        <div data-repeater-list="outer-group" class="outer">
+                                                            <div data-repeater-item class="outer">
         
-                                                            <div class="form-group row mb-4">
-                                                                <label class="col-form-label col-lg-4" for="validationCustom01">Username<span style="color:red">*</span></label>
-                                                                <div class="col-lg-8">
-                                                                    <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
-                                                                    id="username" name="Username" placeholder="Enter Username" required>
+                                                                <div class="form-group row mb-4">
+                                                                    <label class="col-form-label col-lg-4" for="validationCustom01">Username<span style="color:red">*</span></label>
+                                                                    <div class="col-lg-8">
+                                                                        <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
+                                                                        id="v-username" name="V-username" placeholder="Enter Username" required>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
         
-                                                            <div class="form-group row mb-4">
-                                                                <label class="col-form-label col-lg-4">Password<span style="color:red">*</span></label>
-                                                                <div class="col-lg-8">
-                                                                    <input type="password" class="form-control" pattern="[a-zA-Z0-9!@#$%&*]{1,}" 
-                                                                    id="password" name="Password" placeholder="Enter Password" required>
+                                                                <div class="form-group row mb-4">
+                                                                    <label class="col-form-label col-lg-4">Password<span style="color:red">*</span></label>
+                                                                    <div class="col-lg-8">
+                                                                        <input type="password" class="form-control" name="V-password" 
+                                                                        id="v-password" placeholder="Enter Password" required>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
         
-                                                            <div class="form-group row mb-4">
-                                                                <label class="col-form-label col-lg-4" for="validationCustom01">Comments<span style="color:red">*</span></label>
-                                                                <div class="col-lg-8">
-                                                                    <input type="text" class="form-control" name="Comments" 
-                                                                    id="comments" placeholder="Enter Comment" required>
+                                                                <div class="form-group row mb-4">
+                                                                    <label class="col-form-label col-lg-4" for="validationCustom01">Comments<span style="color:red">*</span></label>
+                                                                    <div class="col-lg-8">
+                                                                        <input type="text" class="form-control" name="Comments" 
+                                                                        id="comments" placeholder="Enter Comments" required>
+                                                                        <div class="valid-feedback"></div>
+                                                                        <div class="invalid-feedback"></div>
+                                                                    </div>
                                                                 </div>
+                                                            
                                                             </div>
-                                                        
                                                         </div>
-                                                    </div>
-                                                    <div class="row justify-content-end">
-                                                        <div class="col-lg-10">
-                                                            <button type="submit" style="float: right;"
-                                                                class="btn btn-primary" id="submit-btn">Submit
-                                                            </button>
+                                                        <div class="row justify-content-end">
+                                                            <div class="col-lg-10">
+                                                                <button type="submit" style="float: right;"
+                                                                    class="btn btn-primary" id="submit-form">Submit
+                                                                </button>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    </form>
                                                 </div>
                                             </div><!-- /.modal-content -->
                                         </div><!-- /.modal-dialog -->
@@ -206,6 +213,9 @@
     
         <!-- form validation -->
         <script src="{% static 'js/pages/form-validation.init.js' %}"></script>
+    
+        <script src="{% static 'js/pages/mode-styling.init.js' %}"></script>
+
 
         <script>
             window.onload = displayClock();
@@ -215,17 +225,6 @@
                 document.getElementById("current-dt").value = date + ", " + display;
                 setTimeout(displayClock, 1000); 
             }
-        </script>
-
-        <script>
-            $('#vertical-menu-btn').on('click', function() {
-                if (document.getElementsByTagName("BODY")[0].getAttribute('data-sidebar-size') == 'sm') {
-                    document.getElementById('menu-div').style.width = '68px'
-                }
-                else {
-                    document.getElementById('menu-div').style.width = '88px'
-                }
-            })
         </script>
 
 

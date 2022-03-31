@@ -1,5 +1,5 @@
 from django.db import models
-
+from datetime import datetime
 class user_member(models.Model):
     objects = models.Manager()
     u_name = models.CharField(max_length=30)
@@ -67,15 +67,20 @@ class GroupSecurity(models.Model):
         return self.Group.GroupName
 
 
-
+class Department(models.Model):
+    Department_Name = models.CharField(max_length=100,default="DepartmentName")
+    
+    def __str__(self):
+        return self.Department_Name
 
 class User(models.Model):
     Username = models.CharField(max_length=30)
     Password = models.CharField(max_length=30)
     PasswdChangeDuration = models.IntegerField()
     Group = models.ForeignKey(Group, on_delete=models.SET_NULL, null=True, blank=True) 
-    Department = models.CharField(max_length=30)
+    Dep = models.ForeignKey(Department, on_delete=models.CASCADE,blank=True,null=True)
     status = models.CharField(max_length=20)
+    UserType = models.CharField(max_length=20,default="UserType")
     SuperAdmin = models.BooleanField(default=False)
     UserCreatedDate = models.DateTimeField(auto_now_add=True)
     PasswordCreatedDate = models.DateTimeField(auto_now_add=True)
@@ -130,7 +135,6 @@ class UserSecurity(models.Model):
 
 
 class DatabaseSetting(models.Model):
-    days = models.IntegerField()
     time1 = models.TimeField()
     time2 = models.TimeField()
     time3 = models.TimeField()
@@ -176,4 +180,10 @@ class MailTemplate(models.Model):
     Footer = models.CharField(max_length=500)
     Address = models.TextField(default="Address")
     Logo = models.FileField(upload_to="template-logo/",default="no-logo.png")
+    
+class UserAudit(models.Model):
+    User =models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    Date = models.DateField(default=datetime.now())
+    Time = models.TimeField(default=datetime.now().time())
+    Comment = models.TextField()
     

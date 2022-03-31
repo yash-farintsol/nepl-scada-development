@@ -17,9 +17,7 @@
         <!-- DataTables -->
         <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet"
             type="text/css" />
-        <link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet"
-            type="text/css" />
-
+        
         <!-- Responsive datatable examples -->
         <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}"
             rel="stylesheet" type="text/css" />
@@ -33,8 +31,6 @@
         <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
-
-        <!-- <link href="https://cdn.datatables.net/datetime/1.1.1/css/dataTables.dateTime.min.css" rel="stylesheet" type="text/css" /> -->
 
         <link href="{% static 'libs/datatables.Time/dataTable.min.css' %}" rel="stylesheet" type="text/css" />
 
@@ -113,9 +109,9 @@
                                     <br>
 
                                     <div style="float: right;">
-                                        <button type="button" class="btn btn-primary waves-effect waves-light">
+                                        <a href="{% url 'pdf' %}" target="_blank"  class="btn btn-primary waves-effect waves-light">
                                             Report
-                                        </button> &nbsp;&nbsp;
+                                        </a> &nbsp;&nbsp;
                                         <button type="button" class="btn btn-primary waves-effect waves-light">
                                             Send for Approval
                                         </button>
@@ -129,49 +125,21 @@
                                         dataTable no-footer dtr-inline" style="table-layout: auto">
                                         <thead id="header">
                                             <tr>
-                                                <th>Username</th>
-                                                <th>Date</th> <!-- strftime('%Y-%m-%d') -->
-                                                <th>Time</th>
-                                                <th>Log Status</th>
-                                            </tr>
-                                            <tr>
-                                                <td id="0"></td>
-                                                <td id="1"></td>
-                                                <td id="2"></td>
-                                                <td id="3"></td>
+                                                <th style="font-weight: 800;">Username</th>
+                                                <th style="font-weight: 800;">Date</th> <!-- strftime('%Y-%m-%d') -->
+                                                <th style="font-weight: 800;">Time</th>
+                                                <th style="font-weight: 800;">Log Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {% for i in ua %}
                                             <tr>
-                                                <td>admin</td>
-                                                <td>07/02/2022</td>
-                                                <td>15:58</td>
-                                                <td>Logged in from IP: 192.168.1.114</td>
+                                                <td>{{i.User.Username}}</td>
+                                                <td>{{i.Date}}</td>
+                                                <td>{{i.Time}}</td>
+                                                <td>{{i.Comment}}</td>
                                             </tr>
-                                            <tr>
-                                                <td>admin</td>
-                                                <td>08/02/2022</td>
-                                                <td>05:23</td>
-                                                <td>Logged in from IP: 192.168.1.14</td>
-                                            </tr>
-                                            <tr>
-                                                <td>admin</td>
-                                                <td>07/02/2022</td>
-                                                <td>16:34</td>
-                                                <td>Equipment 'SMART OVEN' Deactivated Successfully</td>
-                                            </tr>
-                                            <tr>
-                                                <td>admin</td>
-                                                <td>08/02/2022</td>
-                                                <td>17:58</td>
-                                                <td>New Equipment 'Cooling Chamber' Added Successfully</td>
-                                            </tr>
-                                            <tr>
-                                                <td>admin</td>
-                                                <td>07/02/2022</td>
-                                                <td>20:00</td>
-                                                <td>Equipment 'Cooling Chamber' Activated Successfully</td>
-                                            </tr>
+                                            {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
@@ -219,25 +187,15 @@
         <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
         <script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
     
-        <!-- Buttons examples -->
-        <script src="{% static 'libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
-        <script src="{% static 'libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
-        <script src="{% static 'libs/jszip/jszip.min.js' %}"></script>
-        <script src="{% static 'libs/pdfmake/build/pdfmake.min.js' %}"></script>
-        <script src="{% static 'libs/pdfmake/build/vfs_fonts.js' %}"></script>
-        <script src="{% static 'libs/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
-        <script src="{% static 'libs/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
-        <script src="{% static 'libs/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
-    
         <!-- Responsive examples -->
         <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
         <script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
 
-        <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/datetime/1.1.1/js/dataTables.dateTime.min.js"></script> -->
-
         <script src="{% static 'libs/datatables.Time/moment.min.js' %}"></script>
         <script src="{% static 'libs/datatables.Time/dataTable.min.js' %}"></script>
+    
+        <script src="{% static 'js/pages/mode-styling.init.js' %}"></script>
+
 
         <script>
             var minDate, maxDate;
@@ -274,8 +232,7 @@
                 var table = $('#datatable-buttons').DataTable({
                     orderCellsTop: true,
                     fixedHeader: true,
-                    lengthChange: !1,
-                    buttons: ["copy", "excel", "pdf", "colvis"],
+                    lengthChange: true,
                     initComplete: function () {
                             
                         this.api().columns(0).every(function () {
@@ -364,20 +321,7 @@
                 $('#min, #max').on('change', function () {
                     table.draw();
                 });
-
-                table.buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)");
             });
-        </script>
-
-        <script>
-            $('#vertical-menu-btn').on('click', function() {
-                if (document.getElementsByTagName("BODY")[0].getAttribute('data-sidebar-size') == 'sm') {
-                    document.getElementById('menu-div').style.width = '68px'
-                }
-                else {
-                    document.getElementById('menu-div').style.width = '88px'
-                }
-            })
         </script>
 
 

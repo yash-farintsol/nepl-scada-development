@@ -65,7 +65,7 @@
                         </div>
                         <div class="card">
                             <div class="card-body">
-                                <form id="new-form" class="needs-validation" novalidate>
+                                <form id="form1" action="{% url 'seteqpdatetime' %}" class="needs-validation" novalidate>
                                     {% csrf_token %}
                                     <div class="row">
                                         <div class="col-xl-6 col-md-6">
@@ -92,7 +92,7 @@
                                                 <label for="validationCustom11" class="form-label">
                                                     Current Date Time<span style="color:red"> *</span>
                                                 </label>
-                                                <input type="text" class="form-control" id="current-dt" name="Current-dt"
+                                                <input type="text" class="form-control" id="currentdt" name="Current-dt"
                                                     placeholder="Enter Current Date Time" readonly>
                                                 <div class="valid-feedback">
                                                     Looks Good!
@@ -111,25 +111,19 @@
                                                 </label>
                                                 <input type="text" class="form-control" id="plc-dt" name="Plc-dt"
                                                     placeholder="PLC Date Time" readonly>
-                                                <div class="valid-feedback">
-                                                    Looks Good!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Looks Bad!
-                                                </div>
                                             </div>
                                         </div>
                                         <!-- <div class="row justify-content-end"> -->
                                         <div class="col-xl-6 col-md-6">
                                             <div style="float: right;">
                                                 <button class="btn btn-primary waves-effect waves-light" id="getdate" type="button">Get Date</button> &nbsp;&nbsp;
-                                                <button class="btn btn-primary waves-effect waves-light" type="submit">Synchronize</button>
+                                                <button class="btn btn-primary waves-effect waves-light" id="currentdatetime" type="submit">Synchronize</button>
                                             </div>
                                         </div>
-                                    </div>
-                                        
+                                    </div>                  
+                                
                                     <!-- Modal starts -->
-                                    <!-- <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
+                                    <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
                                         id="modal" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
@@ -141,46 +135,51 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <div data-repeater-list="outer-group" class="outer">
-                                                        <div data-repeater-item class="outer">
+                                                    <div id="alert_placeholder"></div>
+                                                    <form class="needs-validation" novalidate>
+                                                        <div data-repeater-list="outer-group" class="outer">
+                                                            <div data-repeater-item class="outer">
         
-                                                            <div class="form-group row mb-4">
-                                                                <label class="col-form-label col-lg-4" for="validationCustom01">Username<span style="color:red">*</span></label>
-                                                                <div class="col-lg-8">
-                                                                    <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
-                                                                    id="username" name="Username" placeholder="Enter Username" required>
+                                                                <div class="form-group row mb-4">
+                                                                    <label class="col-form-label col-lg-4" for="validationCustom01">Username<span style="color:red">*</span></label>
+                                                                    <div class="col-lg-8">
+                                                                        <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
+                                                                        id="v-username" name="V-username" placeholder="Enter Username" required>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
         
-                                                            <div class="form-group row mb-4">
-                                                                <label class="col-form-label col-lg-4">Password<span style="color:red">*</span></label>
-                                                                <div class="col-lg-8">
-                                                                    <input type="password" class="form-control" pattern="[a-zA-Z0-9!@#$%&*]{1,}" 
-                                                                    id="password" name="Password" placeholder="Enter Password" required>
+                                                                <div class="form-group row mb-4">
+                                                                    <label class="col-form-label col-lg-4">Password<span style="color:red">*</span></label>
+                                                                    <div class="col-lg-8">
+                                                                        <input type="password" class="form-control" name="V-password" 
+                                                                        id="v-password" placeholder="Enter Password" required>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
         
-                                                            <div class="form-group row mb-4">
-                                                                <label class="col-form-label col-lg-4" for="validationCustom01">Comments<span style="color:red">*</span></label>
-                                                                <div class="col-lg-8">
-                                                                    <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
-                                                                    id="comments" name="Comments" placeholder="Enter Comments" required>
+                                                                <div class="form-group row mb-4">
+                                                                    <label class="col-form-label col-lg-4" for="validationCustom01">Comments<span style="color:red">*</span></label>
+                                                                    <div class="col-lg-8">
+                                                                        <input type="text" class="form-control" name="Comments" 
+                                                                        id="comments" placeholder="Enter Comments" required>
+                                                                        <div class="valid-feedback"></div>
+                                                                        <div class="invalid-feedback"></div>
+                                                                    </div>
                                                                 </div>
+                                                            
                                                             </div>
-                                                        
                                                         </div>
-                                                    </div>
-                                                    <div class="row justify-content-end">
-                                                        <div class="col-lg-10">
-                                                            <button type="submit" style="float: right;"
-                                                                class="btn btn-primary" id="submit-btn">Submit
-                                                            </button>
+                                                        <div class="row justify-content-end">
+                                                            <div class="col-lg-10">
+                                                                <button type="submit" style="float: right;"
+                                                                    class="btn btn-primary" id="submit-form">Submit
+                                                                </button>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div> -->
-                                            <!-- </div>/.modal-content -->
-                                        <!-- </div>/.modal-dialog -->
-                                    <!-- </div>/.modal -->
+                                                    </form>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
                                     
                                 </form>
                             </div>
@@ -223,30 +222,21 @@
         <script src="{% static 'js/app.js' %}"></script>
     
         <!-- form validation -->
-        <!-- <script src="{% static 'js/pages/form-validation.init.js' %}"></script> -->
+        <script src="{% static 'js/pages/form-validation.init.js' %}"></script>
+    
+        <script src="{% static 'js/pages/mode-styling.init.js' %}"></script>
+        
 
         <script>
             window.onload = displayClock();
             function displayClock(){
                 var date = new Date().toDateString()
                 var display = new Date().toLocaleTimeString();
-                document.getElementById("current-dt").value = date + ", " + display;
+                document.getElementById("currentdt").value = date + ", " + display;
                 setTimeout(displayClock, 1000); 
             }
         </script>
 
-        <script>
-            $('#vertical-menu-btn').on('click', function() 
-            {
-                if (document.getElementsByTagName("BODY")[0].getAttribute('data-sidebar-size') == 'sm') {
-                    document.getElementById('menu-div').style.width = '68px'
-                }
-                else 
-                {
-                    document.getElementById('menu-div').style.width = '88px'
-                }
-            })
-        </script>
 
         <script>
             $('#getdate').on('click', function() {
@@ -278,7 +268,7 @@
                         else if (r.month == 10) { r.month = "Oct" }
                         else if (r.month == 11) { r.month = "Nov" }
                         else if (r.month == 12) { r.month = "Dec" }
-                        
+
                         if (r.hrs == 12) { set = "PM" }
                         else if (r.hrs == 13) { r.hrs = 1; set = "PM" }
                         else if (r.hrs == 14) { r.hrs = 2; set = "PM" }
@@ -293,6 +283,26 @@
                         else if (r.hrs == 23) { r.hrs = 11; set = "PM" }
                         else if (r.hrs == 24) { r.hrs = 0 }
                         document.getElementById("plc-dt").value = r.month + " " + r.date + " " + r.year + ", " + r.hrs + ":" + r.mit + ":" + r.sec + " " + set ;
+                    }
+                })
+            })
+        </script>
+        <!--  -->
+        <script>
+            $('#currentdatetime').on('click', function() {
+                console.log('function called')
+                val = document.getElementById('currentdt').value
+                console.log(val)
+                $.ajax({
+                    method: "POST",
+                    url: `/set-equipment-date-time/`,
+                    data: {
+                        csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+                        Currentdt: val,
+                    },
+                    success: function(response)
+                    {
+                        console.log("CURRENT DATE TIME");
                     }
                 })
             })

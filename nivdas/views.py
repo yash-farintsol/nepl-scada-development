@@ -11,6 +11,8 @@ from django.http import JsonResponse
 from .PdfProcess import html_to_pdf
 from django.views.generic import View
 from .PlcModbus import *
+from .tasks import test_func
+from django.template.loader import render_to_string
 
 def LoginPage(request):
     return render(request, "nivdas/login.html")
@@ -18,6 +20,24 @@ def LoginPage(request):
 
 def IndexPage(request):
     if 'username' in request.session:
+        if 'grid' in request.session:
+            return redirect("dashboard-grid")
+        else:
+            return redirect("dashboard-list")
+    else:
+        return redirect("loginpage")
+
+def DashboardGrid(request):
+    if 'username' in request.session:
+        request.session['grid'] = 'grid'
+        return render(request, "nivdas/dashboard-grid.html")
+    else:
+        return redirect("loginpage")
+
+def DashboardList(request):
+    if 'username' in request.session:
+        if 'grid' in request.session:
+            del request.session['grid']
         return render(request, "nivdas/dashboard-list.html")
     else:
         return redirect("loginpage")
@@ -26,7 +46,8 @@ def RegisterPage(request):
     if 'username' in request.session:
         GetGroups = Group.objects.all()
         AllUsers = User.objects.all()
-        return render(request, "nivdas/register.html",{'groups':GetGroups,'alluser':AllUsers})
+        Dep = Department.objects.all()
+        return render(request, "nivdas/register.html",{'groups':GetGroups,'alluser':AllUsers,'dep':Dep})
     else:
         return redirect("loginpage")
 
@@ -123,7 +144,8 @@ def SyncDateTime(request):
 
 def ResetLuxUV(request):
     if 'username' in request.session:
-        return render(request, "nivdas/ms-reset-luxuv.html")
+        eqps = Equipment.objects.all()
+        return render(request, "nivdas/ms-reset-luxuv.html",{'eqp':eqps})
     else:
         return redirect("loginpage")
 
@@ -149,7 +171,8 @@ def LuxUVDataView(request):
 
 def AuditUser(request):
     if 'username' in request.session:
-        return render(request, "nivdas/audit-user.html")
+        ua = UserAudit.objects.all()
+        return render(request, "nivdas/audit-user.html",{'ua':ua})
     else:
         return redirect("loginpage")
 
@@ -229,7 +252,8 @@ def GraphSetting(request):
 
 def PasswordSetting(request):
     if 'username' in request.session:
-        return render(request, "nivdas/tu-password-setting.html")
+        users = User.objects.all()
+        return render(request, "nivdas/tu-password-setting.html", {'users': users})
     else:
         return redirect("loginpage")
 
@@ -355,6 +379,8 @@ def Login(request):
                             request.session['PrintMultipleReports'] = get_group_security[0].PrintMultipleReports
                             request.session['AboutUs'] = get_group_security[0].AboutUs
                             request.session['Help'] = get_group_security[0].Help
+                        
+                        UA = UserAudit.objects.create(User=usr[0],Comment="User Logged In")
                         return redirect("indexpage")
                     except:
                         return redirect("indexpage")
@@ -378,14 +404,19 @@ def AddUser(request):
         status = request.POST['status']
         password = request.POST['password']
         PasswordChangeDuration = request.POST['PasswdChangeDuration']
+        usrtype = request.POST['usrtype']
         
         GetGroup = Group.objects.get(GroupName=group)
+        GetDep = Department.objects.get(id=department)
         print("ADD GORUP TO USER-->",GetGroup)
         usr = User.objects.create(Username=username,
         Password=password,PasswdChangeDuration=PasswordChangeDuration,
-        Department=department,status=status)
+        Dep=GetDep,status=status,UserType=usrtype)
         usr.Group = GetGroup
         usr.save()
+        getusr = User.objects.get(Username=request.session['username'])
+        msg = f"{getusr.Username} added {username}"
+        UA = UserAudit.objects.create(User=getusr,Comment=msg)
         return redirect("user-management")
 
 def UserUpdateData(request, pk):
@@ -398,7 +429,7 @@ def UserUpdateData(request, pk):
         'name': getann.Username,
         'password': getann.Password,
         'grp_name': getann.Group.GroupName,
-        'dep_name': getann.Department,
+        'dep_name': getann.Dep.Department_Name,
         'status': getann.status,
         'cpassword': getann.PasswdChangeDuration
     }
@@ -413,17 +444,22 @@ def UpdateUserData(request):
         getgrpname = request.POST['group_name']
         getgrp = Group.objects.get(GroupName = getgrpname)
         getusr.Group = getgrp
-        getusr.Department = request.POST['dept_name']
+        getdep = Department.objects.get(Department_Name=request.POST['dept_name'])
+        print("GET_DEP-->",getdep)
+        getusr.Dep = getdep
         getusr.status = request.POST['status']
         getusr.Password = request.POST['pswd']
         getusr.PasswdChangeDuration = request.POST['passwdChangeDuration']
         getusr.save()
         print("DATA_UPDATED")
+        getuser = User.objects.get(Username=request.session['username'])
+        msg = f"{getuser.Username} updated {getusr.Username}"
+        UA = UserAudit.objects.create(User=getusr,Comment=msg)
         return redirect("user-management")
 
 def StoreDatabaseSetting(request):
     if request.method == "POST":
-        days = request.POST['days']
+        # days = request.POST['days']
         time1 = datetime.strptime(request.POST['time1'], '%H:%M').time()
         time2 = datetime.strptime(request.POST['time2'], '%H:%M').time()
         time3 = datetime.strptime(request.POST['time3'], '%H:%M').time()
@@ -434,9 +470,13 @@ def StoreDatabaseSetting(request):
         HistoryDatabase = request.POST['HistoryDatabase']  
 
 
-        StoreDBSetting = DatabaseSetting.objects.create(days=days,time1=time1,
+        StoreDBSetting = DatabaseSetting.objects.create(time1=time1,
         time2=time2,time3=time3,time4=time4,time5=time5,DataBackupPath=BackupFilePath,
         AutoBackupStatus=AutoBackupStatus)
+        
+        getusr = User.objects.get(Username=request.session['username'])
+        msg = f"{getusr.Username} Updated database setting"
+        UA = UserAudit.objects.create(User=getusr,Comment=msg)
 
         return redirect("indexpage")
 
@@ -719,6 +759,9 @@ def AssignGroupSecurity(request):
             getSecurity.Help = False
         
         getSecurity.save()
+        getusr = User.objects.get(Username=request.session['username'])
+        msg = f"{getusr.Username} Updated {getGroup} group securities"
+        UA = UserAudit.objects.create(User=getusr,Comment=msg)
         return redirect("groupsec")
 
 def AssignUserSecurity(request):
@@ -902,6 +945,9 @@ def AssignUserSecurity(request):
             getSecurity.Help = False
         
         getSecurity.save()
+        getusr = User.objects.get(Username=request.session['username'])
+        msg = f"{getusr.Username} Updated {getUser} user securities"
+        UA = UserAudit.objects.create(User=getusr,Comment=msg)
         return redirect("usersec")
 
 def StoreSmsSetting(request):
@@ -912,6 +958,9 @@ def StoreSmsSetting(request):
 
         StoreSMSsetting = SMSsetting.objects.create(IntervalTime=interval_time,
         PortNum=port,BaudRate=baud)
+        getusr = User.objects.get(Username=request.session['username'])
+        msg = f"{getusr.Username} Updated SMS settings"
+        UA = UserAudit.objects.create(User=getusr,Comment=msg)
         return redirect("indexpage")
 
 def StoreEmailSetting(request):
@@ -927,6 +976,10 @@ def StoreEmailSetting(request):
         SmtpPort = smtpPort,SSL = ssl
         )
 
+        getusr = User.objects.get(Username=request.session['username'])
+        msg = f"{getusr.Username} Updated Email settings"
+        UA = UserAudit.objects.create(User=getusr,Comment=msg)
+        
         return redirect("indexpage")
 
 def MasterPasswordSetting(request):
@@ -941,6 +994,9 @@ def MasterPasswordSetting(request):
             if newpasswd == confpasswd:
                 usr.Password = confpasswd
                 usr.save()
+                getusr = User.objects.get(Username=request.session['username'])
+                msg = f"{getusr.Username} Updated Email settings"
+                UA = UserAudit.objects.create(User=getusr,Comment=msg)
                 return redirect("indexpage")
             else:
                 print("Password and Confirm password doesn't match")
@@ -979,6 +1035,7 @@ def CreateEquipment(request):
             print('else')
         EquipmentName = request.POST['eqp_name']
         EquipmentType = request.POST['eqp_type']
+        print("EQTYPE->",EquipmentType)
         DataLogIntervals = int(request.POST['log_inv'])
         IP1 = request.POST['t1']
         IP2 = request.POST['t2']
@@ -1008,6 +1065,10 @@ def CreateEquipment(request):
         else:
             Equip.IsDual = False
         Equip.save()
+        print("EQTYPE->",EquipmentType)
+        getusr = User.objects.get(Username=request.session['username'])
+        msg = f"{getusr.Username} Added {EquipmentType}"
+        UA = UserAudit.objects.create(User=getusr,Comment=msg)
 
         return redirect("equipment-creation")
 
@@ -1059,7 +1120,11 @@ def samp(request):
 
 
 def GeneratePdf(request):
-    pdf = html_to_pdf('nivdas/samp.html')
+    ua = UserAudit.objects.all()
+    f = open('nivdas/templates/nivdas/pdf-template.html', "w")
+    f.write(render_to_string('nivdas/audit-user.html', {'ua': ua}))
+    
+    pdf = html_to_pdf('nivdas/pdf-template.html')
     return HttpResponse(pdf, content_type='application/pdf')
 
 def GetData(request):
@@ -1105,6 +1170,8 @@ def EquipUpdateData(request, pk):
         'comment': equip.Comments,
     }
     return JsonResponse({'data': data})
+
+
 
 # def UpdateEquipData(request):
 #     if request.method == "POST":
@@ -1185,3 +1252,39 @@ def GetPLCDateTime(request):
         data.update({'hrs':hrs,'mit':mit,'sec':sec,'date':date,'month' : month,'year':year})
         print(data)
         return JsonResponse({'data': data})
+    
+def SetEquipmentDateTime(request):
+    # currentdatetime = request.POST['Currentdt']
+    # print("CURRENT DATE TIME------>",currentdatetime)
+    client = ModbusTcpClient("192.168.1.200")  # "192.168.1.200"
+    connection = client.connect()
+    print("Modbus connection ", connection, '\n')
+    dt = str(datetime.datetime.now())
+    print("SYNC DATETIME PLC--->",dt)
+    print("SYNC DATETIME--->",dt[0:4])
+    
+    year = int(dt[0:4])
+    month = int(dt[5:7])
+    date = int(dt[8:10])
+    hour = int(dt[11:13])
+    minute = int(dt[14:16])
+    sec = int(dt[17:19])
+    
+    print("SYNC DATETIME--->",hour,minute,sec,date,month,year)
+    
+    values = {400133:hour,400132:minute,400131:sec,400134:date,400135:month,400136:year,400137:1}
+    if connection:
+        try:
+            for i in values:
+                if i in [400005, 400006, 400007, 400012, 400026, 400027, 400028, 400033]:
+                    client.write_registers(i - 400001, values[i] * 10, unit=0x01)
+                else:
+                    client.write_registers(i - 400001, values[i], unit=0x01)
+        except:
+            print("Register address error")
+            return redirect("synchronize-date-time")
+    else:
+        print("Modbus Connection Error")
+        return redirect("synchronize-date-time")
+    
+    return redirect("synchronize-date-time")

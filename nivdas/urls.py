@@ -67,4 +67,7 @@ urlpatterns = [
     path("verify-admin/", views.VerifyUser, name="verify-admin"),
     path('equipment-update-data/<str:pk>/', views.EquipUpdateData, name="equipment-update-data"),
     path('get-plc-date-time/',views.GetPLCDateTime,name="getplcdatetime"),
+    path('dashboard-grid/',views.DashboardGrid,name="dashboard-grid"),
+    path('dashboard-list/',views.DashboardList,name="dashboard-list"),
+    path('set-equipment-date-time/',views.SetEquipmentDateTime,name="seteqpdatetime"),
 ]

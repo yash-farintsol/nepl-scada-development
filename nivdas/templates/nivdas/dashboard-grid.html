@@ -24,9 +24,10 @@
         <!-- App Css-->
         <link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
 
+        <link href="//db.onlinewebfonts.com/c/0aee6008b82cde991ec28387169bb13e?family=GD+Sherpa+Regular" rel="stylesheet" type="text/css"/>
     </head>
 
-    <body data-topbar="dark">
+    <body data-topbar="dark" style="font-family: GD Sherpa Regular !important;">
 
     <!-- <body data-layout="horizontal"> -->
 
@@ -76,7 +77,7 @@
                                     <div>
                                         <ul class="nav nav-pills">
                                             <li class="nav-item">
-                                                <a class="nav-link" href="{% url 'indexpage' %}" data-bs-toggle="tooltip" data-bs-placement="top" title="List"><i class="bx bx-list-ul"></i></a>
+                                                <a class="nav-link" href="{% url 'dashboard-list' %}" data-bs-toggle="tooltip" data-bs-placement="top" title="List"><i class="bx bx-list-ul"></i></a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link active" data-bs-toggle="tooltip" data-bs-placement="top" title="Grid"><i class="bx bx-grid-alt"></i></a>
@@ -445,17 +446,8 @@
         <!-- <script src="{% static 'js/pages/fontawesome.init.js' %}"></script> -->
     
         <script src="{% static 'js/app.js' %}"></script>
-
-        <script>
-            $('#vertical-menu-btn').on('click', function() {
-                if (document.getElementsByTagName("BODY")[0].getAttribute('data-sidebar-size') == 'sm') {
-                    document.getElementById('menu-div').style.width = '68px'
-                }
-                else {
-                    document.getElementById('menu-div').style.width = '88px'
-                }
-            })
-        </script>
+    
+        <script src="{% static 'js/pages/mode-styling.init.js' %}"></script>
         
 
     </body>

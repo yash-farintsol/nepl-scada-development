@@ -18,8 +18,6 @@
         <!-- DataTables -->
         <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet"
             type="text/css" />
-        <link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet"
-            type="text/css" />
 
         <!-- Responsive datatable examples -->
         <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}"
@@ -145,8 +143,9 @@
                                                             <div class="col-lg-8">
                                                                 <select class="form-control" id="department-name" name="dept_name" required>
                                                                     <option value="" selected disabled>Select</option>
-                                                                    <option>IT</option>
-                                                                    <option>QC</option>
+                                                                    {% for i in dep %}
+                                                                        <option>{{i.Department_Name}}</option>
+                                                                    {% endfor %}
                                                                 </select>
                                                                 <div class="valid-feedback">
                                                                     Looks good!
@@ -187,7 +186,7 @@
                                                         <div class="form-group row mb-4">
                                                             <label class="col-form-label col-lg-4">Password Change Duration(In days)<span style="color:red"> *</span></label>
                                                             <div class="col-lg-8">
-                                                                <input class="form-control" type="text" id="password-change" name="passwdChangeDuration" placeholder="Enter Password Change Duration(In days)" required>
+                                                                <input class="form-control" pattern="[0-9]{1,}" type="text" id="password-change" name="passwdChangeDuration" placeholder="Enter Password Change Duration(In days)" required>
                                                                 <div class="valid-feedback">
                                                                     Looks good!
                                                                 </div>
@@ -325,8 +324,26 @@
                                                             <div class="col-lg-8">
                                                                 <select class="form-control" name="department" required>
                                                                     <option value="" selected disabled>Select</option>
-                                                                    <option>IT</option>
-                                                                    <option>QC</option>
+                                                                    {% for i in dep %}
+                                                                        <option value="{{i.id}}">{{i.Department_Name}}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                </div>
+                                                                <div class="invalid-feedback">
+                                                                    Looks bad!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row mb-4">
+                                                            <label class="col-form-label col-lg-4">User Type<span style="color:red"> *</span></label>
+                                                            <div class="col-lg-8">
+                                                                <select class="form-control" name="usrtype" required>
+                                                                    <option value="" selected disabled>Select</option>
+                                                                    <option>Creator</option>
+                                                                    <option>Checker</option>
+                                                                    <option>Approver</option>
                                                                 </select>
                                                                 <div class="valid-feedback">
                                                                     Looks good!
@@ -367,7 +384,7 @@
                                                         <div class="form-group row mb-4">
                                                             <label class="col-form-label col-lg-4">Password Change Duration(In days)<span style="color:red"> *</span></label>
                                                             <div class="col-lg-8">
-                                                                <input class="form-control" type="text" name="PasswdChangeDuration" placeholder="Enter Password Change Duration(In days)" required>
+                                                                <input class="form-control" pattern="[0-9]{1,}" type="text" name="PasswdChangeDuration" placeholder="Enter Password Change Duration(In days)" required>
                                                                 <div class="valid-feedback">
                                                                     Looks good!
                                                                 </div>
@@ -507,30 +524,16 @@
 
         <script src="{% static 'js/app.js' %}"></script>
 
-        <!-- form validation -->
-        <!-- <script src="{% static 'js/pages/form-validation.init.js' %}"></script> -->
-
         <!-- Required datatable js -->
         <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
         <script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
 
-        <!-- Buttons examples -->
-        <script src="{% static 'libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
-        <script src="{% static 'libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
-        <script src="{% static 'libs/jszip/jszip.min.js' %}"></script>
-        <script src="{% static 'libs/pdfmake/build/pdfmake.min.js' %}"></script>
-        <script src="{% static 'libs/pdfmake/build/vfs_fonts.js' %}"></script>
-        <script src="{% static 'libs/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
-        <script src="{% static 'libs/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
-        <script src="{% static 'libs/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
+        <script src="{% static 'js/pages/mode-styling.init.js' %}"></script>
 
         <!-- Responsive examples -->
         <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
         <script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
 
-        <!-- Datatable init js -->
-        <!-- <script src="{% static 'js/pages/datatables.init.js' %}"></script> -->
-        <!-- <script src="{% static 'js/pages/custom-dt.init.js' %}"></script> -->
 
         <script>
             $(document).ready(function () {
@@ -540,8 +543,7 @@
                 var table = $('#datatable-buttons').DataTable({
                     orderCellsTop: true,
                     fixedHeader: true,
-                    lengthChange: !1,
-                    buttons: ["copy", "excel", "pdf", "colvis"],
+                    lengthChange: true,
                     initComplete: function () {
 
                         this.api().columns(1).every(function () {
@@ -584,7 +586,7 @@
                             });
                         })
                     },
-                }).buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)");
+                });
                 $(".dataTables_length select").addClass("form-select form-select-sm")
             });
         </script>
@@ -618,7 +620,7 @@
                     success: function(response)
                     {
                         r = response.data;
-                        console.log(r);
+                        console.log(r[0].dep_name);
                         document.getElementById("uid").value = r[0].id;
                         document.getElementById("username").value = r[0].name;
                         document.getElementById("password").value = r[0].password;
@@ -786,17 +788,6 @@
                     })
                 }, !1) 
             }()
-        </script>
-
-        <script>
-            $('#vertical-menu-btn').on('click', function() {
-                if (document.getElementsByTagName("BODY")[0].getAttribute('data-sidebar-size') == 'sm') {
-                    document.getElementById('menu-div').style.width = '68px'
-                }
-                else {
-                    document.getElementById('menu-div').style.width = '88px'
-                }
-            })
         </script>
 
 

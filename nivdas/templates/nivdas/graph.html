@@ -115,6 +115,8 @@
         <!-- apexcharts init -->
         <!-- <script src="{% static 'assets/js/pages/apexcharts.init.js' %}"></script> -->
     
+        <script src="{% static 'js/pages/mode-styling.init.js' %}"></script>
+    
     
         <script>
             function getChartColorsArray(e){
@@ -148,7 +150,7 @@
                 {name:"CH-10", data:[0, 13, 12, 45, 28, 12, 17]},
             ],
             title:{
-                text:"Inward & Outward Weekly",
+                text:"Graph Data",
                 align:"left",
                 style:{fontWeight:"500"}
             },
@@ -177,17 +179,6 @@
                 }]
             },
             chart=new ApexCharts(document.querySelector("#line_chart_datalabel"),options);chart.render();
-        </script>
-
-        <script>
-            $('#vertical-menu-btn').on('click', function() {
-                if (document.getElementsByTagName("BODY")[0].getAttribute('data-sidebar-size') == 'sm') {
-                    document.getElementById('menu-div').style.width = '68px'
-                }
-                else {
-                    document.getElementById('menu-div').style.width = '88px'
-                }
-            })
         </script>
 
 

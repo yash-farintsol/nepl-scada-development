@@ -17,8 +17,6 @@
         <!-- DataTables -->
         <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet"
             type="text/css" />
-        <link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet"
-            type="text/css" />
 
         <!-- Responsive datatable examples -->
         <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}"
@@ -33,8 +31,6 @@
         <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
-
-        <!-- <link href="https://cdn.datatables.net/datetime/1.1.1/css/dataTables.dateTime.min.css" rel="stylesheet" type="text/css" /> -->
 
         <link href="{% static 'libs/datatables.Time/dataTable.min.css' %}" rel="stylesheet" type="text/css" />
 
@@ -134,12 +130,6 @@
                                                 <th>Log Time</th>
                                                 <th>Alarm Type</th>
                                             </tr>
-                                            <tr>
-                                                <td id="0"></td>
-                                                <td id="1"></td>
-                                                <td id="2"></td>
-                                                <td id="3"></td>
-                                            </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
@@ -201,25 +191,15 @@
         <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
         <script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
     
-        <!-- Buttons examples -->
-        <script src="{% static 'libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
-        <script src="{% static 'libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
-        <script src="{% static 'libs/jszip/jszip.min.js' %}"></script>
-        <script src="{% static 'libs/pdfmake/build/pdfmake.min.js' %}"></script>
-        <script src="{% static 'libs/pdfmake/build/vfs_fonts.js' %}"></script>
-        <script src="{% static 'libs/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
-        <script src="{% static 'libs/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
-        <script src="{% static 'libs/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
-    
         <!-- Responsive examples -->
         <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
         <script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
 
-        <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/datetime/1.1.1/js/dataTables.dateTime.min.js"></script> -->
-
         <script src="{% static 'libs/datatables.Time/moment.min.js' %}"></script>
         <script src="{% static 'libs/datatables.Time/dataTable.min.js' %}"></script>
+    
+        <script src="{% static 'js/pages/mode-styling.init.js' %}"></script>
+
 
         <script>
             var minDate, maxDate;
@@ -256,90 +236,8 @@
                 var table = $('#datatable-buttons').DataTable({
                     orderCellsTop: true,
                     fixedHeader: true,
-                    lengthChange: !1,
-                    buttons: ["copy", "excel", "pdf", "colvis"],
-                    initComplete: function () {
-                            
-                        this.api().columns(0).every(function () {
-                            var column = this;
-                            var select = $(' <select class="form-select"><option value="">All Equipment</option></select>')
-                                // .appendTo(myTable.header())
-                                .appendTo('#username')
-                                .on('change', function () {
-                                    var val = $.fn.dataTable.util.escapeRegex(
-                                        $(this).val()
-                                    );
-            
-                                    column
-                                        .search(val ? '^' + val + '$' : '', true, false)
-                                        .draw();
-                                });
-            
-                            column.data().unique().sort().each(function (d, j) {
-                                select.append('<option value="' + d + '">' + d + '</option>')
-                            });
-                        })
-            
-                        this.api().columns(1).every(function () {
-                            var column = this;
-                            var select = $(' <select class="form-select"><option value=""></option></select>')
-                                // .appendTo(myTable.header())
-                                .appendTo('#datatable-buttons thead tr #1')
-                                .on('change', function () {
-                                    var val = $.fn.dataTable.util.escapeRegex(
-                                        $(this).val()
-                                    );
-            
-                                    column
-                                        .search(val ? '^' + val + '$' : '', true, false)
-                                        .draw();
-                                });
-            
-                            column.data().unique().sort().each(function (d, j) {
-                                select.append('<option value="' + d + '">' + d + '</option>')
-                            });
-                        })
-            
-                        // this.api().columns(2).every(function () {
-                        //     var column = this;
-                        //     var select = $(' <select class="form-select"><option value=""></option></select>')
-                        //         // .appendTo(myTable.header())
-                        //         .appendTo('#datatable-buttons thead tr #2')
-                        //         .on('change', function () {
-                        //             var val = $.fn.dataTable.util.escapeRegex(
-                        //                 $(this).val()
-                        //             );
-            
-                        //             column
-                        //                 .search(val ? '^' + val + '$' : '', true, false)
-                        //                 .draw();
-                        //         });
-            
-                        //     column.data().unique().sort().each(function (d, j) {
-                        //         select.append('<option value="' + d + '">' + d + '</option>')
-                        //     });
-                        // })
-            
-                        this.api().columns(3).every(function () {
-                            var column = this;
-                            var select = $(' <select class="form-select"><option value=""></option></select>')
-                                // .appendTo(myTable.header())
-                                .appendTo('#datatable-buttons thead tr #3')
-                                .on('change', function () {
-                                    var val = $.fn.dataTable.util.escapeRegex(
-                                        $(this).val()
-                                    );
-            
-                                    column
-                                        .search(val ? '^' + val + '$' : '', true, false)
-                                        .draw();
-                                });
-            
-                            column.data().unique().sort().each(function (d, j) {
-                                select.append('<option value="' + d + '">' + d + '</option>')
-                            });
-                        })
-                    },
+                    lengthChange: true,
+                    initComplete: function () {},
                 });
             
                 // Refilter the table
@@ -349,17 +247,6 @@
 
                 table.buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)");
             });
-        </script>
-
-        <script>
-            $('#vertical-menu-btn').on('click', function() {
-                if (document.getElementsByTagName("BODY")[0].getAttribute('data-sidebar-size') == 'sm') {
-                    document.getElementById('menu-div').style.width = '68px'
-                }
-                else {
-                    document.getElementById('menu-div').style.width = '88px'
-                }
-            })
         </script>
 
 
