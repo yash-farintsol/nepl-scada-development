@@ -99,7 +99,12 @@ def GeneralSetting(request):
 def EquipmentCreation(request):
     if 'username' in request.session:
         equipment = Equipment.objects.all()
-        return render(request, "nivdas/equip_creation.html", {'equip': equipment})
+        lst = []
+        chm = User.objects.get(Username=request.session['username'])
+        n = int(chm.NumberOfChamber)
+        for i in range(1,n+1):
+            lst.append(i)
+        return render(request, "nivdas/equip_creation.html", {'equip': equipment,'chm':lst})
     else:
         return redirect("loginpage")
 
@@ -1007,7 +1012,8 @@ def MasterPasswordSetting(request):
 
 def EquipmentList(request):
     if 'username' in request.session:
-        return render(request, "nivdas/supervise-equip-list.html")
+        GetAllEquip = Equipment.objects.all()
+        return render(request, "nivdas/supervise-equip-list.html",{'eqp':GetAllEquip})
     else:
         return redirect("loginpage")
 
@@ -1120,9 +1126,9 @@ def samp(request):
 
 
 def GeneratePdf(request):
-    ua = UserAudit.objects.all()
-    f = open('nivdas/templates/nivdas/pdf-template.html', "w")
-    f.write(render_to_string('nivdas/audit-user.html', {'ua': ua}))
+    # ua = UserAudit.objects.all()
+    # f = open('nivdas/templates/nivdas/pdf-template.html', "w")
+    # f.write(render_to_string('nivdas/audit-user.html', {'ua': ua}))
     
     pdf = html_to_pdf('nivdas/pdf-template.html')
     return HttpResponse(pdf, content_type='application/pdf')
@@ -1207,6 +1213,7 @@ def GetPLCDateTime(request):
         result = {}
         client = ModbusTcpClient(GetEquip.IPAddress)  # "192.168.1.200"
         connection = client.connect()
+        print("MODBUS CONNECTION----->",connection)
         # print("Modbus connection ", connection, '\n')
         values = [400151,400153,400147,400156,400154,400150]
         if connection:
@@ -1256,7 +1263,7 @@ def GetPLCDateTime(request):
 def SetEquipmentDateTime(request):
     # currentdatetime = request.POST['Currentdt']
     # print("CURRENT DATE TIME------>",currentdatetime)
-    client = ModbusTcpClient("192.168.1.200")  # "192.168.1.200"
+    client = ModbusTcpClient("192.168.1.140")  # "192.168.1.200"
     connection = client.connect()
     print("Modbus connection ", connection, '\n')
     dt = str(datetime.datetime.now())
@@ -1288,3 +1295,18 @@ def SetEquipmentDateTime(request):
         return redirect("synchronize-date-time")
     
     return redirect("synchronize-date-time")
+
+
+def EquipmentActivationStatus(request,pk):
+    if request.method == "POST":
+        geteqpact = Equipment.objects.get(id=pk)
+        # name = f"eqp_status_{pk}"
+        print(request.POST)
+        getstatus = request.POST["eqp_status"]
+        print("GETSTATUS",getstatus)
+        geteqpact.EquipmentActivationStation = getstatus
+        geteqpact.save()
+        return redirect("equipment-activation")
+    
+def SetEquipmentParameters(request):
+    pass

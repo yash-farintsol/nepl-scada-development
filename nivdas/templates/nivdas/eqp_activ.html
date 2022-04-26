@@ -85,25 +85,36 @@
 
                                                 <tbody>
                                                     {% for i in eqp %}
-                                                    <form id="form" action="" method="POST" >
+                                                    <form id="form{{i.id}}" action="{% url 'eqpactivestatus' pk=i.id %}" method="POST" >
+                                                        {% csrf_token %}
                                                         <tr data-id="{{i.id}}">
                                                             <td name="eqp_name">{{i.EquipmentName}}</td>
                                                             <td name="ip_addr">{{i.IPAddress}}</td>
-                                                            <td data-field="eqp_status" name="eqp_status">{{i.EquipmentActivationStation}}</td>
+                                                            <!-- <td data-field="eqp_status" id="drop{{i.id}}" name="eqp_status">{{i.EquipmentActivationStation}}</td>
+                                                            <input type="hidden" id="down{{i.id}}" data-field="eqp_status" value="" name="eqp_status"> -->
+                                                            <td>
+                                                                <select id="drop{{i.id}}" name="eqp_status">
+                                                                    {% if i.EquipmentActivationStation %}
+                                                                        <option selected>{{i.EquipmentActivationStation}}</option>
+                                                                    {% else %}
+                                                                        <option selected>Select Status</option>
+                                                                    {% endif %}
+                                                                    <option>Active</option>
+                                                                    <option>Inactive</option>
+                                                                </select>
+                                                            </td>
                                                             <td name="sensors">{{i.NumberOfSensor}}</td>
                                                             <td name="param">{{i.NumberOfParams}}</td>
                                                             <td name="mach_code">{{i.MachineCode}}</td>
                                                             <td>
-                                                                <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                    <i class="fas fa-pencil-alt"></i>
-                                                                </a>
+                                                                <input type="submit" class="btn btn-outline-secondary btn-sm edit" value="Edit">
                                                             </td>
                                                         </tr>
                                                     </form>
                                                     {% endfor %}
                                                 </tbody>
-                                            </table>
-                                        
+                                            </table>                  
+                                
                                             <!-- Modal starts -->
                                             <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
                                                 id="modal" aria-hidden="true">
@@ -125,7 +136,7 @@
                                                                         <div class="form-group row mb-4">
                                                                             <label class="col-form-label col-lg-4" for="validationCustom01">Username<span style="color:red">*</span></label>
                                                                             <div class="col-lg-8">
-                                                                                <input type="text" class="form-control"
+                                                                                <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
                                                                                 id="v-username" name="V-username" placeholder="Enter Username" required>
                                                                             </div>
                                                                         </div>
@@ -141,7 +152,7 @@
                                                                         <div class="form-group row mb-4">
                                                                             <label class="col-form-label col-lg-4" for="validationCustom01">Comments<span style="color:red">*</span></label>
                                                                             <div class="col-lg-8">
-                                                                                <input type="text" class="form-control" name="Comments" minlength="10"
+                                                                                <input type="text" class="form-control" name="Comments" 
                                                                                 id="comments" placeholder="Enter Comments" required>
                                                                                 <div class="valid-feedback"></div>
                                                                                 <div class="invalid-feedback"></div>
@@ -228,40 +239,53 @@
                 { 
                     var e = document.getElementsByClassName("needs-validation"); 
                     Array.prototype.filter.call(e, function (t) 
-                    {
-                        t.addEventListener("submit", function (e) 
-                        {
-                            // !1 === t.checkValidity() && (e.preventDefault(), e.stopPropagation()), t.classList.add("was-validated")
-                            if (!t.checkValidity()) {
-                                e.preventDefault(), e.stopPropagation()
-                            }
-                            else {
-                                $.ajax ({
-                                    method: "POST",
-                                    url: `/verify-admin/`,
+                    { 
+                        $('button[type=submit]').on('click', function() {
+                            t.addEventListener("submit", function (e) 
+                            { 
+                                !1 === t.checkValidity() && (e.preventDefault(), e.stopPropagation()), t.classList.add("was-validated")
+                                if ($(".invalid-feedback:visible").length == 0 && !$('#modal').hasClass('show')) {
+                                    $('#modal').modal('show') && (e.preventDefault(), e.stopPropagation());
+                                }
+                                else if ($(".invalid-feedback:visible").length == 0 && $(".valid-feedback:visible").length > 0 && $('#modal').hasClass('show')) {
+                                    e.preventDefault(), e.stopPropagation()
+                                    // $("#submit-form").on('click', function() {
+                                        if ($(".invalid-feedback:visible").length == 0 && $(".valid-feedback:visible").length > 0) {
+                                            $.ajax ({
+                                                method: "POST",
+                                                url: `/verify-admin/`,
 
-                                    data: {
-                                        csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
-                                        user: document.getElementById('v-username').value,
-                                        pass: document.getElementById('v-password').value,
-                                    },
-                                    success: function(response) {
-                                        // r = response.data;
-                                        // console.log(r);
-                                        if (response.data.valid == "YES") {
-                                            $("#form").trigger('submit', [true]);
+                                                data: {
+                                                    csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+                                                    user: document.getElementById('v-username').value,
+                                                    pass: document.getElementById('v-password').value,
+                                                },
+                                                success: function(response) {
+                                                    // r = response.data;
+                                                    // console.log(r);
+                                                    if (response.data.valid == "YES") {
+                                                        console.log('yes')
+                                                        var ID = localStorage.id;
+                                                        $(`#form${ID}`).trigger('submit', [true]);
+                                                    }
+                                                    else {
+                                                        console.log('no')
+                                                        e.preventDefault(), e.stopPropagation()
+                                                        $('#alert_placeholder').html('<div class="alert alert-danger alert-dismissible fade show" role="alert">Invalid Admin Credentials!<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>')
+                                                    }
+                                                }
+                                            })
                                         }
-                                        else {
-                                            e.preventDefault(), e.stopPropagation()
-                                            $('#alert_placeholder').html('<div class="alert alert-danger alert-dismissible fade show" role="alert">Invalid Admin Credentials!<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>')
-                                        }
-                                    }
-                                })
-                            }
-                        }, !1) 
+                                    // })
+                                }
+                                else {
+                                    e.preventDefault(), e.stopPropagation()
+                                }
+                            }, !1) 
+                        })
                     })
                 }, !1) 
-            }
+            }()
         </script>
 
 

@@ -4,7 +4,7 @@ from pymodbus.client.sync import ModbusTcpClient
 root = Tk()
 
 def PLC_Connection_Status():
-    client = ModbusTcpClient("192.168.1.200",port=502)
+    client = ModbusTcpClient("192.168.1.211",port=502)
     connection = client.connect()
     print(f"PLC CONNECTION STATUS--------->{connection}")
     if connection == False:

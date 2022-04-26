@@ -87,6 +87,7 @@ class User(models.Model):
     PasswordExpiryDate = models.DateTimeField(auto_now_add=True)
     Is_Group_Security_Assigned = models.BooleanField(default=False)
     Is_User_Security_Assigned = models.BooleanField(default=False)
+    NumberOfChamber = models.CharField(max_length=30,default="chamber")
 
     def __str__(self):
         return self.Username
@@ -173,6 +174,29 @@ class Equipment(models.Model):
     Comments = models.CharField(max_length=200)
     EquipmentActivationStation = models.CharField(max_length=200,default="Inactive")
 
+
+class EqpParameterTemp(models.Model):
+    Equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
+    SetValue = models.CharField(max_length=200,default="0")
+    LowerLimit = models.CharField(max_length=200,default="0")
+    UpperLimit = models.CharField(max_length=200,default="0")
+    TotalSensor = models.CharField(max_length=200,default="0")
+    Cooling = models.CharField(max_length=200,default="Cooling")
+    
+class EqpParameterHum(models.Model):
+    Equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
+    SetValue = models.CharField(max_length=200,default="0")
+    LowerLimit = models.CharField(max_length=200,default="0")
+    UpperLimit = models.CharField(max_length=200,default="0")
+    TotalSensor = models.CharField(max_length=200,default="0")
+    
+class EqpParameterLux(models.Model):
+    Equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
+    SetLux = models.CharField(max_length=200,default="0")
+    SetLuxIntensity = models.CharField(max_length=200,default="0")
+    SetUV = models.CharField(max_length=200,default="0")
+    SetUVIntensity = models.CharField(max_length=200,default="0")
+
 class MailTemplate(models.Model):
     TemplateName = models.CharField(max_length=200)
     EquipmentName = models.CharField(max_length=200)
@@ -187,3 +211,9 @@ class UserAudit(models.Model):
     Time = models.TimeField(default=datetime.now().time())
     Comment = models.TextField()
     
+    def __str__(self):
+        return self.Comment
+    
+class Chambers(models.Model):
+    chm_name = models.CharField(max_length=100,default="chm_name")
+    chm_register = models.CharField(max_length=100,default="chm_register")

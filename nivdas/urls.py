@@ -30,6 +30,7 @@ urlpatterns = [
     path('equipment-creation', views.EquipmentCreation, name="equipment-creation"),
     path('equipment-parameter', views.EquipmentParameter, name="equipment-parameter"),
     path('equipment-activation', views.EquipmentActivation, name="equipment-activation"),
+    path("eqp-active/<int:pk>/",views.EquipmentActivationStatus,name="eqpactivestatus"),
     path('template/', views.MSTemplate, name="template"),
     path('store-template-settings/',views.StoreTemplate,name="store_mail_template"),
     path('mobile-number/', views.MobileNo, name="mobile-number"),
@@ -70,4 +71,5 @@ urlpatterns = [
     path('dashboard-grid/',views.DashboardGrid,name="dashboard-grid"),
     path('dashboard-list/',views.DashboardList,name="dashboard-list"),
     path('set-equipment-date-time/',views.SetEquipmentDateTime,name="seteqpdatetime"),
+    path('set-equipment-parameter/',views.SetEquipmentParameters,name="SetEquipmentParameters"),
 ]
