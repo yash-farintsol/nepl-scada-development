@@ -1,0 +1,254 @@
+{% load static %} 
+<!doctype html>
+<html lang="en">
+
+    <head>
+        
+        <meta charset="utf-8" />
+        <title>Status Reports | AHFL</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesbrand" name="author" />
+        
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{% static 'images/nepl-logo.png' %}">
+    
+        <!-- DataTables -->
+        <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet"
+            type="text/css" />
+    
+        <!-- Responsive datatable examples -->
+        <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}"
+            rel="stylesheet" type="text/css" />
+        
+        <!-- preloader css -->
+        <link rel="stylesheet" href="{% static 'css/preloader.min.css' %}" type="text/css" />
+
+        <!-- Bootstrap Css -->
+        <link href="{% static 'css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body data-topbar="dark">
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            {% include 'nivdas/sidebar-base.html' %}
+
+            {% include 'nivdas/navbar-base.html' %}
+
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">Status Reports</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="{% url 'indexpage' %}">Dashboard</a></li>
+                                            <li class="breadcrumb-item"><a href="#">Supervise</a></li>
+                                            <li class="breadcrumb-item active">Status Reports</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+                        
+
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="row">
+                                    <div class="col-xl-2">
+                                        <label>Equipment Name : </label>
+                                    </div>
+                                    <div class="col-xl-3">
+                                        <div id="username"></div>
+                                    </div>
+
+                                    <div class="col-xl-7">
+                                        <button class="btn btn-primary waves-effect waves-light" 
+                                            type="button" style="float: right;">View
+                                        </button>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="table-responsive">
+                                            <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline" style="table-layout: auto">
+                                                <thead id="header">
+                                                    <tr>
+                                                        <th>Report</th>
+                                                        <th>Instrument/User</th>
+                                                        <th>Created By</th>
+                                                        <th>Created On</th>
+                                                        <th>Checked By</th>
+                                                        <th>Checked On</th>
+                                                        <th>Approved By</th>
+                                                        <th>Approved On</th>
+                                                        <th>Rejected By</th>
+                                                        <th>Rejected On</th>
+                                                        <th></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td id="sort0"></td>
+                                                        <td id="sort1"></td>
+                                                        <td id="sort2"></td>
+                                                        <td id="sort3"></td>
+                                                        <td id="sort4"></td>
+                                                        <td id="sort5"></td>
+                                                        <td id="sort6"></td>
+                                                        <td id="sort7"></td>
+                                                        <td id="sort8"></td>
+                                                        <td id="sort9"></td>
+                                                        <td id="sort10"></td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>User Audit</td>
+                                                        <td>user1</td>
+                                                        <td>user1</td>
+                                                        <td>05/02/2022 12:22</td>
+                                                        <td>user2</td>
+                                                        <td>05/02/2022 12:35</td>
+                                                        <td>admin</td>
+                                                        <td>05/02/2022 12:46</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td><a href="{% static 'sample1.pdf' %}" target="_blank">Click to view</a></td>
+                                                    </tr> <!-- {{MEDIA_URL}}{{i.PAN.url}} -->
+                                                    <tr>
+                                                        <td>Equipment Audit</td>
+                                                        <td>cooling Chamber</td>
+                                                        <td>user1</td>
+                                                        <td>05/02/2022 12:23</td>
+                                                        <td>user2</td>
+                                                        <td>05/02/2022 12:35</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>admin</td>
+                                                        <td>05/02/2022 12:46</td>
+                                                        <td><a href="{% static 'sample.pdf' %}" target="_blank">Click to view</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>MKT Report</td>
+                                                        <td>Deep Freezer</td>
+                                                        <td>admin</td>
+                                                        <td>05/02/2022 12:22</td>
+                                                        <td>vivek</td>
+                                                        <td>05/02/2022 12:35</td>
+                                                        <td>admin</td>
+                                                        <td>05/02/2022 12:46</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td><a href="{% static 'sample.pdf' %}" target="_blank">Click to view</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Data Report</td>
+                                                        <td>SMARTOVEN</td>
+                                                        <td>user1</td>
+                                                        <td>05/02/2022 15:52</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td><a href="{% static 'sample1.pdf' %}" target="_blank">Click to view</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Data Report</td>
+                                                        <td>Deep Freezer</td>
+                                                        <td>user1</td>
+                                                        <td>22/02/2022 17:01</td>
+                                                        <td>user2</td>
+                                                        <td>22/02/2022 17:10</td>
+                                                        <td>admin</td>
+                                                        <td>22/02/2022 17:10</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td><a href="{% static 'sample1.pdf' %}" target="_blank">Click to view</a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div> <!-- end card-body -->
+                                </div> <!-- end card -->
+                                
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <script>document.write(new Date().getFullYear())</script> © NIV-DAS.
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="text-sm-end d-none d-sm-block">
+                                    Crafted with <i class="mdi mdi-heart text-danger"></i> .
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
+
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'libs/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'libs/metismenu/metisMenu.min.js' %}"></script>
+        <script src="{% static 'libs/simplebar/simplebar.min.js' %}"></script>
+        <script src="{% static 'libs/node-waves/waves.min.js' %}"></script>
+        <script src="{% static 'libs/feather-icons/feather.min.js' %}"></script>
+        <!-- pace js -->
+        <script src="{% static 'libs/pace-js/pace.min.js' %}"></script>
+    
+        <!-- Required datatable js -->
+        <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+    
+        <script src="{% static 'js/app.js' %}"></script>
+
+        <!-- Datatable init js -->
+        <script src="{% static 'js/pages/scrollable-dt.init.js' %}"></script>
+    
+        <script src="{% static 'js/pages/mode-styling.init.js' %}"></script>
+
+
+    </body>
+</html>
+
+
+

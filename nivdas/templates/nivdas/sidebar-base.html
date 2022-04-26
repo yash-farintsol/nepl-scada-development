@@ -1,0 +1,212 @@
+{% load static %}
+
+{% for item in all %}
+    {% if item.u_name == user.username %}
+        {% if item.group_name == "Admin" %}
+        
+        {% endif %}
+        {% if item.group_name == "Supervisor" %}
+        
+        {% endif %}
+        {% if item.group_name == "Operator" %}
+        
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
+<!-- ========== Left Sidebar Start ========== -->
+<div class="vertical-menu">
+
+    <div data-simplebar class="h-100">
+
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu list-unstyled" id="side-menu">
+                
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="users"></i>
+                        <span data-key="t-ecommerce">Admin</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        {% if request.session.UserCreation == True %}
+                            <li><a href="{% url 'user-management' %}" data-key="t-products">User Creation</a></li>
+                        {% endif %}
+                        {% if request.session.GroupSec == True %}
+                            <li><a href="{% url 'groupsec' %}" data-key="t-product-detail">Group Security</a></li>
+                        {% endif %}
+                        {% if request.session.UserSec == True %}
+                            <li><a href="{% url 'usersec' %}" data-key="t-orders">User Security</a></li>
+                        {% endif %}
+                        {% if request.session.DatabaseSetting == True %}
+                            <li><a href="{% url 'DatabaseSettingPage' %}" data-key="t-customers">Database Settings</a></li>
+                        {% endif %}
+                        {% if request.session.SMSsetting == True %}
+                            <li><a href="{% url 'sms-setting' %}" data-key="t-cart">SMS Settings</a></li>
+                        {% endif %}
+                        {% if request.session.EmailSetting == True %}
+                            <li><a href="{% url 'email-setting' %}" data-key="t-cart">Email Settings</a></li>
+                        {% endif %}
+                        {% if request.session.MasterPasswdSetting == True %}
+                            <li><a href="{% url 'master-password-setting' %}" data-key="t-checkout">Master Password Settings</a></li>
+                        {% endif %}
+                        {% if request.session.GeneralSetting == True %}
+                            <li><a href="{% url 'general-setting' %}" data-key="t-cart">General Setting</a></li>
+                        {% endif %}
+                        </ul>
+                </li>
+                
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="settings"></i>
+                        <span data-key="t-ecommerce">Master Settings</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        {% if request.session.EquipmentCreation == True %}
+                            <li><a href="{% url 'equipment-creation' %}" data-key="t-products">Equipment Creation</a></li>
+                        {% endif %}
+                        {% if request.session.EquipmentParameter == True %}
+                            <li><a href="{% url 'equipment-parameter' %}" data-key="t-product-detail">Equipment Parameter</a></li>
+                        {% endif %}
+                        {% if request.session.EquipmentActivation == True %}
+                            <li><a href="{% url 'equipment-activation' %}" data-key="t-orders">Equipment Activation</a></li>
+                        {% endif %}
+                        {% if request.session.Template == True %}
+                            <li><a href="{% url 'template' %}" data-key="t-customers">Template</a></li>
+                        {% endif %}
+                        {% if request.session.MobileNumber == True %}
+                            <li><a href="{% url 'mobile-number' %}" data-key="t-cart">Mobile Number</a></li>
+                        {% endif %}
+                        {% if request.session.MasterTemplate == True %}
+                            <li><a href="{% url 'master-template' %}" data-key="t-checkout">Master Template</a></li>
+                        {% endif %}
+                        {% if request.session.SyncDataTime == True %}
+                            <li><a href="{% url 'synchronize-date-time' %}" data-key="t-shops">Synchronize Date Time</a></li>
+                        {% endif %}
+                        {% if request.session.ResetLuxUV == True %}
+                            <li><a href="{% url 'reset-lux-uv' %}" data-key="t-add-product">Reset Lux UV</a></li>
+                        {% endif %}
+                        {% if request.session.InputOutputStatus == True %}
+                            <li><a href="{% url 'io-status' %}" data-key="t-add-product">Input Output Status</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+                
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="user-check"></i>
+                        <span data-key="t-ecommerce">Supervise</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        {% if request.session.EquipmentList == True %}
+                            <li><a href="{% url 'equipment-list' %}" data-key="t-products">Equipment List</a></li>
+                        {% endif %}
+                        {% if request.session.DataView == True %}
+                            <li><a href="{% url 'data-view' %}" data-key="t-product-detail">Data View</a></li>
+                        {% endif %}
+                        {% if request.session.LuxUVDataView == True %}
+                            <li><a href="{% url 'luxuv-data-view' %}" data-key="t-orders">Lux UV Data View</a></li>
+                        {% endif %}
+                        {% if request.session.ReportApproval == True %}
+                            <li><a href="{% url 'report-approval' %}" data-key="t-products">Report Approval</a></li>
+                        {% endif %}
+                        {% if request.session.StatusReports == True %}
+                            <li><a href="{% url 'status-report' %}" data-key="t-product-detail">Status Reports</a></li>
+                        {% endif %}
+                    </ul> 
+                </li>
+                
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="align-right"></i>
+                        <span data-key="t-ecommerce">Audit Trails</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        {% if request.session.UserAudit == True %}
+                            <li><a href="{% url 'user-audit' %}" data-key="t-products">User Audit</a></li>
+                        {% endif %}
+                        {% if request.session.AlarmAudit == True %}
+                            <li><a href="{% url 'alarm-audit' %}" data-key="t-products">Alarm Audit</a></li>
+                        {% endif %}
+                        {% if request.session.SMSAudit == True %}
+                            <li><a href="{% url 'sms-audit' %}" data-key="t-products">SMS Audit</a></li>
+                        {% endif %}
+                        {% if request.session.EquipmentAudit == True %}
+                            <li><a href="{% url 'equipment-audit' %}" data-key="t-products">Equipment Audit</a></li>
+                        {% endif %}
+                        {% if request.session.EmailAudit == True %}
+                            <li><a href="{% url 'email-audit' %}" data-key="t-products">Email Audit</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+                
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="activity"></i>
+                        <span data-key="t-ecommerce">History</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        {% if request.session.DataReportGraph == True %}
+                            <li><a href="{% url 'data-view-history' %}" data-key="t-products">Data Report/Graph</a></li>
+                        {% endif %}
+                        {% if request.session.LuxUVDataView == True %}
+                            <li><a href="{% url 'luxuv-data-view-history' %}" data-key="t-product-detail">Lux UV Data View</a></li>
+                        {% endif %}
+                        {% if request.session.HUserAudit == True %}
+                            <li><a href="{% url 'user-audit-history' %}" data-key="t-products">User Audit</a></li>
+                        {% endif %}
+                        {% if request.session.HAlarmAudit == True %}
+                            <li><a href="{% url 'alarm-audit-history' %}" data-key="t-products">Alarm Audit</a></li>
+                        {% endif %}
+                        {% if request.session.HSMSAudit == True %}
+                            <li><a href="{% url 'sms-audit-history' %}" data-key="t-products">SMS Audit</a></li>
+                        {% endif %}
+                        {% if request.session.HEquipmentAudit == True %}
+                            <li><a href="{% url 'equipment-audit-history' %}" data-key="t-products">Equipment Audit</a></li>
+                        {% endif %}
+                        {% if request.session.HEmailAudit == True %}
+                            <li><a href="{% url 'email-audit-history' %}" data-key="t-products">Email Audit</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+                
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="tool"></i>
+                        <span data-key="t-ecommerce">Tools/Utility</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        {% if request.session.GraphSettings == True %}
+                            <li><a href="{% url 'graph-setting' %}" data-key="t-products">Graph Settings</a></li>
+                        {% endif %}
+                        {% if request.session.PasswordSettings == True %}
+                            <li><a href="{% url 'password-setting' %}" data-key="t-product-detail">Password Settings</a></li>
+                        {% endif %}
+                        {% if request.session.PrintMultipleReports == True %}
+                            <li><a href="{% url 'print-multiple-reports' %}" data-key="t-orders">Print Multiple Reports</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+                
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="help-circle"></i>
+                        <span data-key="t-ecommerce">Help</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        {% if request.session.AboutUs == True %}
+                            <li><a href="javascript: void(0);" data-key="t-product-detail">About Us</a></li>
+                        {% endif %}
+                        {% if request.session.Help == True %}
+                            <li><a href="javascript: void(0);" data-key="t-orders">Help</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+                
+            </ul>
+        </div>
+        <!-- Sidebar -->
+    </div>
+</div>
+<!-- Left Sidebar End {% url 'about-us' %}-->

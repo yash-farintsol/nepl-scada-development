@@ -1,0 +1,516 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+    <head>
+        
+        <meta charset="utf-8" />
+        <title>Equipment Creation | NIV-DAS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesbrand" name="author" />
+        
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{% static 'images/nepl-logo.png' %}">
+
+        <!-- DataTables -->
+        <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet"
+            type="text/css" />
+        <link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet"
+            type="text/css" />
+
+        <!-- Responsive datatable examples -->
+        <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}"
+            rel="stylesheet" type="text/css" />
+
+        <!-- preloader css -->
+        <link rel="stylesheet" href="{% static 'css/preloader.min.css' %}" type="text/css" />
+
+        <!-- Bootstrap Css -->
+        <link href="{% static 'css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body data-topbar="dark">
+
+    <!-- <body data-layout="horizontal"> -->
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            {% include 'nivdas/sidebar-base.html' %}
+
+            {% include 'nivdas/navbar-base.html' %}
+            
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <!-- breadcrumb -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">Equipment Creation</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="{% url 'indexpage' %}">Dashboard</a></li>
+                                            <li class="breadcrumb-item"><a href="#">Master Settings</a></li>
+                                            <li class="breadcrumb-item active">Equipment Creation</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form class="needs-validation" action="{% url 'equipment' %}" novalidate method="POST" id="form1">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="id" id="uid">
+                                            <div class="row">
+                                                <div class="col-xl-6 col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label>Equipment Name</label>
+                                                        <input class="form-control" type="text" list="equipment_name" id="equip_name" name = "eqp_name" value="Select">
+                                                        <datalist id="equipment_name" class="form-datalist-lg mb-5" aria-label=".form-datalist-lg example">
+                                                            {% for i in equip %}
+                                                                <option>{{i.EquipmentName}}</option>
+                                                            {% endfor %}
+                                                        </datalist>
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                        <div class="invalid-feedback">
+                                                            Looks bad!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label>Type of Equipment</label>
+                                                        <input class="form-control" type="text" id="equip_type" name="eqp_type" placeholder="Enter Type of Equipment">
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                        <div class="invalid-feedback">
+                                                            Looks bad!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row">
+                                                <div class="col-xl-6 col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label>No. of Parameters</label>
+                                                        <select class="form-select" id="Param" name="param">
+                                                            <option selected disabled value="">Select</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                        </select>
+                                                        <div id="noerror" class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                        <div id="error" class="invalid-feedback">
+                                                            Looks bad!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label>No. of Sensors</label>
+                                                        <select class="form-select" id="sensor" name="sensor">
+                                                            <option selected disabled value="">Select</option>
+                                                            {% for i in chm %}
+                                                                <option>{{i}}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                        <div id="noerror" class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                        <div id="error" class="invalid-feedback">
+                                                            Looks bad!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-xl-6 col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label>Data Log Intervals</label>
+                                                        <input class="form-control" type="text" name="log_inv" id="interval" pattern="[6-9]|\d{2,}|\d{3,}" 
+                                                            placeholder="Enter Data Log Intervals" required>
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                        <div class="invalid-feedback">
+                                                            Looks bad!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-md-6">
+                                                    <div class="form-group mb-3"> <br>
+                                                        <label>(Minimum 5 minutes)</label> &emsp;&emsp;
+                                                        <!-- <div style="float: right;"> -->
+                                                            <button class="btn btn-primary waves-effect waves-light" type="submit">Sync</button>
+                                                        <!-- </div> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row">
+                                                <div class="col-xl-2 col-md-3 col-sm-3">
+                                                    <div class="form-group mb-3">
+                                                        <label>IP Address</label>
+                                                        <input type="text" class="form-control text-center" 
+                                                            name="t1" id="digit1-input" pattern="[0-9]{1,4}" required>
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                        <div class="invalid-feedback">
+                                                            Looks bad!
+                                                        </div>
+                                                    </div>
+                                                </div>
+            
+                                                <div class="col-xl-2 col-md-3 col-sm-3">
+                                                    <div class="form-group mb-3">
+                                                        <input type="text" class="form-control text-center" 
+                                                        name="t2" id="digit2-input" pattern="[0-9]{1,4}" required style="margin-top: 27px;">
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                        <div class="invalid-feedback">
+                                                            Looks bad!
+                                                        </div>
+                                                    </div>
+                                                </div>
+            
+                                                <div class="col-xl-2 col-md-3 col-sm-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="digit3-input" class="visually-hidden"></label>
+                                                        <input type="text" class="form-control text-center" 
+                                                        name="t3" id="digit3-input" pattern="[0-9]{1,4}" required style="margin-top: 27px;">
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                        <div class="invalid-feedback">
+                                                            Looks bad!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--  form-control-lg -->
+                                                <div class="col-xl-2 col-md-3 col-sm-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="digit4-input" class="visually-hidden"></label>
+                                                        <input type="text" class="form-control text-center" 
+                                                        name="t4" id="digit4-input" pattern="[0-9]{1,4}" required style="margin-top: 27px;">
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                        <div class="invalid-feedback">
+                                                            Looks bad!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-4 col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label>Machine Code</label>
+                                                        <input class="form-control" type="text" id="machine_code" name="mach_code" placeholder="Enter Machine Code">
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                        <div class="invalid-feedback">
+                                                            Looks bad!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-xl-6 col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label>Department</label>
+                                                        <input class="form-control" type="text" list="department_name" id="department" name="dep_name" value="Select">
+                                                        <datalist id="department_name" class="form-datalist-lg mb-5" aria-label=".form-datalist-lg example">
+                                                            
+                                                        </datalist>
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                        <div class="invalid-feedback">
+                                                            Looks bad!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label>Protocol</label>
+                                                        <select class="form-select" name="protocol" id="Protocols">
+                                                            <option selected disabled value="">-- Select Option --</option>
+                                                            <option>TCP/IP</option>
+                                                            <option>FTP</option>
+                                                        </select>
+                                                        <div id="noerror" class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                        <div id="error" class="invalid-feedback">
+                                                            Looks bad!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-xl-3 col-md-6"><br><br>
+                                                    <div class="form-check font-size-16">
+                                                        <input class="form-check-input" type="checkbox" name="Dual"
+                                                            value="Photo-stability" id="photoStability">
+                                                        <label class="form-check-label" for="admincheck03">
+                                                            Is Photo Stability
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6"><br><br>
+                                                    <div class="form-check font-size-16">
+                                                        <input class="form-check-input" type="checkbox" name="Dual"
+                                                            value="Dual" id="dual">
+                                                        <label class="form-check-label" for="admincheck03">
+                                                            Is Dual
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label>Comments</label>
+                                                        <textarea class="form-control" name="comment" id="Comments" rows="3" placeholder="Enter Comments"></textarea>
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                        <div class="invalid-feedback">
+                                                            Looks bad!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-end">
+                                                <div class="col-xl-12">
+                                                    <div style="float: right;">
+                                                        <button class="btn btn-primary waves-effect waves-light" type="submit">Save</button> &nbsp;&nbsp;
+                                                        <button class="btn btn-primary waves-effect waves-light" type="submit" onclick="clearForm()">Clear</button>
+                                                    </div>
+                                                </div>
+                                            </div>                   
+                                
+                                            <!-- Modal starts -->
+                                            <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
+                                                id="modal" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Verify Admin</h5>
+                                                            <button type="button" class="btn-close"
+                                                                style="padding: 0rem 2rem; width: 2px"
+                                                                data-bs-dismiss="modal" aria-label="Close">
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div id="alert_placeholder"></div>
+                                                            <form class="needs-validation" novalidate>
+                                                                <div data-repeater-list="outer-group" class="outer">
+                                                                    <div data-repeater-item class="outer">
+                
+                                                                        <div class="form-group row mb-4">
+                                                                            <label class="col-form-label col-lg-4" for="validationCustom01">Username<span style="color:red">*</span></label>
+                                                                            <div class="col-lg-8">
+                                                                                <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
+                                                                                id="v-username" name="V-username" placeholder="Enter Username" required>
+                                                                            </div>
+                                                                        </div>
+                
+                                                                        <div class="form-group row mb-4">
+                                                                            <label class="col-form-label col-lg-4">Password<span style="color:red">*</span></label>
+                                                                            <div class="col-lg-8">
+                                                                                <input type="password" class="form-control" name="V-password" 
+                                                                                id="v-password" placeholder="Enter Password" required>
+                                                                            </div>
+                                                                        </div>
+                
+                                                                        <div class="form-group row mb-4">
+                                                                            <label class="col-form-label col-lg-4" for="validationCustom01">Comments<span style="color:red">*</span></label>
+                                                                            <div class="col-lg-8">
+                                                                                <input type="text" class="form-control" name="Comments" 
+                                                                                id="comments" placeholder="Enter Comments" required>
+                                                                                <div class="valid-feedback"></div>
+                                                                                <div class="invalid-feedback"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row justify-content-end">
+                                                                    <div class="col-lg-10">
+                                                                        <button type="submit" style="float: right;"
+                                                                            class="btn btn-primary" id="submit-form">Submit
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div><!-- /.modal-content -->
+                                                </div><!-- /.modal-dialog -->
+                                            </div><!-- /.modal -->
+                
+                                        </form>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <script>document.write(new Date().getFullYear())</script> © NIV-DAS.
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="text-sm-end d-none d-sm-block">
+                                    Crafted with <i class="mdi mdi-heart text-danger"></i> .
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'libs/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'libs/metismenu/metisMenu.min.js' %}"></script>
+        <script src="{% static 'libs/simplebar/simplebar.min.js' %}"></script>
+        <script src="{% static 'libs/node-waves/waves.min.js' %}"></script>
+        <script src="{% static 'libs/feather-icons/feather.min.js' %}"></script>
+        <!-- pace js -->
+        <script src="{% static 'libs/pace-js/pace.min.js' %}"></script>
+
+        <script src="{% static 'js/app.js' %}"></script>
+
+        <!-- form validation -->
+        <script src="{% static 'js/pages/form-validation.init.js' %}"></script>
+    
+        <script src="{% static 'js/pages/mode-styling.init.js' %}"></script>
+
+        
+        <!-- clear form -->
+        <script>
+            function clearForm() {
+                document.getElementById("form1").reset();
+            }
+        </script>
+
+        <script>
+            $("#equip_name").on("change",function(){
+                console.log("change")
+                var aid = this.value
+                console.log("update",aid)
+
+                $.ajax
+                ({
+                    method : "GET",
+                    url : `/equipment-update-data/${aid}/`,
+
+                    success: function(response)
+                    {
+                        r = response.data;
+                        console.log(r);
+                        document.getElementById("uid").value = r.id;
+                        document.getElementById("equip_name").value = r.equip_name;
+                        document.getElementById("equip_type").value = r.equip_type;
+                        document.getElementById("Param").value = r.parameter;
+                        document.getElementById("sensor").value = r.sensor;
+                        document.getElementById("interval").value = r.data_log;
+                        document.getElementById("machine_code").value = r.machine_code;
+                        document.getElementById("department").value = r.department;
+                        document.getElementById("Protocols").value = r.protocol;
+                        document.getElementById("Comments").value = r.comment;
+                        if (r.photo_stability == true) {
+                            document.getElementById("photoStability").checked = true
+                        }
+                        else {
+                            document.getElementById("photoStability").checked = false
+                        }
+                        if (r.dual == true) {
+                            document.getElementById("dual").checked = true
+                        }
+                        else {
+                            document.getElementById("dual").checked = false
+                        }
+                        var address = r.ip_address;
+                        address = address.split(/[.]/);
+                        document.getElementById("digit1-input").value = address[0]
+                        document.getElementById("digit2-input").value = address[1]
+                        document.getElementById("digit3-input").value = address[2]
+                        document.getElementById("digit4-input").value = address[3]
+                    }
+                });
+            });
+        </script>
+
+        <script>
+            $('#dual').on('change', function() {
+                if (document.getElementById("dual").checked == true) {
+                    document.getElementById("photoStability").disabled = true
+                    document.getElementById("photoStability").checked = false
+                }
+                else {
+                    document.getElementById("photoStability").disabled = false
+                }
+            })
+            
+            $('#photoStability').on('change', function() {
+                if (document.getElementById("photoStability").checked == true) {
+                    document.getElementById("dual").disabled = true
+                    document.getElementById("dual").checked = false
+                }
+                else {
+                    document.getElementById("dual").disabled = false
+                }
+            })
+
+            $('#form1').on('click', function() {
+                if (document.getElementById("uid").value == "") {
+                    document.getElementById("Param").disabled = false;
+                    document.getElementById("sensor").disabled = false;
+                }
+                else {
+                    document.getElementById("Param").disabled = true;
+                    document.getElementById("sensor").disabled = true;
+                }
+            })
+        </script>
+        
+
+    </body>
+</html>

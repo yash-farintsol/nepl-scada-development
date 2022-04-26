@@ -1,0 +1,513 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+    <head>
+        
+        <meta charset="utf-8" />
+        <title>Equipment Parameter | NIV-DAS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesbrand" name="author" />
+        
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{% static 'images/nepl-logo.png' %}">
+
+        <!-- preloader css -->
+        <link rel="stylesheet" href="{% static 'css/preloader.min.css' %}" type="text/css" />
+
+        <!-- Bootstrap Css -->
+        <link href="{% static 'css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body data-topbar="dark">
+
+    <!-- <body data-layout="horizontal"> -->
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            {% include 'nivdas/sidebar-base.html' %}
+
+            {% include 'nivdas/navbar-base.html' %}
+            
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <!-- breadcrumb -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">Equipment Parameter</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="{% url 'indexpage' %}">Dashboard</a></li>
+                                            <li class="breadcrumb-item"><a href="#">Master Settings</a></li>
+                                            <li class="breadcrumb-item active">Equipment Parameter</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <form id="form1" action="{% url 'SetEquipmentParameters' %}" method="POST" class="needs-validation" novalidate>
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <br>
+                                                <label for="validationCustom01" class="form-label">Equipment
+                                                    Name</label>
+                                                <select class="form-select" id="eqp-name" name="Eqp-name" required>
+                                                    <option selected disabled value="">Select</option>
+                                                    {% for i in equip %}
+                                                        <option value="{{i.id}}">{{i.EquipmentName}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <div class="valid-feedback">
+                                                    Looks Good!
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Looks Bad!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-md-4">
+                                            <div class="mt-1 border p-4">
+    
+                                                <h5>Temperature (°C)</h5>
+
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom02" class="form-label">Set Value</label>
+                                                    <input type="text" class="form-control" id="value" name="Value"
+                                                        placeholder="0" pattern="[0-9]{1,}" required disabled>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
+                                                </div>
+    
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom03" class="form-label">Lower Limit</label>
+                                                    <input type="text" class="form-control" pattern="[0-9]{1,}" id="low-limit" name="Low-limit"
+                                                        placeholder="0" required disabled>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
+                                                </div>
+    
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom04" class="form-label">Upper Limit</label>
+                                                    <input type="text" class="form-control" pattern="[0-9]{1,}" id="up-limit" name="Up-limit"
+                                                        placeholder="0" required disabled>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
+                                                </div>
+    
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom05" class="form-label">Total Sensor</label>
+                                                    <input type="text" class="form-control" pattern="[0-9]{1,}" id="sensor" name="Sensor"
+                                                        placeholder="0" required disabled>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
+                                                </div>
+    
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom06" class="form-label">Cooling</label>
+                                                    <select class="form-select" id="cooling" name="Cooling" required disabled>
+                                                        <option selected disabled value="">Select</option>
+                                                        <option value="">ON</option>
+                                                        <option value="">OFF</option>
+                                                    </select>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
+                                                </div>
+
+                                                <br>
+                                                <button class="btn btn-primary waves-effect waves-light"
+                                                    style="float: right;" type="submit" id="sync-temp"
+                                                    name="Sync-temp" disabled>Sync Temp
+                                                </button>
+                                                <br><br>
+                                            </div>
+                                        </div>
+    
+    
+                                        <div class="col-md-4">
+                                            <div class="mt-1 border p-4">
+    
+                                                <h5>Humidity (%RH)</h5>
+
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom07" class="form-label">Set Value</label>
+                                                    <input type="text" class="form-control" id="value1" name="Value1"
+                                                        placeholder="0" pattern="[0-9]{1,}" required disabled>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom08" class="form-label">Lower Limit</label>
+                                                    <input type="text" class="form-control" id="low-limit1"
+                                                        name="Low-limit1" pattern="[0-9]{1,}" placeholder="0" required disabled>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom09" class="form-label">Upper Limit</label>
+                                                    <input type="text" class="form-control" pattern="[0-9]{1,}" id="up-limit1" name="Up-limit1"
+                                                        placeholder="0" required disabled>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom10" class="form-label">Total Sensor</label>
+                                                    <input type="text" class="form-control" pattern="[0-9]{1,}" id="sensor1" name="Sensor1"
+                                                        placeholder="0" required disabled>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
+                                                </div>
+                                                
+                                                <br><br><br><br><br>
+                                                <button class="btn btn-primary waves-effect waves-light"
+                                                    style="float: right;" type="submit" id="sync-humidity"
+                                                    name="Sync-humidity" disabled>Sync Humidity
+                                                </button>
+                                                <br><br>
+                                            </div>
+                                        </div>
+    
+                                        <div class="col-md-4">
+                                            <div class="mt-1 border p-4">
+    
+                                                <h5>Lux/UV</h5>
+
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom11" class="form-label">Set Lux</label>
+                                                    <input type="text" class="form-control" id="lux" name="Lux"
+                                                        placeholder="KluxHrs" required disabled>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
+                                                </div>
+    
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom12" class="form-label">Set Measured Lux
+                                                        Intensity</label>
+                                                    <input type="text" class="form-control" id="lux-intensity" disabled
+                                                        name="Lux-intensity" placeholder="Watt Hrs/Sq Mtr" required>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom13" class="form-label">Set UV</label>
+                                                    <input type="text" class="form-control" id="uv" name="Uv"
+                                                        placeholder="Watt Hrs/Sq Mtr" required disabled>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustom14" class="form-label">Set Measured UV
+                                                        Intensity</label>
+                                                    <input type="text" class="form-control" id="uv-intensity"
+                                                        name="Uv-intensity" placeholder="0" required disabled>
+                                                    <div class="valid-feedback">
+                                                        Looks Good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Looks Bad!
+                                                    </div>
+                                                </div>
+
+                                                <br><br><br><br><br>
+                                                <button class="btn btn-primary waves-effect waves-light"
+                                                    style="float: right;" type="submit" id="sync-lux-uv"
+                                                    name="Sync-lux-uv" disabled>Sync Lux UV
+                                                </button>
+                                                <br><br>
+                                            </div>
+                                        </div>
+    
+                                    </div>
+    
+                                    <br>
+    
+                                    <div style="float: right;">
+                                        <button class="btn btn-primary waves-effect waves-light" type="submit" id="save"
+                                            name="Save">Save
+                                        </button> &nbsp; &nbsp;
+                                        <button class="btn btn-primary waves-effect waves-light" type="submit" id="clear"
+                                            name="Clear" onclick="clearForm()">Clear
+                                        </button>
+                                    </div>                  
+                                
+                                    <!-- Modal starts -->
+                                    <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
+                                        id="modal" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Verify Admin</h5>
+                                                    <button type="button" class="btn-close"
+                                                        style="padding: 0rem 2rem; width: 2px"
+                                                        data-bs-dismiss="modal" aria-label="Close">
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div id="alert_placeholder"></div>
+                                                    <form class="needs-validation" novalidate>
+                                                        <div data-repeater-list="outer-group" class="outer">
+                                                            <div data-repeater-item class="outer">
+        
+                                                                <div class="form-group row mb-4">
+                                                                    <label class="col-form-label col-lg-4" for="validationCustom01">Username<span style="color:red">*</span></label>
+                                                                    <div class="col-lg-8">
+                                                                        <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
+                                                                        id="v-username" name="V-username" placeholder="Enter Username" required>
+                                                                    </div>
+                                                                </div>
+        
+                                                                <div class="form-group row mb-4">
+                                                                    <label class="col-form-label col-lg-4">Password<span style="color:red">*</span></label>
+                                                                    <div class="col-lg-8">
+                                                                        <input type="password" class="form-control" name="V-password" 
+                                                                        id="v-password" placeholder="Enter Password" required>
+                                                                    </div>
+                                                                </div>
+        
+                                                                <div class="form-group row mb-4">
+                                                                    <label class="col-form-label col-lg-4" for="validationCustom01">Comments<span style="color:red">*</span></label>
+                                                                    <div class="col-lg-8">
+                                                                        <input type="text" class="form-control" name="Comments" 
+                                                                        id="comments" placeholder="Enter Comments" required>
+                                                                        <div class="valid-feedback"></div>
+                                                                        <div class="invalid-feedback"></div>
+                                                                    </div>
+                                                                </div>
+                                                            
+                                                            </div>
+                                                        </div>
+                                                        <div class="row justify-content-end">
+                                                            <div class="col-lg-10">
+                                                                <button type="submit" style="float: right;"
+                                                                    class="btn btn-primary" id="submit-form">Submit
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
+        
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <script>document.write(new Date().getFullYear())</script> © NIV-DAS.
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="text-sm-end d-none d-sm-block">
+                                    Crafted with <i class="mdi mdi-heart text-danger"></i> .
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'libs/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'libs/metismenu/metisMenu.min.js' %}"></script>
+        <script src="{% static 'libs/simplebar/simplebar.min.js' %}"></script>
+        <script src="{% static 'libs/node-waves/waves.min.js' %}"></script>
+        <script src="{% static 'libs/feather-icons/feather.min.js' %}"></script>
+        <!-- pace js -->
+        <script src="{% static 'libs/pace-js/pace.min.js' %}"></script>
+    
+        <script src="{% static 'js/app.js' %}"></script>
+    
+        <!-- form validation -->
+        <script src="{% static 'js/pages/form-validation.init.js' %}"></script>
+    
+        <script src="{% static 'js/pages/mode-styling.init.js' %}"></script>
+
+
+        <!-- clear form -->
+        <script>
+            function clearForm() {
+                document.getElementById("form1").reset();
+            }
+        </script>
+
+        <script>
+            $("#eqp-name").on("change",function(){
+                console.log("change")
+                var aid = this.value
+                console.log("UPdatebtn pREsseS",aid)
+
+                $.ajax
+                ({
+                    method : "GET",
+                    url : `/equipment-parameter-data/${aid}/`,
+
+                    success: function(response)
+                    {
+                        r = response.data;
+                        console.log(r);
+
+                        if (r.param == 2 && r.photostability == false) {
+                            document.getElementById("lux-intensity").disabled = true
+                            document.getElementById("lux").disabled = true
+                            document.getElementById("uv-intensity").disabled = true
+                            document.getElementById("uv").disabled = true
+                            document.getElementById("sync-lux-uv").disabled = true
+                            document.getElementById("value").disabled = false
+                            document.getElementById("low-limit").disabled = false
+                            document.getElementById("up-limit").disabled = false
+                            document.getElementById("sensor").disabled = false
+                            document.getElementById("cooling").disabled = false
+                            document.getElementById("sync-temp").disabled = false
+                            document.getElementById("value1").disabled = false
+                            document.getElementById("low-limit1").disabled = false
+                            document.getElementById("up-limit1").disabled = false
+                            document.getElementById("sensor1").disabled = false
+                            document.getElementById("sync-humidity").disabled = false
+                        }
+
+                        else if (r.photostability == true) {
+                            document.getElementById("lux-intensity").disabled = false
+                            document.getElementById("lux").disabled = false
+                            document.getElementById("uv-intensity").disabled = false
+                            document.getElementById("uv").disabled = false
+                            document.getElementById("sync-lux-uv").disabled = false
+                            document.getElementById("value").disabled = false
+                            document.getElementById("low-limit").disabled = false
+                            document.getElementById("up-limit").disabled = false
+                            document.getElementById("sensor").disabled = false
+                            document.getElementById("cooling").disabled = false
+                            document.getElementById("sync-temp").disabled = false
+                            document.getElementById("value1").disabled = false
+                            document.getElementById("low-limit1").disabled = false
+                            document.getElementById("up-limit1").disabled = false
+                            document.getElementById("sensor1").disabled = false
+                            document.getElementById("sync-humidity").disabled = false
+                        }
+
+                        else {
+                            document.getElementById("lux-intensity").disabled = true
+                            document.getElementById("lux").disabled = true
+                            document.getElementById("uv-intensity").disabled = true
+                            document.getElementById("uv").disabled = true
+                            document.getElementById("sync-lux-uv").disabled = true
+                            document.getElementById("value").disabled = false
+                            document.getElementById("low-limit").disabled = false
+                            document.getElementById("up-limit").disabled = false
+                            document.getElementById("sensor").disabled = false
+                            document.getElementById("cooling").disabled = false
+                            document.getElementById("sync-temp").disabled = false
+                            document.getElementById("value1").disabled = true
+                            document.getElementById("low-limit1").disabled = true
+                            document.getElementById("up-limit1").disabled = true
+                            document.getElementById("sensor1").disabled = true
+                            document.getElementById("sync-humidity").disabled = true
+                        }
+                    }
+                });
+            });
+        </script>
+
+
+    </body>
+</html>
+
+
+
+<!-- <div class="mt-4 border p-4">
+    <div class="row">
+        <div class="col-xl-3 col-md-5">
+
+        </div>
+    </div>
+</div> -->
