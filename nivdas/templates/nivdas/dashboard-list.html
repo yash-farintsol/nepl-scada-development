@@ -131,8 +131,9 @@
                                                     </tr> -->
                                                 </thead>
                                                 <tbody>
+                                                    {% for i in eqp %}
                                                     <tr>
-                                                        <td>Deep Freezer</td>
+                                                        <td>{{i.EquipmentName}}</td>
                                                         <td>&#176;C</td>
                                                         <td>-40</td>
                                                         <td class="font-size-15" style="background-color: #0c8f40; color: white;">-37</td>
@@ -149,42 +150,7 @@
                                                         </td>
                                                         <td>0</td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>SMART OVEN</td>
-                                                        <td>&#176;C</td>
-                                                        <td>50</td>
-                                                        <td class="font-size-15" style="background-color: #f00; color: white;">25</td>
-                                                        <td>RH</td>
-                                                        <td>0</td>
-                                                        <td>5</td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-sm rounded-pill" style="width: 1.5rem; height:1.5rem; background-color: #0c8f40;"></button>
-                                                        </td>
-                                                        <td>
-                                                            <a href="{% url 'graph1' %}">
-                                                                <i data-feather="bar-chart-2"></i>
-                                                            </a>
-                                                        </td>
-                                                        <td>10</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Cooling Chamber</td>
-                                                        <td>&#176;C</td>
-                                                        <td>5</td>
-                                                        <td>7</td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-sm rounded-pill" style="width: 1.5rem; height:1.5rem; background-color: #0c8f40;"></button>
-                                                        </td>
-                                                        <td>
-                                                            <a href="{% url 'graph1' %}">
-                                                                <i data-feather="bar-chart-2"></i>
-                                                            </a>
-                                                        </td>
-                                                        <td>7</td>
-                                                    </tr>
+                                                    {% endfor %}
                                                 </tbody>
                                             </table>
                                         </div>

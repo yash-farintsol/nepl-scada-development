@@ -67,6 +67,15 @@
                         </div>
 
                         <div class="card">
+                            {% if messages %}
+                                <div class="alert alert-danger alert-dismissible alert-outline fade show" role="alert">
+                                    {% for message in messages %}
+                                    <strong {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                             <!-- add and edit buttons -->
                             <div class="card-header">
                                 <div style="float: right;">
@@ -116,7 +125,7 @@
                                                                     Looks good!
                                                                 </div>
                                                                 <div class="invalid-feedback">
-                                                                    Looks bad!
+                                                                    Enter Username
                                                                 </div>
                                                             </div>
                                                             <!-- <p> {{item}} </p> -->
@@ -134,7 +143,7 @@
                                                                     Looks good!
                                                                 </div>
                                                                 <div class="invalid-feedback">
-                                                                    Looks bad!
+                                                                    Select Group
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -151,7 +160,7 @@
                                                                     Looks good!
                                                                 </div>
                                                                 <div class="invalid-feedback">
-                                                                    Looks bad!
+                                                                    Select Department
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -167,7 +176,7 @@
                                                                     Looks good!
                                                                 </div>
                                                                 <div class="invalid-feedback">
-                                                                    Looks bad!
+                                                                    Select Account Status
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -179,7 +188,7 @@
                                                                     Looks good!
                                                                 </div>
                                                                 <div class="invalid-feedback">
-                                                                    Looks bad!
+                                                                    Enter Password
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -191,7 +200,7 @@
                                                                     Looks good!
                                                                 </div>
                                                                 <div class="invalid-feedback">
-                                                                    Looks bad!
+                                                                    Enter Password Change Duration
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -242,7 +251,7 @@
                                                             <label class="col-form-label col-lg-4">Password<span style="color:red">*</span></label>
                                                             <div class="col-lg-8">
                                                                 <input type="password" class="form-control" name="V-password"
-                                                                id="v-edit-password" placeholder="Enter Password" required>
+                                                                id="v-edit-password" pattern="(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter Password" required>
                                                             </div>
                                                         </div>
 
@@ -298,7 +307,7 @@
                                                                     Looks good!
                                                                 </div>
                                                                 <div class="invalid-feedback">
-                                                                    Looks bad!
+                                                                    Enter Username
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -315,7 +324,7 @@
                                                                     Looks good!
                                                                 </div>
                                                                 <div class="invalid-feedback">
-                                                                    Looks bad!
+                                                                    Select Group
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -332,7 +341,7 @@
                                                                     Looks good!
                                                                 </div>
                                                                 <div class="invalid-feedback">
-                                                                    Looks bad!
+                                                                    Select Department
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -349,7 +358,7 @@
                                                                     Looks good!
                                                                 </div>
                                                                 <div class="invalid-feedback">
-                                                                    Looks bad!
+                                                                    Select User Type
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -365,19 +374,19 @@
                                                                     Looks good!
                                                                 </div>
                                                                 <div class="invalid-feedback">
-                                                                    Looks bad!
+                                                                    Select Account Status
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row mb-4">
                                                             <label class="col-form-label col-lg-4">Password<span style="color:red"> *</span></label>
                                                             <div class="col-lg-8">
-                                                                <input class="form-control" type="Password" name = "password" placeholder="Enter Password" required>
+                                                                <input class="form-control" type="Password" name = "password" pattern="(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter Password" required>
                                                                 <div class="valid-feedback">
                                                                     Looks good!
                                                                 </div>
                                                                 <div class="invalid-feedback">
-                                                                    Looks bad!
+                                                                    Enter Password
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -389,7 +398,7 @@
                                                                     Looks good!
                                                                 </div>
                                                                 <div class="invalid-feedback">
-                                                                    Looks bad!
+                                                                    Enter Password Change Duration
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -480,12 +489,14 @@
                                                         <th>Username</th>
                                                         <th>Status</th>
                                                         <th>Group Name</th>
+                                                        <th>User Type</th>
                                                         <th>Days</th>
                                                     </tr>
                                                     <tr>
                                                         <td id="sort0"></td>
                                                         <td id="sort1"></td>
                                                         <td id="sort2"></td>
+                                                        <td id="sort4"></td>
                                                         <td id="sort3"></td>
                                                     </tr>
                                                 </thead>
@@ -495,6 +506,7 @@
                                                             <td>{{i.Username}}</td>
                                                             <td>{{i.status}}</td>
                                                             <td>{{i.Group.GroupName}}</td>
+                                                            <td>{{i.UserType}}</td>
                                                             <td>{{i.PasswdChangeDuration}}</td>
                                                         </tr>
                                                     {% endfor %}

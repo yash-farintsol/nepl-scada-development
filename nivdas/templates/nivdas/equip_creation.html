@@ -83,7 +83,7 @@
                                                 <div class="col-xl-6 col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label>Equipment Name</label>
-                                                        <input class="form-control" type="text" list="equipment_name" id="equip_name" name = "eqp_name" value="Select">
+                                                        <input class="form-control" type="text" list="equipment_name" id="equip_name" name = "eqp_name" required placeholder="Select">
                                                         <datalist id="equipment_name" class="form-datalist-lg mb-5" aria-label=".form-datalist-lg example">
                                                             {% for i in equip %}
                                                                 <option>{{i.EquipmentName}}</option>
@@ -115,8 +115,8 @@
                                                 <div class="col-xl-6 col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label>No. of Parameters</label>
-                                                        <select class="form-select" id="Param" name="param">
-                                                            <option selected disabled value="">Select</option>
+                                                        <select class="form-select" id="Param" required name="param">
+                                                            <option selected disabled>Select</option>
                                                             <option>1</option>
                                                             <option>2</option>
                                                         </select>
@@ -132,7 +132,7 @@
                                                     <div class="form-group mb-3">
                                                         <label>No. of Sensors</label>
                                                         <select class="form-select" id="sensor" name="sensor">
-                                                            <option selected disabled value="">Select</option>
+                                                            <option selected disabled>Select</option>
                                                             {% for i in chm %}
                                                                 <option>{{i}}</option>
                                                             {% endfor %}

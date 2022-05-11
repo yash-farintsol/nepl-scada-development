@@ -30,7 +30,8 @@ def IndexPage(request):
 def DashboardGrid(request):
     if 'username' in request.session:
         request.session['grid'] = 'grid'
-        return render(request, "nivdas/dashboard-grid.html")
+        eqp = Equipment.objects.filter(EquipmentActivationStation="Active")
+        return render(request, "nivdas/dashboard-grid.html",{'eqp':eqp})
     else:
         return redirect("loginpage")
 
@@ -38,7 +39,8 @@ def DashboardList(request):
     if 'username' in request.session:
         if 'grid' in request.session:
             del request.session['grid']
-        return render(request, "nivdas/dashboard-list.html")
+        eqp = Equipment.objects.filter(EquipmentActivationStation="Active")
+        return render(request, "nivdas/dashboard-list.html",{'eqp':eqp})
     else:
         return redirect("loginpage")
 
@@ -414,14 +416,21 @@ def AddUser(request):
         GetGroup = Group.objects.get(GroupName=group)
         GetDep = Department.objects.get(id=department)
         print("ADD GORUP TO USER-->",GetGroup)
-        usr = User.objects.create(Username=username,
-        Password=password,PasswdChangeDuration=PasswordChangeDuration,
-        Dep=GetDep,status=status,UserType=usrtype)
-        usr.Group = GetGroup
-        usr.save()
-        getusr = User.objects.get(Username=request.session['username'])
-        msg = f"{getusr.Username} added {username}"
-        UA = UserAudit.objects.create(User=getusr,Comment=msg)
+        
+        user = User.objects.filter(Username=username)
+        
+        if len(user) > 0:
+            messages.error(request, "Username Already Exists")
+            return redirect("user-management")
+        else:
+            usr = User.objects.create(Username=username,
+            Password=password,PasswdChangeDuration=PasswordChangeDuration,
+            Dep=GetDep,status=status,UserType=usrtype)
+            usr.Group = GetGroup
+            usr.save()
+            getusr = User.objects.get(Username=request.session['username'])
+            msg = f"{getusr.Username} added {username}"
+            UA = UserAudit.objects.create(User=getusr,Comment=msg)
         return redirect("user-management")
 
 def UserUpdateData(request, pk):
@@ -1214,7 +1223,6 @@ def GetPLCDateTime(request):
         client = ModbusTcpClient(GetEquip.IPAddress)  # "192.168.1.200"
         connection = client.connect()
         print("MODBUS CONNECTION----->",connection)
-        # print("Modbus connection ", connection, '\n')
         values = [400151,400153,400147,400156,400154,400150]
         if connection:
             try:
